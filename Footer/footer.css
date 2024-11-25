@@ -1,0 +1,94 @@
+/*HomePage Footer*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+footer {
+  width: 100%; /* Ensures full width */
+  background-color: #e0e0e0; /* Adjust color to match your brand */
+  padding: 20px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Ensures wrapping on smaller screens */
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.footer-content div {
+  max-width: 23%; /* Maintain the current design */
+  /*box-sizing: border-box;*/
+  flex: 1 1 100%;
+}
+
+.footer-content h3 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-content ul li {
+  margin: 5px 0;
+}
+
+.footer-content ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.footer-content ul li a:hover {
+  text-decoration: underline;
+}
+
+.payment img {
+  width: 100px; /* Adjust size as needed */
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  background-color: #6ABF4B;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.social-icons a {
+  margin: 0 5px;
+  color: #333;
+  font-size: 20px;
+}
+
+.social-icons a:hover {
+  color: #0073e6;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-wrap: wrap; /* Allow wrapping */
+  }
+
+  .footer-content div {
+    max-width: 100%; /* Full-width sections */
+    margin-bottom: 1rem;
+  }
+}

@@ -1,0 +1,305 @@
+html{
+  scroll-behavior: smooth;
+}
+/* Hero section styling */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Background video styling */
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+
+  
+}
+
+/* Hero content styling */
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color:#6ABF4B;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: #4a8e36;
+   
+}
+
+/* Dark overlay for readability */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+  z-index: -1;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .nav-links {
+      display: none;
+  }
+
+  .navbar {
+      flex-direction: column;
+      padding: 15px;
+  }
+}
+
+/* Why Choose Nepali Swadh Section */
+.why-choose {
+  padding: 40px;
+  background-color:white;
+  text-align: center;
+  border-radius: 20px;
+  margin: 20px auto;
+  max-width: 1000px;
+  margin-top:50px;
+
+  
+}
+
+.why-choose h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 400;
+}
+
+.benefits-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  
+}
+
+.benefit {
+  max-width: 300px;
+  text-align: center;
+  padding: 20px;
+  background-color:white;
+  border-radius: 10px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.benefit .icon {
+  font-size: 2.5rem;
+  color: #80b53f;
+  margin-bottom: 10px;
+}
+
+.benefit h3 {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.benefit p {
+  font-size: 1rem;
+  color: #666;
+}
+/*Featured Products*/
+body {
+  font-family:'Times New Roman', Times, serif;
+  
+}
+
+.featured-products {
+  text-align: center;
+  padding: 2em;
+  display: flex;
+  justify-content: center;
+  gap: 2.5em;
+  flex-wrap: wrap;
+  
+ 
+ 
+}
+
+.featured-products h2 {
+  font-size: 2em;
+  margin-bottom: 1em;
+  width: 100%;
+  font-weight: 400;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /*width:   calc(100% / 2 - 2%);  Two cards per row */
+  max-width: 200px;
+  height: 50%;
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+.product-card h3{
+  margin-top: 50px;
+}
+@media (max-width: 768px) {
+  .product-card {
+    width: 90%; /* Single column layout for smaller screens */
+    margin: 0 auto;
+  }
+}
+
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  max-width: 90%;
+  border-radius: 10%;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.product-card h3 {
+  font-size: 1.1em;
+  margin: 0.5em 0;
+  min-height: 3em; /* Ensures consistent space for the title */
+}
+
+.product-card p {
+  color: #666;
+  font-weight: bold;
+}
+
+.rating {
+  color: orange;
+  margin-bottom: 0.5em;
+}
+
+button {
+  padding: 0.5em 1em;
+  border: 2px solid #4CAF50;
+  color: #4CAF50;
+  background-color: white;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-top: auto;
+  
+}
+
+button:hover {
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: underline;
+  text-decoration-color: #4a8e36;
+}
+.product-card img:hover,
+.product-card img.active {
+    transform: scale(1.25);
+    border:none;
+    
+}
+/*HomePage Footer 
+footer {
+  background-color: #e0e0e0; 
+  padding: 20px;
+  color: #333;
+  
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.footer-content div {
+  width: 23%;
+}
+
+.footer-content h3 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-content ul li {
+  margin: 5px 0;
+}
+.footer-content ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.footer-content ul li a:hover {
+  text-decoration: underline;
+}
+
+.payment img {
+  width: 100px; 
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  border-top: 1px solid #ccc;
+  background-color: #8CC63F;
+  
+  width:100%;
+  padding: 20px;
+  
+}
+
+
+.social-icons a {
+    margin: 0 5px;
+    color: #333;
+    font-size: 20px;
+}
+
+.social-icons a:hover {
+    color: #0073e6;
+}
+

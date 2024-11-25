@@ -1,0 +1,89 @@
+/* Reset Default Styles */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+h2 {
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  margin: 0; /* Completely remove the gap around the heading */
+  padding: 20px 0; /* Add consistent spacing for readability */
+  color:#8cc635;
+}
+
+/* Full Page Layout */
+.product-section {
+  width: 100%;
+  margin: 0; /* Remove extra margin */
+  padding: 0; /* Remove top padding */
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+/* Product Container Styling */
+.product1{
+  max-width: 1000px;
+  margin: 0 auto; /* Center-align the product container */
+  padding: 20px;
+}
+
+/* Image Styling */
+.product-img {
+  width: 500px;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  border:none;
+  outline: none;
+  box-shadow: none;
+  padding:0;
+  
+}
+
+/* Title Styling */
+.product-title {
+  font-size: 25px;
+  color: #333;
+ 
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* Price Styling */
+.product-price {
+  font-size: 20px;
+  color: black;
+  margin: 10px 0;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* Add to Cart Button Styling */
+.add-to-cart {
+  background-color:  #8cc635;
+  color: white;
+  padding: 15px 30px;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: background-color 0.3s ease;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.add-to-cart:hover {
+  background-color:  #adc63f;
+}
+
+/* Product Description Styling */
+.product-description {
+  font-size: 18px;
+  color: #555;
+  margin-top: 15px;
+  line-height: 1.6;
+  font-family: 'Times New Roman', Times, serif;
+}

@@ -1,0 +1,158 @@
+
+/* Reset default styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #F8F4E3;
+}
+
+/* Top banner styling */
+.top-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color:#6ABF4B;
+  padding: 10px 50px;
+  color: white;
+  position: relative;
+}
+
+.social-media-icons {
+  display: flex;
+  gap: 50px;
+}
+
+.social-media-icons a {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.social-media-icons a:hover {
+  opacity: 0.7;
+}
+
+
+.tagline {
+  font-size: 16px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-icons {
+  display: flex;
+  gap: 50px;
+}
+
+.nav-icons a {
+  color: white;
+  font-size: 20px;
+
+  text-decoration: underline; 
+   
+}
+
+/* Navigation bar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: right;
+  background-color: #f8f8f8;
+  padding: 1rem;
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+ 
+}
+
+.logo img {
+  width: 50px;
+  margin-right: 10px;
+  cursor: pointer;
+ 
+}
+
+.logo span {
+  font-size: 24px;
+  font-weight:lighter;
+  color: #333;
+  display: flex;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ 
+ 
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+   
+}
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column; /* Stack links vertically */
+    gap: 0.5rem;
+  }
+}
+.nav-links li {
+  margin-right: 20px;/* 0 */
+  
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 13px;
+  font-weight: 500;
+  margin-right:5px;
+}
+.nav-links a :hover{
+  text-decoration: underline;
+}
+
+ /* Drop down */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #7bb24d; /* Green background */
+  z-index: 1;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  left: auto;
+  right: 650px;
+  
+
+}
+@media (max-width: 768px) {
+  .dropdown-content {
+    min-width: 100%; /* Ensure full-width dropdown on small screens */
+  }
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 15px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+}
+
+.dropdown-content a:hover {
+  background-color: #6f9c40; /* Darker green on hover */
+  
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}

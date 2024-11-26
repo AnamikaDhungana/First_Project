@@ -22,8 +22,6 @@ html{
   height: 100%;
   object-fit: cover;
   z-index: -1;
-
-  
 }
 
 /* Hero content styling */
@@ -91,8 +89,6 @@ html{
   margin: 20px auto;
   max-width: 1000px;
   margin-top:50px;
-
-  
 }
 
 .why-choose h2 {
@@ -108,7 +104,6 @@ html{
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 20px;
-  
 }
 
 .benefit {
@@ -149,9 +144,6 @@ body {
   justify-content: center;
   gap: 2.5em;
   flex-wrap: wrap;
-  
- 
- 
 }
 
 .featured-products h2 {
@@ -235,71 +227,3 @@ button:hover {
     border:none;
     
 }
-/*HomePage Footer 
-footer {
-  background-color: #e0e0e0; 
-  padding: 20px;
-  color: #333;
-  
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.footer-content div {
-  width: 23%;
-}
-
-.footer-content h3 {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.footer-content ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.footer-content ul li {
-  margin: 5px 0;
-}
-.footer-content ul li a {
-  color: #333;
-  text-decoration: none;
-}
-
-.footer-content ul li a:hover {
-  text-decoration: underline;
-}
-
-.payment img {
-  width: 100px; 
-}
-
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  
-  border-top: 1px solid #ccc;
-  background-color: #8CC63F;
-  
-  width:100%;
-  padding: 20px;
-  
-}
-
-
-.social-icons a {
-    margin: 0 5px;
-    color: #333;
-    font-size: 20px;
-}
-
-.social-icons a:hover {
-    color: #0073e6;
-}
-

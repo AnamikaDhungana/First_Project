@@ -7,12 +7,18 @@ body {
   overflow-x: hidden;
 }
 
-h2 {
+.header h2 {
   text-align: center;
   font-family: 'Times New Roman', Times, serif;
   margin: 0; /* Completely remove the gap around the heading */
   padding: 20px 0; /* Add consistent spacing for readability */
-  color:#8cc635;
+  
+}
+
+.header p{
+  text-align: center;
+  font-size: 17px;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 /* Full Page Layout */
@@ -20,7 +26,7 @@ h2 {
   width: 100%;
   margin: 0; /* Remove extra margin */
   padding: 0; /* Remove top padding */
-  background-color: #f9f9f9;
+  background-color: #F8F4E3;
   text-align: center;
 }
 
@@ -33,8 +39,8 @@ h2 {
 
 /* Image Styling */
 .product-img {
-  width: 500px;
-  max-width: 600px;
+  width: 400px;
+  /* max-width: 600px; */
   height: auto;
   margin: 0 auto;
   display: block;
@@ -49,7 +55,6 @@ h2 {
 .product-title {
   font-size: 25px;
   color: #333;
- 
   font-family: 'Times New Roman', Times, serif;
 }
 

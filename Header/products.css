@@ -1,140 +1,79 @@
-/* General Reset 
-body {
+  /* General Page Styling */
+  html {
+    scroll-behavior:smooth;
+  }
+  
+  body {
+    font-family:'Times New Roman', Times, serif;
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f9f3e6;
-  }
-  
-     Products Section 
-  .products-section {
-    text-align: center;
-    padding: 40px 20px;
-  }
-  
-  .products-section h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+    padding: 0;
+    background-color: #f9f9f9;
     color: #333;
   }
   
-      Products Container 
-  .products-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-       Product Card 
-  .product-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 200px;
+  header {
     text-align: center;
+    background-color: #e8f5e9;
+    padding: 20px;
   }
   
-  .product-card img {
+  header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+  }
+  
+  header p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .tea-section {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 1000px;
+  }
+  
+  .tea-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #5d4037;
+  }
+  
+  .tea-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+  }
+  
+  .tea-item {
+    text-align: center;
+    padding: 15px;
+    background-color: #f1f8e9;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tea-item img {
     width: 100%;
     height: auto;
     border-radius: 8px;
   }
   
-  .product-card h2 {
-    font-size: 1.2rem;
+  .tea-item h3 {
     margin: 10px 0;
-    color: #333;
+    font-size: 1.2rem;
   }
   
-  .product-card p {
+  .tea-item p {
+    margin: 5px 0;
     font-size: 1rem;
-    color: #666;
-    margin-bottom: 10px;
   }
   
-  .product-card .rating {
-    font-size: 1rem;
-    color: #f5b942;
-    margin-bottom: 10px;
+  .tea-item p:last-child {
+    font-weight: bold;
+    color: #2e7d32;
   }
-  
-  .product-card button {
-    background: #fff;
-    border: 2px solid #3bbd75;
-    color: #3bbd75;
-    padding: 8px 12px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .product-card button:hover {
-    background: #3bbd75;
-    color: #fff;
-  } */
-
-  /* General Page Styling */
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-}
-
-h1, h2, h3 {
-  text-align: center;
-}
-
-/* Tea Category Section */
-.tea-category {
-  margin: 20px auto;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-.tea-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  padding: 20px;
-}
-
-.tea-item {
-  text-align: center;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.tea-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-.tea-item h3 {
-  font-size: 1.2rem;
-  margin: 10px 0;
-}
-
-.tea-item p {
-  color: #555;
-}
-.product-card button {
-  background: #fff;
-  border: 2px solid #3bbd75;
-  color: #3bbd75;
-  padding: 8px 12px;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.product-card button:hover {
-  background: #3bbd75;
-  color: #fff;
-} 

@@ -131,10 +131,10 @@ html{
   font-size: 1rem;
   color: #666;
 }
+
 /*Featured Products*/
 body {
-  font-family:'Times New Roman', Times, serif;
-  
+  font-family:'Times New Roman', Times, serif; 
 }
 
 .featured-products {
@@ -181,11 +181,12 @@ body {
 
 .product-card img {
   width: 100%;
-  height: auto;
+  height: 120%;
   max-width: 90%;
   border-radius: 10%;
   margin: 0 auto;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .product-card h3 {
@@ -218,9 +219,8 @@ button {
 button:hover {
   background-color: #4CAF50;
   color: white;
-  text-decoration: underline;
-  text-decoration-color: #4a8e36;
 }
+
 .product-card img:hover,
 .product-card img.active {
     transform: scale(1.25);

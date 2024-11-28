@@ -1,4 +1,4 @@
-const LANG = {
+window.LANG_NP = {
     "message" : "आनन्दको एक कप",
     "title" : "नेपाली स्वाध",
     "home" : "घर",

@@ -1,4 +1,4 @@
-const LANG = {
+window.LANG_EN = {
     "message" : "A Cupful of Joy",
     "title" : "NEPALI SWADH",
     "home" : "HOME",
@@ -19,6 +19,7 @@ const LANG = {
     "chamomile_tea" : "Chamomile Tea",
     "herbal_tea" : "Herbal Tea",
     "green_tea" : "Green Tea",
+    "flower_tea" : "Flower Tea",
 
     // Black Tea Section
     "black_tea_heading": "Black Tea",
@@ -35,7 +36,7 @@ const LANG = {
     "flower_tea_heading": "Flower Tea",
     "butterfly_pea_tea": "Butterfly Pea Tea",
     "butterfly_pea_tea_price": "Rs 300 - Rs 1,200",
-    "chamomile_tea": "Chamomile Tea",
+    // "chamomile_tea": "Chamomile Tea",
     "chamomile_tea_price": "Rs 300 - Rs 600",
     "rose_tea": "Rose Tea",
     "rose_tea_price": "Rs 800 - Rs 4,500",

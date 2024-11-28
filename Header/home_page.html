@@ -6,7 +6,7 @@
     <title>NEPALI SWADH</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="home_style.css">
-    
+   
        <!--- <link rel="icon" type="image/png" href="Layer_1.png">-->
 
 </head>
@@ -29,76 +29,76 @@
             <source src="bg_video.mp4" type="video/mp4">
         </video>
         <div class="hero-content">
-            <h1>Premium Tea Collection</h1>
-            <p>Our new range of flower teas are now available</p>
-            <a href="#featured-products" class="btn">Explore</a>
+            <h1 id="hero_title">Premium Tea Collection</h1>
+            <p id="hero_subtitle">Our new range of flower teas are now available</p>
+            <a id="explore" href="#featured-products" class="btn">Explore</a>
         </div>
     </section>
  
   <!-- Why Choose Nepali Swadh Section -->
 <section class="why-choose">
-  <h2>Why Choose Nepali Swadh?</h2>
+  <h2 id="why_choose">Why Choose Nepali Swadh?</h2>
   <div class="benefits-container">
 
       <!-- Healthy Benefit -->
       <div class="benefit">
           <i class="fas fa-heartbeat icon"></i>
-          <h3>Healthy</h3>
-          <p>Nourishing, antioxidant-rich, invigorating, natural</p>
+          <h3 id="healthy">Healthy</h3>
+          <p id="healthy_desc">Nourishing, antioxidant-rich, invigorating, natural</p>
       </div>
 
       <!-- Sustainable Benefit -->
       <div class="benefit">
           <i class="fas fa-seedling icon"></i>
-          <h3>Sustainable</h3>
-          <p>Eco-friendly, Sustainable sips</p>
+          <h3 id="sustainable">Sustainable</h3>
+          <p id="sustainable_desc">Eco-friendly, Sustainable sips</p>
       </div>
 
       <!-- Sourced from the Himalayas -->
       <div class="benefit">
           <i class="fas fa-mountain icon"></i>
-          <h3>Sourced from the Himalayas</h3>
-          <p>Himalayan-sourced tea with delightful flavor</p>
+          <h3 id="sourced">Sourced from the Himalayas</h3>
+          <p id="sourced_desc">Himalayan-sourced tea with delightful flavor</p>
       </div>  
   </div>
 </section>
 
 <!--Featured Products-->
 <section id="featured-products" class="featured-products">
-    <h2>Featured Products</h2>
+    <h2 id="featured_products">Featured Products</h2>
     <span class="product-card">
         <img src="/Tea_name/ctc-tea.png" alt="Black Tea"> <br> 
-        <h3>Black Tea</h3>
-        <p>Rs 300 – Rs 1,200</p> <br>
+        <h3 id="black_tea">Black Tea</h3>
+        <p id="">Rs 300 – Rs 1,200</p> <br>
         <!-- <div class="rating">⭐⭐⭐⭐⭐</div> -->
         <a href="/Header/products.html#black-tea">
-            <button>Select options</button>
+            <button id="">Select options</button>
         </a>   
     </span>
 
     <span class="product-card">
         <img src="/Tea_name/chamomile-tea.png" alt="Chamomile Tea"> <br> 
-        <h3> Flower Tea</h3>
-        <p>Rs 300 – Rs 600</p> <br> 
+        <h3 id="flower_tea"> Flower Tea</h3>
+        <p id="">Rs 300 – Rs 600</p> <br> 
         <a href="/Header/products.html#flower-tea">
-            <button>Select options</button>
+            <button id="">Select options</button>
         </a>    
     </span>
 
     <span class="product-card">
         <img src="/Tea_name/lemongrass-tea.png" alt="Herbal Tea"><br> 
-        <h3>Herbal Tea</h3>
-        <p>Rs 800 – Rs 4,500</p> <br>
+        <h3 id="herbal_tea">Herbal Tea</h3>
+        <p id="">Rs 800 – Rs 4,500</p> <br>
         <a href="/Header/products.html#herbal-tea">
-            <button>Select options</button>
+            <button id="">Select options</button>
         </a>
     </span>
     <span class="product-card">
         <img src="/Tea_name/silver_needle_tea.png" alt="Everest Gold Pure Tea"><br>
-        <h3>Green Tea</h3>
-        <p>Rs 250 – Rs 1,900</p> <br>
+        <h3 id="green_tea">Green Tea</h3>
+        <p id="">Rs 250 – Rs 1,900</p> <br>
         <a href="/Header/products.html#green-tea">
-            <button>Select options</button>
+            <button id="">Select options</button>
         </a>
     </span>
 </section>
@@ -112,6 +112,7 @@
             document.getElementById('footer-container').innerHTML = data;
         });
 </script>
+<script src="./../language/script.js" />
 
 </body>
 </html>

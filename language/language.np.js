@@ -16,31 +16,39 @@ window.LANG_NP = {
     "sourced_desc": "रमणीय स्वाद संग हिमालयन-स्रोत चिया",
     "featured_products": "विशेष उत्पादनहरू",
     "black_tea" : "कालो चिया",
+    "black_tea_price" : "Rs 300 - Rs 1,200",
+    "select_option1" : "विकल्पहरू चयन गर्नुहोस्",
     "flower_tea" : "फूलको चिया",
+    "flower_tea_price" : "Rs 300 - Rs 600",
+    "select_option2" : "विकल्पहरू चयन गर्नुहोस्",
     "herbal_tea" : "हर्बल चिया",
+    "herbal_tea_price" : "Rs 800 - Rs 4,500",
+    "select_option3" : "विकल्पहरू चयन गर्नुहोस्",
     "green_tea" : "हरियो चिया",
+    "green_tea_price" : "Rs 250 - Rs 1,900",
+    "select_option4" : "विकल्पहरू चयन गर्नुहोस्",
 
     // Black Tea Section
     "black_tea_heading": "कालो चिया",
     "orthodox_tea": "अर्थोडक्स चिया",
-    "orthodox_tea_price": "रु 300 - रु 1,200",
+    "orthodox_tea_price": "रु ३00 - रु 1,200",
     "ctc_tea": "क्रश टियर कर्ल",
-    "ctc_tea_price": "Rs 300 - Rs 600",
+    "ctc_tea_price": "रु ३00 - रु ६00",
     "everest_tea": "एभरेष्ट चिया",
-    "everest_tea_price": "Rs 800 - Rs 4,500",
+    "everest_tea_price": "रु ८00 - रु ४,५00",
     "golden_black_tea": "गोल्डेन कालो चिया",
-    "golden_black_tea_price": "Rs 250 - Rs 1,900",
+    "golden_black_tea_price": "रु २५0 - रु १,९00",
 
     // Flower Tea Section
     "flower_tea_heading": "फूल चिया",
     "butterfly_pea_tea": "पुतली मटर चिया",
-    "butterfly_pea_tea_price": "Rs 300 - Rs 1,200",
+    "butterfly_pea_tea_price": "रु ३00 - रु १२००",
     "chamomile_tea": "क्यामोमाइल चिया",
-    "chamomile_tea_price": "Rs 300 - Rs 600",
+    "chamomile_tea_price": "रु ३00 - रु ६00",
     "rose_tea": "गुलाब चिया",
-    "rose_tea_price": "Rs 800 - Rs 4,500",
+    "rose_tea_price": "रु ८00 - रु ४,५00",
     "hibiscus_tea": "हिबिस्कस चिया",
-    "hibiscus_tea_price": "Rs 250 - Rs 1,900",
+    "hibiscus_tea_price": "रु २५0 - रु १,९00",
 
     // Herbal Tea Section
     "herbal_tea_heading": "हर्बल चिया",
@@ -51,7 +59,7 @@ window.LANG_NP = {
     "oregano_tea": "ओरेगानो चिया",
     "oregano_tea_price": "Rs 800 - Rs 4,500",
     "thyme_tea": "थाइम चिया",
-    "thyme_tea_price": "Rs 250 - Rs 1,900",
+    "thyme_tea_price": "रु २५0 - रु १,९00",
 
     // Green Tea Section
     "green_tea_heading": "हरियो चिया",
@@ -68,14 +76,14 @@ window.LANG_NP = {
 
     "accessories": "टीपोट सेट र सहायक",
     "travel_mug": "यात्रा मैत्री मग",
-    "price_507": "रु. ७५०",
+    "travel_mug_price": "रु. ७५०",
     "add_to_cart": "कार्टमा थप्नुहोस्",
     "travel_mug_desc": "यो उज्यालो सुन्तला इन्सुलेटेड मगको साथ शैलीमा हाइड्रेटेड रहनुहोस्। तपाईंको पेयहरू घण्टाको लागि तातो वा चिसो राख्नको लागि डिजाइन गरिएको, चिया प्रेमीहरूको लागि उपयुक्त!",
     "porcelain_cup": "पोर्सिलेन चिया कप",
-    "price_650": "रु. ६५०",
+    "porcelain_cup_price": "रु. ६५०",
     "porcelain_cup_desc": "यो एक चिकनी सेतो फिनिशको साथ एक सुरुचिपूर्ण पोर्सिलेन चिया कप हो, सुनको रिम र सुन्दर ढंगले बनाइएको सुनको ह्यान्डलले उच्चारण गरिएको। यो लक्जरी र परिष्कारको स्पर्श थप्दै, मिल्दो सुनको किनारा ससरहरूसँग आउँछ। औपचारिक चिया सेटिङहरूको लागि वा सजावटी टुक्राको रूपमा उत्तम।",
     "ceramic_mug": "भिन्टेज सिरेमिक मग",
-    "price_1050": "रु. १०५०",
+    "ceramic_mug_price": "रु. १०५०",
     "ceramic_mug_desc": "यो मग पुरानो जमानाको चिया सेटको अंश हो जुन साँच्चै सुन्दर र उत्कृष्ट देखिन्छ। यसमा सेतो फूलको डिजाइनको साथ नीलो रंग छ, जसले यसलाई बाहिर खडा बनाउँछ। मग सिरेमिकले बनेको हुन्छ, त्यसैले यसले तपाईंको चियालाई लामो समयसम्म तातो राख्छ। यसमा एक राम्रो ह्यान्डल पनि छ जुन समात्न सजिलो छ। सेट मिल्दो साना प्लेटहरूसँग आउँछ, जसले यसलाई फेन्सी तरिकामा वा सजावटको लागि पनि चिया सेवाको लागि उपयुक्त बनाउँछ।",
 
     "about_us_title": "हाम्रो बारेमा",
@@ -98,9 +106,9 @@ window.LANG_NP = {
     // "footer_quick_links_title": "द्रुत लिङ्कहरू",
     // "footer_privacy_policy": "गोपनीयता नीति",
     // "footer_refund_policy": "फिर्ता नीति",
-    // "footer_payment_title": "भुक्तानी विधिहरू",
-    // "footer_payment_desc": "हामी मार्फत सुरक्षित भुक्तानी विकल्पहरू स्वीकार गर्छौं:",
-    // "footer_payment_icon_alt": "भुक्तानी विधिहरू",
+    "footer_payment_title": "भुक्तानी विधिहरू",
+    "footer_payment_desc": "हामी मार्फत सुरक्षित भुक्तानी विकल्पहरू स्वीकार गर्छौं:",
+    "footer_payment_icon_alt": "भुक्तानी विधिहरू",
     "footer_bottom_copyright": "प्रतिलिपि अधिकार © २०२४ नेपाली स्वाध। सबै अधिकार सुरक्षित"
     
 }

@@ -4,6 +4,8 @@ window.LANG_EN = {
     "home" : "HOME",
     // "accessories" : "TEAPOTSET AND ACCESSORIES",
     // "about us" : "ABOUT US",
+
+// Home page 
     "hero_title" : "Premium Tea Collection",
     "hero_subtitle": "Our new range of flower teas are now available",
     "explore": "Explore",
@@ -16,10 +18,17 @@ window.LANG_EN = {
     "sourced_desc": "Himalayan-sourced tea with delightful flavor",
     "featured_products": "Featured Products",
     "black_tea" : "Black Tea",
-    "chamomile_tea" : "Chamomile Tea",
-    "herbal_tea" : "Herbal Tea",
-    "green_tea" : "Green Tea",
+    "black_tea_price" : "Rs 300 - Rs 1,200",
+    "select_option1" : "Select options",
     "flower_tea" : "Flower Tea",
+    "flower_tea_price" : "Rs 300 - Rs 600",
+    "select_option2" : "Select options",
+    "herbal_tea" : "Herbal Tea",
+    "herbal_tea_price" : "Rs 800 - Rs 4,500",
+    "select_option3" : "Select options",
+    "green_tea" : "Green Tea",
+    "green_tea_price" : "Rs 250 - Rs 1,900",
+    "select_option4" : "Select options",
 
     // Black Tea Section
     "black_tea_heading": "Black Tea",
@@ -36,7 +45,7 @@ window.LANG_EN = {
     "flower_tea_heading": "Flower Tea",
     "butterfly_pea_tea": "Butterfly Pea Tea",
     "butterfly_pea_tea_price": "Rs 300 - Rs 1,200",
-    // "chamomile_tea": "Chamomile Tea",
+    "chamomile_tea": "Chamomile Tea",
     "chamomile_tea_price": "Rs 300 - Rs 600",
     "rose_tea": "Rose Tea",
     "rose_tea_price": "Rs 800 - Rs 4,500",
@@ -64,21 +73,22 @@ window.LANG_EN = {
     "silver_needle_tea_price": "Rs 800 - Rs 4,500",
     "himalayan_tea": "Himalayan Tea",
     "himalayan_tea_price": "Rs 250 - Rs 1,900",
-
     "add_to_cart": "Add to Cart",
 
+// TeapotSet and Accessories
     "accessories": "TEAPOT SET AND ACCESSORY",
     "travel_mug": "Travel Friendly Mug",
-    "price_750": "Rs. 750",
+    "travel_mug_price": "Rs. 750",
     "add_to_cart": "Add to cart",
     "travel_mug_desc": "Stay hydrated in style with this bright orange insulated mug. Designed to keep your drinks hot or cold for hours, perfect for tea lovers on the go!",
     "porcelain_cup": "Porcelain Tea Cup",
-    "price_650": "Rs. 650",
+    "porcelain_cup_price": "Rs. 650",
     "porcelain_cup_desc": "This is an elegant porcelain tea cup with a smooth white finish, accented by a gold rim and a beautifully crafted gold handle. It comes with matching gold-edged saucers, adding a touch of luxury and sophistication. Perfect for formal tea settings or as a decorative piece.",
     "ceramic_mug": "Vintage Ceramic Mug",
-    "price_1050": "Rs. 1050",
+    "ceramic_mug_price": "Rs. 1050",
     "ceramic_mug_desc": "This mug is part of an old-fashioned tea set that looks really pretty and classy. It has a blue color with white flower designs, which makes it stand out. The mug is made of ceramic, so it keeps your tea warm for a longer time. It also has a nice handle that is easy to hold. The set comes with matching small plates, which make it perfect for serving tea in a fancy way or even just for decoration.",
 
+// About Us
     "about_us_title": "About Us",
     "about_us_description": "Welcome to Nepali Swad, we are on a journey to bring the rich heritage and unique flavors of Nepali teas to the world. Our teas reflect the essence of Nepal's natural beauty, cultural richness, and sustainable agricultural practices.",
     "mission_title": "Our Mission",
@@ -90,6 +100,8 @@ window.LANG_EN = {
     "story_member_1": "Anamika Dhungana",
     "story_member_2": "Amisha Rai",
     "story_member_3": "Moti Tamang",
+
+// Footer Of Webpage 
     "footer_about_us": "Nepali Swad is a premium brand offering authentic Nepali flavors, crafted with natural ingredients for a unique taste experience.",
     "footer_address": "Address: Lalitpur, Gwarko",
     "footer_phone": "Phone: +9779800569900",
@@ -99,8 +111,8 @@ window.LANG_EN = {
     // "footer_quick_links_title": "Quick Links",
     // "footer_privacy_policy": "Privacy Policy",
     // "footer_refund_policy": "Refund Policy",
-    // "footer_payment_title": "Payment Methods",
-    // "footer_payment_desc": "We accept secured payment options via:",
-    // "footer_payment_icon_alt": "Payment Methods",
+    "footer_payment_title": "Payment Methods",
+    "footer_payment_desc": "We accept secured payment options via:",
+    "footer_payment_icon_alt": "Payment Methods",
     "footer_bottom_copyright": "Copyright © 2024 Nepali Swadh. All Rights Reserved"
 }

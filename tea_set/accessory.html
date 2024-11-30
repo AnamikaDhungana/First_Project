@@ -24,44 +24,42 @@
 </script>
 
 <section class="header">
-  <h2>"Brew in Style: Elegant Teapots & Timeless Accessories"</h2>
-  <p>Enhance your tea experience with our carefully crafted teapot sets and unique accessories.</p>
+  <h2 id="title">"Brew in Style: Elegant Teapots & Timeless Accessories"</h2>
+  <p id="sub_title">Enhance your tea experience with our carefully crafted teapot sets and unique accessories.</p>
 </section>
 
   <section class="product-section">
     <!-- Mug Product -->
     <div class="product1">
       <img src="mug1.jpg" alt="Orange Mug" class="product-img">
-      <h1 class="product-title">Travel Friendly Mug</h1>
-      <p class="product-price">Rs. 750</p>
-      <button class="add-to-cart">Add to cart</button>
-      <p class="product-description">
+      <h1 class="product-title" id="travel_mug">Travel Friendly Mug</h1>
+      <p class="product-price" id="travel_mug_price">Rs. 750</p>
+      <button class="add-to-cart1" id="add_to_cart">Add to cart</button>
+      <p class="product-description" id="travel_mug_desc">
         Stay hydrated in style with this bright orange insulated mug. Designed to keep your drinks hot or cold for hours, perfect for tea lovers on the go!
       </p>
     </div>
 
     <div class="product1">
       <img src="mug2.jpg" alt="Orange Mug" class="product-img">
-      <h1 class="product-title">Porcelain Tea Cup</h1>
-      <p class="product-price">Rs. 650</p>
-      <button class="add-to-cart">Add to cart</button>
-      <p class="product-description">
+      <h1 class="product-title" id="porcelain_cup">Porcelain Tea Cup</h1>
+      <p class="product-price" id="porcelain_cup_price">Rs. 650</p>
+      <button class="add-to-cart2" id="add_to_cart1">Add to cart</button>
+      <p class="product-description" id="travel_mug_desc">
         This is an elegant porcelain tea cup with a smooth white finish, accented by a gold rim and a beautifully crafted gold handle. It comes with matching gold-edged saucers, adding a touch of luxury and sophistication. Perfect for formal tea settings or as a decorative piece.
       </p>
     </div>
     <div class="product1">
       <img src="mug3.jpg" alt="Orange Mug" class="product-img">
-      <h1 class="product-title">Vintage Ceramic Mug</h1>
-      <p class="product-price">Rs. 1050</p>
-      <button class="add-to-cart">Add to cart</button>
-      <p class="product-description">
+      <h1 class="product-title" id="ceramic_mug">Vintage Ceramic Mug</h1>
+      <p class="product-price" id="ceramic_mug_price">Rs. 1050</p>
+      <button class="add-to-cart3" id="add_to_cart3">Add to cart</button>
+      <p class="product-description" id="ceramic_mug_desc">
         This mug is part of an old-fashioned tea set that looks really pretty and classy. It has a blue color with white flower designs, which makes it stand out. The mug is made of ceramic, so it keeps your tea warm for a longer time. It also has a nice handle that is easy to hold. The set comes with matching small plates, which make it perfect for serving tea in a fancy way or even just for decoration.
       </p>
     </div>
-
-
-   
   </section>
+
    <!--Javascript for footer-->
 <div id="footer-container"></div>
 <script>
@@ -71,6 +69,8 @@
             document.getElementById('footer-container').innerHTML = data;
         });
 </script>
+
+<script src="./../language/script.js" />
 
 </body>
 </html>

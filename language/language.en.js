@@ -32,6 +32,7 @@ window.LANG_EN = {
     "green_tea_price" : "Rs 250 - Rs 1,900",
     "select_option4" : "Select options",
 
+    "products" : "TEAS",
     // Black Tea Section
     "black_tea_heading": "Black Tea",
     "orthodox_tea": "Orthodox Tea",
@@ -94,7 +95,7 @@ window.LANG_EN = {
 
 // TeapotSet and Accessories
     "accessories": "TEAPOT SET AND ACCESSORY",
-    "title" : "Brew in Style: Elegant Teapots & Timeless Accessories",
+    "title_of_accessories" : "Brew in Style: Elegant Teapots & Timeless Accessories",
     "sub_title" : "Enhance your tea experience with our carefully crafted teapot sets and unique accessories.",
     "travel_mug": "Travel Friendly Mug",
     "travel_mug_price": "Rs. 750",

@@ -16,11 +16,11 @@ function Script() {
 }
 
 //Header 
-// function setLanguageInHomePage(language) {
-//     document.getElementById("message").textContent = language.message;
-//     document.getElementById("title").textContent = language.title;
-//     document.getElementById("home").textContent = language.home;
-// }
+function setLanguageInHeader(language) {
+    document.getElementById("message").textContent = language.message;
+    document.getElementById("title").textContent = language.title;
+    document.getElementById("home").textContent = language.home;
+ }
 
 // Home Page 
 function setLanguageInHomePage(language) {
@@ -54,6 +54,7 @@ function setLanguageInHomePage(language) {
 // Black Tea Section
 function setLanguageInProducts(language) {
     try {
+        document.getElementById("products").textContent = products;
         document.getElementById("black_tea_heading").textContent = language.black_tea_heading;
         document.getElementById("orthodox_tea").textContent = language.orthodox_tea;
         document.getElementById("orthodox_tea_price").textContent = language.orthodox_tea_price;
@@ -185,7 +186,8 @@ function loadLanguageScript(language) {
         console.log(`Loaded language.${language}.js`);
         console.log(language === "en" ? window.LANG_EN : window.LANG_NP);
         window.languageObj = language === "en" ? window.LANG_EN : window.LANG_NP;
-        // setLanguageInHeader(window.languageObj);
+        
+        setLanguageInHeader(window.languageObj);
         setLanguageInHomePage(window.languageObj);
         setLanguageInProducts(window.languageObj);
         setLanguageInTeapotSetAndAccessories(window.languageObj);

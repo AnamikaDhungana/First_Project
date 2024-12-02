@@ -32,6 +32,7 @@ window.LANG_NP = {
     "green_tea_price" : "Rs 250 - Rs 1,900",
     "select_option4" : "विकल्पहरू चयन गर्नुहोस्",
 
+    "products" : "चियापती",
     // Black Tea Section
     "black_tea_heading": "कालो चिया",
     "orthodox_tea": "अर्थोडक्स चिया",
@@ -94,7 +95,7 @@ window.LANG_NP = {
 
 // TeapotSet and Accessories
     "accessories": "टीपोट सेट र सहायक",
-    "title" : "शैलीमा मदिरा: सुरुचिपूर्ण चियापाती र कालातीत सामानहरू",
+    "title_of_accessories" : "शैलीमा मदिरा: सुरुचिपूर्ण चियापाती र कालातीत सामानहरू",
     "sub_title" : "हाम्रो सावधानीपूर्वक क्राफ्ट गरिएको टीपोट सेट र अद्वितीय सामानहरूको साथ तपाईंको चिया अनुभव बढाउनुहोस्।",
     "travel_mug": "यात्रा मैत्री मग",
     "travel_mug_price": "रु. ७५०",

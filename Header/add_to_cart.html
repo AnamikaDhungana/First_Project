@@ -28,15 +28,7 @@
     </div>
   </main>
 
-  <!-- Footer -->
-  <div id="footer-container"></div>
-  <script>
-    fetch("/Footer/footer.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('footer-container').innerHTML = data;
-      });
-  </script>
+  
 
   <!-- JavaScript -->
   <script>
@@ -101,5 +93,16 @@
     // Initial render
     renderCart();
   </script>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+  <script>
+    fetch("/Footer/footer.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      });
+  </script>
+  
 </body>
 </html>

@@ -1,47 +1,45 @@
-/*HomePage Footer*/
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* General Settings */
 html, body {
-  margin: 0;
-  padding: 0;
   width: 100%;
   height: 100%;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 footer {
-  width: 100%; /* Ensures full width */
-  background-color: #e0e0e0; /* Adjust color to match your brand */
+  width: 100%;
+  background-color: #e0e0e0;
   padding: 20px;
   color: #333;
-  box-sizing: border-box;
 }
 
 .footer-content {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap; /* Ensures wrapping on smaller screens */
+  flex-wrap: wrap;
+  gap: 20px; /* Adds spacing between flex items */
   margin-bottom: 20px;
-  width: 100%;
   font-family: 'Times New Roman', Times, serif;
 }
 
 .footer-content div {
-  max-width: 23%; /* Maintain the current design */
-  /*box-sizing: border-box;*/
-  flex: 1 1 100%;
+  flex: 1 1 calc(33.33% - 20px); /* Three columns with gap */
+  min-width: 200px; /* Prevents items from becoming too small */
 }
 
+.footer-content p,
 .footer-content h3 {
-  font-weight: bold;
   margin-bottom: 10px;
 }
 
 .footer-content ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
@@ -58,39 +56,39 @@ footer {
   text-decoration: underline;
 }
 
-.payment img {
-  width: 100px; /* Adjust size as needed */
-}
-
 .footer-bottom {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid #ccc;
   background-color: #6ABF4B;
-  padding: 20px;
-  width: 100%;
-  box-sizing: border-box;
-  font-family: 'Times New Roman', Times, serif;
+  padding: 15px 20px;
+  color: #fff;
+}
+
+.footer-bottom p {
+  margin: 0;
 }
 
 .social-icons a {
-  margin: 0 5px;
-  color: #333;
+  margin: 0 10px;
   font-size: 20px;
+  color: #fff;
 }
 
 .social-icons a:hover {
   color: #0073e6;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
-  .footer-content {
-    flex-wrap: wrap; /* Allow wrapping */
-  }
-
   .footer-content div {
-    max-width: 100%; /* Full-width sections */
-    margin-bottom: 1rem;
+    flex: 1 1 100%; /* Stack items on small screens */
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px; /* Adds space between elements */
   }
 }

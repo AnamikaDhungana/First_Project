@@ -1,9 +1,7 @@
-<!-- 
+<?php
+
 session_start();
-if (!isset($_SESSION['isLoggedIn']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../Login/login.html");
-    exit();
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -12,10 +10,49 @@ if (!isset($_SESSION['isLoggedIn']) || $_SESSION['role'] !== 'admin') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        header nav ul li a:hover {
+            background-color: #007bff;
+        }
+    </style>
+
 </head>
 <body>
     <header>
-               Admin navigation as in auth_admin.php 
         <nav>
             <ul>
                 <li><a href="auth_admin.php">Dashboard</a></li>
@@ -29,8 +66,7 @@ if (!isset($_SESSION['isLoggedIn']) || $_SESSION['role'] !== 'admin') {
     <section class="manage-users">
         <h1>Manage Users</h1>
 
-        
-        // Connect to the database and retrieve user data
+        <?php
         include('database_connection.php');
         $sql = "SELECT * FROM users";
         $result = mysqli_query($conn, $sql);
@@ -48,9 +84,9 @@ if (!isset($_SESSION['isLoggedIn']) || $_SESSION['role'] !== 'admin') {
         ?>
     </section>
 </body>
-</html> -->
+</html> 
 
-<?php
+<!-- 
 include('database_connection.php');
 
 $sql = "SELECT * FROM users";
@@ -67,4 +103,4 @@ if ($result->num_rows > 0) {
 } else {
     echo "No users found.";
 }
-?>
+?> -->

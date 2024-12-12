@@ -20,6 +20,7 @@ if (!isset($_SESSION['isLoggedIn']) || $_SESSION['userRole'] !== 'Admin') {
             <ul>
                 <li><a href="auth_admin.php">Dashboard</a></li>
                 <li><a href="manage_products.php">Manage Products</a></li>
+                <li><a href="add_product.php">Add Products</a></li>
                 <li><a href="manage_users.php">Manage Users</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>

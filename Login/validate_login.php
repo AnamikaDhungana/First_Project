@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("db_connection.php");
+include("database_connection.php");
 
 // Admin credentials
 $adminemail = "MasterAdmin111@gmail.com";
@@ -45,7 +45,7 @@ if ($result->num_rows == 1) {
         $_SESSION['isLoggedIn'] = true;
 
         // Redirect to user home page
-        header("Location: ../Header/add_to_cart.html");
+        header("Location: ../Header/proceed_checkout.html");
         exit();
     } else {
         // Incorrect password

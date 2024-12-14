@@ -19,7 +19,7 @@
     <div class="login-container">
         <div class="login-form">
             <h2>Create Account</h2>
-            <form action="validate_registration.php" method="POST">
+            <form action="validate_registration.php" method="post">
                 <label for="name">Full Name:</label>
                 <input type="text" id="name" name="name" required>
 
@@ -34,10 +34,7 @@
                     title="Enter a valid email address" required>
 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" 
-                    pattern=".{6,}" 
-                    title="Password must be at least 6 characters" 
-                    required>
+                <input type="password" id="password" name="password" required>
 
                 <label for="confirm-password">Confirm Password:</label>
                 <input type="password" id="confirm-password" name="confirm-password" required>

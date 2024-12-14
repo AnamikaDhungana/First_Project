@@ -1,44 +1,3 @@
-<!-- 
-
-include('database_connection.php');
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $product_name = $_POST['product_name'];
-    $price = $_POST['price'];
-    $description = $_POST['description'];
-    $image = $_FILES['image']['name'];
-    $target = "uploads/".basename($image);
-
-    // Insert into the database
-    $sql = "INSERT INTO products (name, price, description, image) VALUES ('$product_name', '$price', '$description', '$image')";
-
-    if ($conn->query($sql) === TRUE) {
-        move_uploaded_file($_FILES['image']['tmp_name'], $target);
-        echo "Product added successfully!";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-}
-?>
-
-<form method="POST" enctype="multipart/form-data">
-
-    <label for="name">Product Name:</label>
-            <input type="text" name="name" required> <br> <br>
-
-            <label for="price">Price:</label>
-            <input type="number" name="price" required><br><br>
-
-            <label for="description">Description:</label>
-            <textarea name="description" required></textarea><br><br>
-
-            <label for="image">Product Image:</label>
-            <input type="file" name="image" required><br><br>
-
-            <button type="submit">Add Product</button>
-</form> -->
-
 <?php
 include('database_connection.php');
 
@@ -50,14 +9,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $image = $_FILES['image']['name'];
     $target = "uploads/" . basename($image);
 
-    // Insert into the database
-    $sql = "INSERT INTO products (product_name, product_price, product_description, image_url) VALUES ('$product_name', '$price', '$description', '$image')";
+    // Check if the uploads directory exists and is writable
+    if (!is_dir('uploads')) {
+        mkdir('uploads', 0777, true); // Create the directory if it doesn't exist
+    }
 
-    if ($conn->query($sql) === TRUE) {
-        move_uploaded_file($_FILES['image']['tmp_name'], $target);
-        echo "<script>alert('Product added successfully!');</script>";
+    if (!is_writable('uploads')) {
+        die("Error: 'uploads' directory is not writable. Please check permissions.");
+    }
+
+    // Use a prepared statement to insert into the database
+    $stmt = $conn->prepare("INSERT INTO products (product_name, product_price, product_description, image_url) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("siss", $product_name, $price, $description, $image);
+
+    if ($stmt->execute()) {
+        // Move the uploaded file
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+            echo "<script>alert('Product added successfully!');</script>";
+        } else {
+            echo "Error: Unable to upload the image.";
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $stmt->error;
     }
 }
 ?>

@@ -4,7 +4,7 @@ include ('db_connection.php');
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Collect and sanitize form data
+    // Collect and sanitize form data   
     $full_name = mysqli_real_escape_string($conn, trim($_POST['name']));
     $phone = mysqli_real_escape_string($conn, trim($_POST['phone']));
     $email = mysqli_real_escape_string($conn, trim(strtolower($_POST['email'])));

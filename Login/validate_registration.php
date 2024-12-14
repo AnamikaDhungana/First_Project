@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include ('db_connection.php');
+include 'db_connection.php';
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -29,27 +29,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // // Validate phone number
-    // if (!preg_match("/^(98|97|96)[0-9]{8}$/", $phone)) {
-    // echo "<script>
-    //         alert('Phone number must be a valid Nepali number starting with 98 or 97 and contain 10 digits!');
-    //         window.location.href = 'register.html';
-    //       </script>";
-    // exit;
-    // }
-
-    // Validate Nepali phone number with optional country code
-if (!preg_match("/^\+?977?([98|97|96|97|98])\d{8}$/", $phone)) {
-    echo "<script>
-            alert('Phone number must be a valid Nepali number starting with +977 or 977 and followed by 9 digits!');
-            window.location.href = 'register.html';
-          </script>";
-    exit;
-}
+    // Validate Nepali phone number
+    if (!preg_match("/^\+?977?-?(9[6-8][0-9])\d{7}$/", $phone)) {
+        echo "<script>
+                alert('Phone number must be a valid Nepali number starting with +977!');
+                window.location.href = 'register.html';
+              </script>";
+        exit;
+    }
 
     // Check if email already exists
     $check_email = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $check_email);
+    if (!$result) {
+        echo "<script>
+                alert('Database error: Failed to validate email.');
+                window.location.href = 'register.html';
+              </script>";
+        exit;
+    }
+
     if (mysqli_num_rows($result) > 0) {
         echo "<script>
                 alert('This email is already registered!');
@@ -62,7 +61,8 @@ if (!preg_match("/^\+?977?([98|97|96|97|98])\d{8}$/", $phone)) {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // SQL query to insert data into the users table
-    $sql = "INSERT INTO users (full_name, phone, email, password) VALUES ('$full_name', '$phone', '$email', '$hashed_password')";
+    $sql = "INSERT INTO users (full_name, phone, email, password) 
+            VALUES ('$full_name', '$phone', '$email', '$hashed_password')";
 
     // Execute the query
     if (mysqli_query($conn, $sql)) {
@@ -76,8 +76,8 @@ if (!preg_match("/^\+?977?([98|97|96|97|98])\d{8}$/", $phone)) {
                 window.location.href = 'register.html';
               </script>";
     }
-
-    // Close the connection
-    mysqli_close($conn);
 }
+
+// Close the connection (only at the end)
+mysqli_close($conn);
 ?>

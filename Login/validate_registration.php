@@ -30,23 +30,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Validate Nepali phone number
-    if (!preg_match("/^\+?977?-?(9[6-8][0-9])\d{7}$/", $phone)) {
-        echo "<script>
-                alert('Phone number must be a valid Nepali number starting with +977!');
-                window.location.href = 'register.html';
-              </script>";
-        exit;
+    if (!preg_match("/^(9[6-8][0-9])\d{7}$/", $phone)) {
+      echo "<script>
+              alert('Phone number must be a valid Nepali number (e.g., 9801234567)');
+              window.location.href = 'register.html';
+            </script>";
+      exit;
     }
-
+  
     // Check if email already exists
     $check_email = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $check_email);
     if (!$result) {
-        echo "<script>
+      echo "<script>
                 alert('Database error: Failed to validate email.');
                 window.location.href = 'register.html';
               </script>";
-        exit;
+      exit;
     }
 
     if (mysqli_num_rows($result) > 0) {

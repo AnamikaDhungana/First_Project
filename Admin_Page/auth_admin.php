@@ -32,7 +32,8 @@ if ($user_count_result && mysqli_num_rows($user_count_result) > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="admin_style.css"> <!-- External CSS file for styling -->
+    <link rel="stylesheet" href="admin_style.css?v=<?php echo time(); ?>">
+ <!-- External CSS file for styling -->
 </head>
 
 <body>

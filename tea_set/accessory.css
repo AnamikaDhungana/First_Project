@@ -1,23 +1,25 @@
 /* Reset Default Styles */
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
-  overflow-x: hidden;
+}
+
+.header {
+  background-color: #F8F4E3;
+  text-align: center;
+  padding: 20px;
 }
 
 .header h2 {
-  text-align: center;
+  margin: 0;
+  padding: 10px 0;
   font-family: 'Times New Roman', Times, serif;
-  margin: 0; /* Completely remove the gap around the heading */
-  padding: 20px 0; /* Add consistent spacing for readability */
-  
 }
 
-.header p{
-  text-align: center;
-  font-size: 17px;
+.header p {
+  margin: 0;
+  padding: 5px 0;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -80,7 +82,7 @@ body {
   font-family: 'Times New Roman', Times, serif;
 }
 
-.add-to-cart:hover {
+.add-to-cart-btn:hover {
   background-color:  #adc63f;
 }
 

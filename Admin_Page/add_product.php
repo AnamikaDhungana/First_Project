@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 0.5rem;
         }
 
-        .form-container input,
+        /* .form-container input,
         .form-container textarea,
         .form-container button {
             width: 100%;
@@ -111,7 +111,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         .form-container button:hover {
             background-color: #0056b3;
+        } */
+        .form-container input,
+        .form-container textarea {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 0.75rem; /* Increased padding for better spacing */
+            font-size: 1rem; /* Increased font size for readability */
+            border: 1px solid #ccc; /* Added border for better definition */
+            border-radius: 5px; /* Rounded corners */
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
         }
+
+        .form-container textarea {
+            height: 120px; /* Adjust height for text area */
+            resize: vertical; /* Allow resizing vertically only */
+        }
+
+        .form-container button {
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 0.75rem; /* Consistent padding */
+            font-size: 1rem; /* Consistent font size */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -140,6 +170,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label for="description">Description:</label>
         <textarea name="description" id="description" required></textarea>
+
+        <label for="stock">Stock:</label>
+        <input type="number" name="stock" id="stock" required>
 
         <label for="image">Product Image:</label>
         <input type="file" name="image" id="image" required>

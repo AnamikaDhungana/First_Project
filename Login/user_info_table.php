@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include 'db_connection.php';  // Make sure this file is in the same folder or provide the correct path
+include 'database_connection.php';  // Make sure this file is in the same folder or provide the correct path
 
 // Create the `users` table
 $sql_users = " CREATE TABLE IF NOT EXISTS users (

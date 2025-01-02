@@ -1,14 +1,15 @@
 window.LANG_EN = {
 
-//header
-    "message" : "A Cupful of Joy",
-    "title" : "NEPALI SWADH",
-    "home" : "HOME",
+    //header
+    "message": "A Cupful of Joy",
+    "title": "NEPALI SWADH",
+    "home": "HOME",
+    "tea_title": "TEAS",
     // "accessories" : "TEAPOTSET AND ACCESSORIES",
     // "about us" : "ABOUT US",
 
-// Home page 
-    "hero_title" : "Premium Tea Collection",
+    // Home page 
+    "hero_title": "Premium Tea Collection",
     "hero_subtitle": "Our new range of flower teas are now available",
     "explore": "Explore",
     "why_choose": "Why Choose Nepali Swad?",
@@ -19,20 +20,20 @@ window.LANG_EN = {
     "sourced": "Sourced from the Himalayas",
     "sourced_desc": "Himalayan-sourced tea with delightful flavor",
     "featured_products": "Featured Products",
-    "black_tea" : "Black Tea",
-    "black_tea_price" : "Rs 300 - Rs 1,200",
-    "select_option1" : "Select options",
-    "flower_tea" : "Flower Tea",
-    "flower_tea_price" : "Rs 300 - Rs 600",
-    "select_option2" : "Select options",
-    "herbal_tea" : "Herbal Tea",
-    "herbal_tea_price" : "Rs 800 - Rs 4,500",
-    "select_option3" : "Select options",
-    "green_tea" : "Green Tea",
-    "green_tea_price" : "Rs 250 - Rs 1,900",
-    "select_option4" : "Select options",
+    "black_tea": "Black Tea",
+    "black_tea_price": "Rs 300 - Rs 1,200",
+    "select_option1": "Select options",
+    "flower_tea": "Flower Tea",
+    "flower_tea_price": "Rs 300 - Rs 600",
+    "select_option2": "Select options",
+    "herbal_tea": "Herbal Tea",
+    "herbal_tea_price": "Rs 800 - Rs 4,500",
+    "select_option3": "Select options",
+    "green_tea": "Green Tea",
+    "green_tea_price": "Rs 250 - Rs 1,900",
+    "select_option4": "Select options",
 
-    "products" : "TEAS",
+    "products": "TEAS",
     // Black Tea Section
     "black_tea_heading": "Black Tea",
     "orthodox_tea": "Orthodox Tea",
@@ -93,10 +94,10 @@ window.LANG_EN = {
     "himalayan_tea_price": "Rs 250 - Rs 1,900",
     "add_to_cart19": "Add to Cart",
 
-// TeapotSet and Accessories
+    // TeapotSet and Accessories
     "accessories": "TEAPOT SET AND ACCESSORY",
-    "title_of_accessories" : "Brew in Style: Elegant Teapots & Timeless Accessories",
-    "sub_title" : "Enhance your tea experience with our carefully crafted teapot sets and unique accessories.",
+    "title_of_accessories": "Brew in Style: Elegant Teapots & Timeless Accessories",
+    "sub_title": "Enhance your tea experience with our carefully crafted teapot sets and unique accessories.",
     "travel_mug": "Travel Friendly Mug",
     "travel_mug_price": "Rs. 750",
     "add_to_cart1": "Add to cart",
@@ -110,7 +111,7 @@ window.LANG_EN = {
     "add_to_cart3": "Add to cart",
     "ceramic_mug_desc": "This mug is part of an old-fashioned tea set that looks really pretty and classy. It has a blue color with white flower designs, which makes it stand out. The mug is made of ceramic, so it keeps your tea warm for a longer time. It also has a nice handle that is easy to hold. The set comes with matching small plates, which make it perfect for serving tea in a fancy way or even just for decoration.",
 
-// About Us
+    // About Us
     "about_us_title": "About Us",
     "about_us_description": "Welcome to Nepali Swad, we are on a journey to bring the rich heritage and unique flavors of Nepali teas to the world. Our teas reflect the essence of Nepal's natural beauty, cultural richness, and sustainable agricultural practices.",
     "mission_title": "Our Mission",
@@ -123,7 +124,7 @@ window.LANG_EN = {
     "story_member_2": "Amisha Rai",
     "story_member_3": "Moti Tamang",
 
-// Footer Of Webpage 
+    // Footer Of Webpage 
     "footer_about_us": "Nepali Swad is a premium brand offering authentic Nepali flavors, crafted with natural ingredients for a unique taste experience.",
     "footer_address": "Address: Lalitpur, Gwarko",
     "footer_phone": "Phone: +9779800569900",

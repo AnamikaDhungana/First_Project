@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,23 +9,26 @@
     <link rel="stylesheet" href="about-us.css">
 
 </head>
+
 <body>
-  <div id="header-placeholder"></div>
-  <script>
-      fetch('/Header/header.html')
-          .then(response => response.text())
-          .then(data => {
-              document.getElementById('header-placeholder').innerHTML = data;
-          })
-          .catch(error => console.error('Error loading header:', error));
-  </script>
+    <div id="header-placeholder"></div>
+    <script>
+        fetch('/Header/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
 
     <!-- Full-Screen Background Section -->
     <section class="about-us">
         <div class="content">
             <h1 id="about_us_title">About Us</h1>
             <p id="about_us_description">
-                Welcome to <strong>Nepali Swad</strong>, we are on a journey to bring the rich heritage and unique flavors of Nepali teas to the world. Our teas reflect the essence of Nepal’s natural beauty, cultural richness, and sustainable agricultural practices.
+                Welcome to <strong>Nepali Swad</strong>, we are on a journey to bring the rich heritage and unique
+                flavors of Nepali teas to the world. Our teas reflect the essence of Nepal’s natural beauty, cultural
+                richness, and sustainable agricultural practices.
             </p>
         </div>
     </section>
@@ -49,16 +53,17 @@
     <!-- Our Story with Image -->
     <section id="our-story">
         <div class="section-content">
-            
+
             <div class="text">
                 <h2 id="our_story_title">Our Story</h2>
                 <p id="our_story_description">
-                    Nepali Swad was founded as part of a college project by a group of passionate students at Tribhuvan University:<br><br>
-                    <ul>
-                        <li id="story_member_1">Anamika Dhungana</li>
-                        <li id="story_member_2">Amisha Rai</li>
-                        <li id="story_member_3">Moti Tamang</li>
-                    </ul>
+                    Nepali Swad was founded as part of a college project by a group of passionate students at Tribhuvan
+                    University:<br><br>
+                <ul>
+                    <li id="story_member_1">Anamika Dhungana</li>
+                    <li id="story_member_2">Amisha Rai</li>
+                    <li id="story_member_3">Moti Tamang</li>
+                </ul>
                 </p>
             </div>
             <div class="image">
@@ -68,15 +73,16 @@
     </section>
 
     <div id="footer-container"></div>
-<script>
-    fetch("/Footer/footer.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer-container').innerHTML = data;
-        });
-</script>
+    <script>
+        fetch("/Footer/footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
 
-<script src="./../language/script.js"></script>
+    <script src="./../language/script.js"></script>
 
 </body>
+
 </html>

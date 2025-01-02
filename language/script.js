@@ -1,26 +1,36 @@
 document.addEventListener("DOMContentLoaded", Script);
 function Script() {
-    let languageSession = sessionStorage.getItem("websiteLanguage") || "en";
-    loadLanguageScript(sessionStorage.getItem("websiteLanguage"));
+    setTimeout(() => {
 
-    document.addEventListener("click", function () {
-        languageSession = sessionStorage.getItem("websiteLanguage") || "en";
-        if (languageSession == "en") {
-            sessionStorage.setItem("websiteLanguage", "np");
-        } else {
-            sessionStorage.setItem("websiteLanguage", "en");
-        }
+        let languageSession = localStorage.getItem("websiteLanguage") || "en";
+        loadLanguageScript(languageSession);
 
-        loadLanguageScript(sessionStorage.getItem("websiteLanguage"));
-    })
+        let languageEvent = document.getElementById('language');
+        languageEvent.addEventListener("click", function () {
+            languageSession = localStorage.getItem("websiteLanguage") || "en";
+            let language = "";
+            if (languageSession == "en") {
+                localStorage.setItem("websiteLanguage", "np");
+                language = "np";
+            } else {
+                localStorage.setItem("websiteLanguage", "en");
+                language = "en";
+            }
+
+            loadLanguageScript(language);
+        })
+    }, 100)
 }
 
 //Header 
 function setLanguageInHeader(language) {
-    document.getElementById("message").textContent = language.message;
-    document.getElementById("title").textContent = language.title;
-    document.getElementById("home").textContent = language.home;
- }
+    try {
+        document.getElementById("message").textContent = language.message;
+        document.getElementById("title").textContent = language.title;
+        document.getElementById("home").textContent = language.home;
+        document.getElementById("tea_title").textContent = language.tea_title;
+    } catch (e) { }
+}
 
 // Home Page 
 function setLanguageInHomePage(language) {
@@ -183,17 +193,16 @@ function loadLanguageScript(language) {
     script.id = scriptId;
     script.src = `/language/language.${language}.js`;
     script.onload = () => {
-        console.log(`Loaded language.${language}.js`);
-        console.log(language === "en" ? window.LANG_EN : window.LANG_NP);
+        // console.log(`Loaded language.${language}.js`);
+        // console.log(language === "en" ? window.LANG_EN : window.LANG_NP);
         window.languageObj = language === "en" ? window.LANG_EN : window.LANG_NP;
-        
+
         setLanguageInHeader(window.languageObj);
         setLanguageInHomePage(window.languageObj);
         setLanguageInProducts(window.languageObj);
         setLanguageInTeapotSetAndAccessories(window.languageObj);
         setLanguageInAboutUs(window.languageObj);
         setLanguageInFooter(window.languageObj);
-
     };
     script.onerror = () => {
         console.error(`Failed to load language.${language}.js`);

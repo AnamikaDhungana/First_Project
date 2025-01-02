@@ -1,21 +1,25 @@
 document.addEventListener("DOMContentLoaded", Script);
 function Script() {
-    let languageSession = localStorage.getItem("websiteLanguage") || "en";
-    loadLanguageScript(languageSession);
+    setTimeout(() => {
 
-    document.addEventListener("click", function () {
-        languageSession = localStorage.getItem("websiteLanguage") || "en";
-        let language = "";
-        if (languageSession == "en") {
-            localStorage.setItem("websiteLanguage", "np");
-            language = "np";
-        } else {
-            localStorage.setItem("websiteLanguage", "en");
-            language = "en";
-        }
+        let languageSession = localStorage.getItem("websiteLanguage") || "en";
+        loadLanguageScript(languageSession);
 
-        loadLanguageScript(language);
-    })
+        let languageEvent = document.getElementById('language');
+        languageEvent.addEventListener("click", function () {
+            languageSession = localStorage.getItem("websiteLanguage") || "en";
+            let language = "";
+            if (languageSession == "en") {
+                localStorage.setItem("websiteLanguage", "np");
+                language = "np";
+            } else {
+                localStorage.setItem("websiteLanguage", "en");
+                language = "en";
+            }
+
+            loadLanguageScript(language);
+        })
+    }, 100)
 }
 
 //Header 
@@ -24,6 +28,7 @@ function setLanguageInHeader(language) {
         document.getElementById("message").textContent = language.message;
         document.getElementById("title").textContent = language.title;
         document.getElementById("home").textContent = language.home;
+        document.getElementById("tea_title").textContent = language.tea_title;
     } catch (e) { }
 }
 
@@ -188,8 +193,8 @@ function loadLanguageScript(language) {
     script.id = scriptId;
     script.src = `/language/language.${language}.js`;
     script.onload = () => {
-        console.log(`Loaded language.${language}.js`);
-        console.log(language === "en" ? window.LANG_EN : window.LANG_NP);
+        // console.log(`Loaded language.${language}.js`);
+        // console.log(language === "en" ? window.LANG_EN : window.LANG_NP);
         window.languageObj = language === "en" ? window.LANG_EN : window.LANG_NP;
 
         setLanguageInHeader(window.languageObj);

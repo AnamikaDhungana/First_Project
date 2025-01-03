@@ -28,7 +28,9 @@ function setLanguageInHeader(language) {
         document.getElementById("message").textContent = language.message;
         document.getElementById("title").textContent = language.title;
         document.getElementById("home").textContent = language.home;
-        document.getElementById("tea_title").textContent = language.tea_title;
+        document.getElementById("products").textContent = products;
+        document.getElementById("accessories").textContent = language.accessories;
+        document.getElementById("about_us_title").textContent = language.about_us_title;
     } catch (e) { }
 }
 
@@ -64,7 +66,7 @@ function setLanguageInHomePage(language) {
 // Black Tea Section
 function setLanguageInProducts(language) {
     try {
-        document.getElementById("products").textContent = products;
+        // document.getElementById("products").textContent = products;
         document.getElementById("black_tea_heading").textContent = language.black_tea_heading;
         document.getElementById("orthodox_tea").textContent = language.orthodox_tea;
         document.getElementById("orthodox_tea_price").textContent = language.orthodox_tea_price;
@@ -130,7 +132,7 @@ function setLanguageInProducts(language) {
 function setLanguageInTeapotSetAndAccessories(language) {
 
     try {
-        document.getElementById("accessories").textContent = language.accessories;
+        // document.getElementById("accessories").textContent = language.accessories;
         document.getElementById("travel_mug").textContent = language.travel_mug;
         document.getElementById("travel_mug_price").textContent = language.travel_mug_price;
         document.getElementById("add_to_cart1").textContent = language.add_to_cart1;
@@ -149,7 +151,7 @@ function setLanguageInTeapotSetAndAccessories(language) {
 // About Us
 function setLanguageInAboutUs(language) {
     try {
-        document.getElementById("about_us_title").textContent = language.about_us_title;
+        // document.getElementById("about_us_title").textContent = language.about_us_title;
         document.getElementById("about_us_description").textContent = language.about_us_description;
         document.getElementById("mission_title").textContent = language.mission_title;
         document.getElementById("mission_item_1").textContent = language.mission_item_1;

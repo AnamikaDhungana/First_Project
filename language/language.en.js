@@ -4,9 +4,9 @@ window.LANG_EN = {
     "message": "A Cupful of Joy",
     "title": "NEPALI SWADH",
     "home": "HOME",
-    "tea_title": "TEAS",
-    // "accessories" : "TEAPOTSET AND ACCESSORIES",
-    // "about us" : "ABOUT US",
+    "products": "TEAS",
+    "accessories": "TEAPOT SET AND ACCESSORY",
+    "about_us_title": "ABOUT US",
 
     // Home page 
     "hero_title": "Premium Tea Collection",
@@ -33,7 +33,7 @@ window.LANG_EN = {
     "green_tea_price": "Rs 250 - Rs 1,900",
     "select_option4": "Select options",
 
-    "products": "TEAS",
+    // "products": "TEAS",
     // Black Tea Section
     "black_tea_heading": "Black Tea",
     "orthodox_tea": "Orthodox Tea",
@@ -95,7 +95,7 @@ window.LANG_EN = {
     "add_to_cart19": "Add to Cart",
 
     // TeapotSet and Accessories
-    "accessories": "TEAPOT SET AND ACCESSORY",
+    // "accessories": "TEAPOT SET AND ACCESSORY",
     "title_of_accessories": "Brew in Style: Elegant Teapots & Timeless Accessories",
     "sub_title": "Enhance your tea experience with our carefully crafted teapot sets and unique accessories.",
     "travel_mug": "Travel Friendly Mug",

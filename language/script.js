@@ -28,7 +28,7 @@ function setLanguageInHeader(language) {
         document.getElementById("message").textContent = language.message;
         document.getElementById("title").textContent = language.title;
         document.getElementById("home").textContent = language.home;
-        document.getElementById("products").textContent = products;
+        document.getElementById("products").textContent = language.products;
         document.getElementById("accessories").textContent = language.accessories;
         document.getElementById("about_us_title").textContent = language.about_us_title;
     } catch (e) { }
@@ -50,7 +50,10 @@ function setLanguageInHomePage(language) {
         document.getElementById("featured_products").textContent = language.featured_products;
         document.getElementById("black_tea").textContent = language.black_tea;
         document.getElementById("black_tea_price").textContent = language.black_tea_price;
+        document.getElementById("select_option").textContent = language.select_option1;
         document.getElementById("select_option1").textContent = language.select_option1;
+        document.getElementById("select_option2").textContent = language.select_option1;
+        document.getElementById("select_option3").textContent = language.select_option1;
         document.getElementById("flower_tea").textContent = language.flower_tea;
         document.getElementById("flower_tea_price").textContent = language.flower_tea_price;
         document.getElementById("select_option2").textContent = language.select_option2;
@@ -139,12 +142,16 @@ function setLanguageInTeapotSetAndAccessories(language) {
         document.getElementById("travel_mug_desc").textContent = language.travel_mug_desc;
         document.getElementById("porcelain_cup").textContent = language.porcelain_cup;
         document.getElementById("porcelain_cup_price").textContent = language.porcelain_cup_price;
+        document.getElementById("add_to_cart").textContent = language.add_to_cart2;
+        document.getElementById("add_to_cart1").textContent = language.add_to_cart2;
         document.getElementById("add_to_cart2").textContent = language.add_to_cart2;
         document.getElementById("porcelain_cup_desc").textContent = language.porcelain_cup_desc;
         document.getElementById("ceramic_mug").textContent = language.ceramic_mug;
         document.getElementById("ceramic_mug_price").textContent = language.ceramic_mug_price;
-        document.getElementById("add_to_cart3").textContent = language.add_to_cart3;
+        // document.getElementById("add_to_cart3").textContent = language.add_to_cart3;
         document.getElementById("ceramic_mug_desc").textContent = language.ceramic_mug_desc;
+        document.getElementById("title_of_accessories").textContent = language.title_of_accessories;
+        document.getElementById("sub_title").textContent = language.sub_title;
     } catch (e) {
     }
 }
@@ -162,6 +169,7 @@ function setLanguageInAboutUs(language) {
         document.getElementById("story_member_1").textContent = language.story_member_1;
         document.getElementById("story_member_2").textContent = language.story_member_2;
         document.getElementById("story_member_3").textContent = language.story_member_3;
+        document.getElementById("about_us_title_1").textContent = language.about_us_title;
     } catch (e) {
     }
 }

@@ -112,7 +112,7 @@ window.LANG_EN = {
     "ceramic_mug_desc": "This mug is part of an old-fashioned tea set that looks really pretty and classy. It has a blue color with white flower designs, which makes it stand out. The mug is made of ceramic, so it keeps your tea warm for a longer time. It also has a nice handle that is easy to hold. The set comes with matching small plates, which make it perfect for serving tea in a fancy way or even just for decoration.",
 
     // About Us
-    "about_us_title": "About Us",
+    // "about_us_title": "About Us",
     "about_us_description": "Welcome to Nepali Swad, we are on a journey to bring the rich heritage and unique flavors of Nepali teas to the world. Our teas reflect the essence of Nepal's natural beauty, cultural richness, and sustainable agricultural practices.",
     "mission_title": "Our Mission",
     "mission_item_1": "Deliver premium-quality tea leaves and accessories",

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <!--JS for the Header-->
+    
     <div id="header-placeholder"></div>
     <script>
         fetch('/Header/header.html')
@@ -24,7 +24,7 @@
     </script>
 
     <main>
-        <!-- Black Tea Section -->
+       
         <section id="black-tea" class="tea-section">
             <h2 id="black_tea_heading">Black Tea</h2>
             <div class="tea-grid">
@@ -64,7 +64,7 @@
         </section>
 
     </main>
-    <!-- Flower Tea Section -->
+    
     <section id="flower-tea" class="tea-section">
         <h2 id="flower_tea_heading">Flower Tea</h2>
         <div class="tea-grid">
@@ -102,7 +102,7 @@
         </div>
     </section>
 
-    <!-- Herbal Tea Section -->
+    
     <section id="herbal-tea" class="tea-section">
         <h2 id="herbal_tea_heading">Herbal Tea</h2>
         <div class="tea-grid">
@@ -140,7 +140,7 @@
         </div>
     </section>
 
-    <!-- Green Tea Section -->
+    
     <section id="green-tea" class="tea-section">
         <h2 id="green_tea_heading">Green Tea</h2>
         <div class="tea-grid">
@@ -201,7 +201,7 @@
     </script>
 
 
-    <!--Javascript for footer-->
+    
     <div id="footer-container"></div>
     <script>
         fetch("/Footer/footer.html")
@@ -212,6 +212,100 @@
     </script>
 
     <script src="./../language/script.js" />
+
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products</title>
+    <link rel="stylesheet" href="products.css">
+    <script>
+        // Function to dynamically generate product sections
+        async function loadProducts() {
+            try {
+                const response = await fetch('fetch_products.php');
+                const products = await response.json();
+
+                const sections = {
+                    "Black Tea": document.getElementById('black-tea-grid'),
+                    "Flower Tea": document.getElementById('flower-tea-grid'),
+                    "Herbal Tea": document.getElementById('herbal-tea-grid'),
+                };
+
+                products.forEach(product => {
+                    const section = sections[product.category] || document.getElementById('other-tea-grid');
+                    
+                    const productHTML = `
+                        <div class="tea-item">
+                            <img src="uploads/${product.image_url}" alt="${product.product_name}">
+                            <h2>${product.product_name}</h2>
+                            <p>Rs ${product.product_price}</p>
+                            <button class="add-to-cart-btn" onclick="addToCart('${product.product_name}', ${product.product_price}, 'uploads/${product.image_url}')">Add To Cart</button>
+                        </div>
+                    `;
+                    section.innerHTML += productHTML;
+                });
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProducts);
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+    <script>
+        fetch('/Header/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+
+    <!-- Main Content -->
+    <main>
+        <section id="black-tea" class="tea-section">
+            <h2>Black Tea</h2>
+            <div class="tea-grid" id="black-tea-grid"></div>
+        </section>
+
+        <section id="flower-tea" class="tea-section">
+            <h2>Flower Tea</h2>
+            <div class="tea-grid" id="flower-tea-grid"></div>
+        </section>
+
+        <section id="herbal-tea" class="tea-section">
+            <h2>Herbal Tea</h2>
+            <div class="tea-grid" id="herbal-tea-grid"></div>
+        </section>
+
+        <section id="green-tea" class="tea-section">
+            <h2>Green Tea</h2>
+            <div class="tea-grid" id="green-tea-grid"></div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+    <script>
+        fetch("/Footer/footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
+
+    <script src="./../language/script.js"></script>
 
 </body>
 

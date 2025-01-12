@@ -1,26 +1,38 @@
 document.addEventListener("DOMContentLoaded", Script);
 function Script() {
-    let languageSession = sessionStorage.getItem("websiteLanguage") || "en";
-    loadLanguageScript(sessionStorage.getItem("websiteLanguage"));
+    setTimeout(() => {
 
-    document.addEventListener("click", function () {
-        languageSession = sessionStorage.getItem("websiteLanguage") || "en";
-        if (languageSession == "en") {
-            sessionStorage.setItem("websiteLanguage", "np");
-        } else {
-            sessionStorage.setItem("websiteLanguage", "en");
-        }
+        let languageSession = localStorage.getItem("websiteLanguage") || "en";
+        loadLanguageScript(languageSession);
 
-        loadLanguageScript(sessionStorage.getItem("websiteLanguage"));
-    })
+        let languageEvent = document.getElementById('language');
+        languageEvent.addEventListener("click", function () {
+            languageSession = localStorage.getItem("websiteLanguage") || "en";
+            let language = "";
+            if (languageSession == "en") {
+                localStorage.setItem("websiteLanguage", "np");
+                language = "np";
+            } else {
+                localStorage.setItem("websiteLanguage", "en");
+                language = "en";
+            }
+
+            loadLanguageScript(language);
+        })
+    }, 100)
 }
 
 //Header 
 function setLanguageInHeader(language) {
-    document.getElementById("message").textContent = language.message;
-    document.getElementById("title").textContent = language.title;
-    document.getElementById("home").textContent = language.home;
- }
+    try {
+        document.getElementById("message").textContent = language.message;
+        document.getElementById("title").textContent = language.title;
+        document.getElementById("home").textContent = language.home;
+        document.getElementById("products").textContent = language.products;
+        document.getElementById("accessories").textContent = language.accessories;
+        document.getElementById("about_us_title").textContent = language.about_us_title;
+    } catch (e) { }
+}
 
 // Home Page 
 function setLanguageInHomePage(language) {
@@ -38,7 +50,10 @@ function setLanguageInHomePage(language) {
         document.getElementById("featured_products").textContent = language.featured_products;
         document.getElementById("black_tea").textContent = language.black_tea;
         document.getElementById("black_tea_price").textContent = language.black_tea_price;
+        document.getElementById("select_option").textContent = language.select_option1;
         document.getElementById("select_option1").textContent = language.select_option1;
+        document.getElementById("select_option2").textContent = language.select_option1;
+        document.getElementById("select_option3").textContent = language.select_option1;
         document.getElementById("flower_tea").textContent = language.flower_tea;
         document.getElementById("flower_tea_price").textContent = language.flower_tea_price;
         document.getElementById("select_option2").textContent = language.select_option2;
@@ -54,7 +69,7 @@ function setLanguageInHomePage(language) {
 // Black Tea Section
 function setLanguageInProducts(language) {
     try {
-        document.getElementById("products").textContent = products;
+        // document.getElementById("products").textContent = products;
         document.getElementById("black_tea_heading").textContent = language.black_tea_heading;
         document.getElementById("orthodox_tea").textContent = language.orthodox_tea;
         document.getElementById("orthodox_tea_price").textContent = language.orthodox_tea_price;
@@ -120,26 +135,30 @@ function setLanguageInProducts(language) {
 function setLanguageInTeapotSetAndAccessories(language) {
 
     try {
-        document.getElementById("accessories").textContent = language.accessories;
+        // document.getElementById("accessories").textContent = language.accessories;
         document.getElementById("travel_mug").textContent = language.travel_mug;
         document.getElementById("travel_mug_price").textContent = language.travel_mug_price;
         document.getElementById("add_to_cart1").textContent = language.add_to_cart1;
         document.getElementById("travel_mug_desc").textContent = language.travel_mug_desc;
         document.getElementById("porcelain_cup").textContent = language.porcelain_cup;
         document.getElementById("porcelain_cup_price").textContent = language.porcelain_cup_price;
+        document.getElementById("add_to_cart").textContent = language.add_to_cart2;
+        document.getElementById("add_to_cart1").textContent = language.add_to_cart2;
         document.getElementById("add_to_cart2").textContent = language.add_to_cart2;
         document.getElementById("porcelain_cup_desc").textContent = language.porcelain_cup_desc;
         document.getElementById("ceramic_mug").textContent = language.ceramic_mug;
         document.getElementById("ceramic_mug_price").textContent = language.ceramic_mug_price;
-        document.getElementById("add_to_cart3").textContent = language.add_to_cart3;
+        // document.getElementById("add_to_cart3").textContent = language.add_to_cart3;
         document.getElementById("ceramic_mug_desc").textContent = language.ceramic_mug_desc;
+        document.getElementById("title_of_accessories").textContent = language.title_of_accessories;
+        document.getElementById("sub_title").textContent = language.sub_title;
     } catch (e) {
     }
 }
 // About Us
 function setLanguageInAboutUs(language) {
     try {
-        document.getElementById("about_us_title").textContent = language.about_us_title;
+        // document.getElementById("about_us_title").textContent = language.about_us_title;
         document.getElementById("about_us_description").textContent = language.about_us_description;
         document.getElementById("mission_title").textContent = language.mission_title;
         document.getElementById("mission_item_1").textContent = language.mission_item_1;
@@ -150,6 +169,7 @@ function setLanguageInAboutUs(language) {
         document.getElementById("story_member_1").textContent = language.story_member_1;
         document.getElementById("story_member_2").textContent = language.story_member_2;
         document.getElementById("story_member_3").textContent = language.story_member_3;
+        document.getElementById("about_us_title_1").textContent = language.about_us_title;
     } catch (e) {
     }
 }
@@ -183,17 +203,16 @@ function loadLanguageScript(language) {
     script.id = scriptId;
     script.src = `/language/language.${language}.js`;
     script.onload = () => {
-        console.log(`Loaded language.${language}.js`);
-        console.log(language === "en" ? window.LANG_EN : window.LANG_NP);
+        // console.log(`Loaded language.${language}.js`);
+        // console.log(language === "en" ? window.LANG_EN : window.LANG_NP);
         window.languageObj = language === "en" ? window.LANG_EN : window.LANG_NP;
-        
+
         setLanguageInHeader(window.languageObj);
         setLanguageInHomePage(window.languageObj);
         setLanguageInProducts(window.languageObj);
         setLanguageInTeapotSetAndAccessories(window.languageObj);
         setLanguageInAboutUs(window.languageObj);
         setLanguageInFooter(window.languageObj);
-
     };
     script.onerror = () => {
         console.error(`Failed to load language.${language}.js`);

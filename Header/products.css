@@ -76,7 +76,7 @@ body {
   color: #2e7d32;
 } */
 
-/* General Page Styling */
+/* General Page Styling
 html {
   scroll-behavior:smooth;
 }
@@ -142,12 +142,12 @@ body {
 
 
 .tea-item p {
-  /*margin: 5px 0;*/
+  
   font-size: 1rem;
  margin-bottom:20px;
 }
 .tea-item button {
-  /*margin: 5px 0;*/
+ 
   background-color:#6ABF4B;
  margin-bottom:  100px;
  border-radius:5px;
@@ -162,4 +162,108 @@ body {
 .tea-item p:last-child {
   font-weight: bold;
   color: #2e7d32;
+} */
+
+/* General Page Styling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Times New Roman', Times, serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+  padding-top: 0px;
+  margin-bottom: 10px;
+}
+
+.tea-section {
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 1000px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.tea-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #5d4037;
+  margin-top: 20px;
+}
+
+/* Grid layout for the product section */
+.tea-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Individual product card */
+.tea-item {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.tea-item:hover {
+  transform: scale(1.05);
+}
+
+/* Product image */
+.tea-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Product title */
+.tea-item h2 {
+  font-size: 1.5em;
+  color: #34495e;
+  margin: 10px 0;
+}
+
+/* Product price and description */
+.tea-item p {
+  margin: 5px 0;
+  color: #7f8c8d;
+}
+
+/* Add to cart button */
+.add-to-cart-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  margin-top: 10px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #3498db;
+  border: none;
+  position: relative;
+  bottom: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tea-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 }

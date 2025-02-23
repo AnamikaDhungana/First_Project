@@ -1,4 +1,4 @@
-body {
+/* body {
   font-family: 'Times New Roman', Times, serif;
   margin: 0;
   padding: 0;
@@ -9,20 +9,20 @@ body {
 .container {
   text-align: center;
   max-height: 1900px;
-  padding: 20px; /* Adds padding around the content inside the container */
+  padding: 20px; 
 }
 
 .box-cont {
   text-align: center;
-  margin-top: 50px; /* Adds space between the content and the top */
+  margin-top: 50px; 
 }
 
 h1 {
-  margin-top: 30px; /* Adds space above the header */
+  margin-top: 30px; 
 }
 
 footer {
-  margin-top: 60px; /* Adds space between the content and the footer */
+  margin-top: 60px; 
   padding: 20px;
   background-color: #f1f1f1;
 }
@@ -33,9 +33,121 @@ footer {
   border: none;
   padding: 15px;
   border-radius: 10px;
-  margin-top: 20px; /* Adds space above the button */
+  margin-top: 20px; 
 }
 
 .btn:hover {
   background-color: #adc63f;
+} */
+
+/* General Body Styling */
+body {
+  font-family: 'Times New Roman', Times, serif;
+  margin: 0;
+  padding: 0;
+  background-color: #85FFBD;
+  background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+  min-height: 100vh; /* Ensures the background covers the entire viewport */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Main Container */
+.container {
+  text-align: center;
+  max-width: 800px;
+  margin: 20px auto; /* Centers the content horizontally */
+  padding: 20px; /* Adds padding around the content */
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  border-radius: 10px; /* Rounded corners for the container */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+}
+
+/* Header Styling */
+h1 {
+  margin-top: 20px;
+  font-size: 2rem; /* Adjusts the font size */
+  color: #333; /* Dark text for better contrast */
+}
+
+/* QR Code Styling */
+.container img {
+  margin: 20px 0;
+  border: 5px solid #fff; /* Adds a white border around the QR code */
+  border-radius: 10px; /* Slightly rounded corners for the QR code */
+}
+
+/* Payment Form Styling */
+.box-cont {
+  margin-top: 30px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* Adds spacing between form elements */
+}
+
+label {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333; /* Darker text for labels */
+}
+
+input[type="text"] {
+  width: 80%;
+  max-width: 400px; /* Prevents input from being too wide */
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #6ABF4B; /* Matches button color */
+  border-radius: 5px; /* Rounded corners for input */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #adc63f; /* Changes color when focused */
+  box-shadow: 0 0 8px rgba(106, 191, 75, 0.5); /* Glowing effect */
+}
+
+/* Button Styling */
+button {
+  background-color: #6ABF4B;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #adc63f; /* Slightly lighter green on hover */
+}
+
+/* Footer Styling */
+footer {
+  margin-top: auto;
+  width: 100%; /* Full width footer */
+  padding: 20px;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container img {
+    width: 250px; /* Smaller QR code for smaller screens */
+    height: 250px;
+  }
+
+  button {
+    padding: 10px 20px; /* Smaller buttons for smaller screens */
+  }
 }

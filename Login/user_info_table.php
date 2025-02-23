@@ -33,6 +33,21 @@ if (mysqli_query($conn, $sql_products)) {
     echo "Error creating 'products' table: " . mysqli_error($conn) . "<br>";
 }
 
+// Add the `category` column before `created_at` if it doesn't exist
+$check_category_column = "SHOW COLUMNS FROM products LIKE 'category'";
+$result = mysqli_query($conn, $check_category_column);
+
+if (mysqli_num_rows($result) == 0) {
+    $add_category_column = "ALTER TABLE products ADD category VARCHAR(255) NOT NULL AFTER image_url";
+    if (mysqli_query($conn, $add_category_column)) {
+        echo "Column 'category' added successfully before 'created_at' in 'products' table.<br>";
+    } else {
+        echo "Error adding 'category' column: " . mysqli_error($conn) . "<br>";
+    }
+} else {
+    echo "Column 'category' already exists in 'products' table.<br>";
+}
+
 // Create the `orders` table
 $sql_orders = " CREATE TABLE IF NOT EXISTS orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,

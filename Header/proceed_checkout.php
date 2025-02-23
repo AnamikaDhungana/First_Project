@@ -11,7 +11,7 @@
      <!-- Header -->
   <div id="header-placeholder"></div>
   <script>
-    fetch('../Header/header.html')
+    fetch('../Header/header.php')
       .then(response => response.text())
       .then(data => {
         document.getElementById('header-placeholder').innerHTML = data;
@@ -36,7 +36,7 @@
     <!-- Footer -->
   <div id="footer-container"></div>
   <script>
-    fetch("../Footer/footer.html")
+    fetch("../Footer/footer.php")
       .then(response => response.text())
       .then(data => {
         document.getElementById('footer-container').innerHTML = data;

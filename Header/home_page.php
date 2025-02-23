@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEPALI SWADH</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="home_style.css">
+    <link rel="stylesheet" href="home_styles.css">
     <link rel="preload" href="../language/language.en.js" as="script">
     <link rel="preload" href="../language/language.np.js" as="script">
 
@@ -19,7 +19,7 @@
 
     <div id="header-placeholder"></div>
     <script>
-        fetch('/Header/header.html')
+        fetch('../Header/header.php')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
@@ -71,37 +71,37 @@
     <section id="featured-products" class="featured-products">
         <h2 id="featured_products">Featured Products</h2>
         <span class="product-card">
-            <img src="/Tea_name/ctc-tea.png" alt="Black Tea"> <br>
+            <img src="../Tea_name/ctc-tea.png" alt="Black Tea"> <br>
             <h3 id="black_tea">Black Tea</h3>
             <p id="black_tea_price">Rs 300 - Rs 1,200</p> <br>
             <!-- <div class="rating">⭐⭐⭐⭐⭐</div> -->
-            <a href="/Header/products.html#black-tea">
+            <a href="../Header/products.php#black-tea">
                 <button id="select_option">Select options</button>
             </a>
         </span>
 
         <span class="product-card">
-            <img src="/Tea_name/chamomile-tea.png" alt="Chamomile Tea"> <br>
+            <img src="../Tea_name/chamomile-tea.png" alt="Chamomile Tea"> <br>
             <h3 id="flower_tea"> Flower Tea</h3>
             <p id="flower_tea_price">Rs 300 - Rs 600</p> <br>
-            <a href="/Header/products.html#flower-tea">
+            <a href="../Header/products.php#flower-tea">
                 <button id="select_option1">Select options</button>
             </a>
         </span>
 
         <span class="product-card">
-            <img src="/Tea_name/lemongrass-tea.png" alt="Herbal Tea"><br>
+            <img src="../Tea_name/lemongrass-tea.png" alt="Herbal Tea"><br>
             <h3 id="herbal_tea">Herbal Tea</h3>
             <p id="herbal_tea_price">Rs 800 - Rs 4,500</p> <br>
-            <a href="/Header/products.html#herbal-tea">
+            <a href="../Header/products.php#herbal-tea">
                 <button id="select_option2">Select options</button>
             </a>
         </span>
         <span class="product-card">
-            <img src="/Tea_name/silver_needle_tea.png" alt="Everest Gold Pure Tea"><br>
+            <img src="../Tea_name/silver_needle_tea.png" alt="Everest Gold Pure Tea"><br>
             <h3 id="green_tea">Green Tea</h3>
             <p id="green_tea_price">Rs 250 - Rs 1,900</p> <br>
-            <a href="/Header/products.html#green-tea">
+            <a href="../Header/products.php#green-tea">
                 <button id="select_option3">Select options</button>
             </a>
         </span>
@@ -110,7 +110,7 @@
     <!--Javascript for footer-->
     <div id="footer-container"></div>
     <script>
-        fetch("/Footer/footer.html")
+        fetch("../Footer/footer.php")
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-container').innerHTML = data;

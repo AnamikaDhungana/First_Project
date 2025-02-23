@@ -27,26 +27,27 @@
             <p class="tagline" id="message">A Cupful of Joy</p>
 
             <div class="nav-icons">
-                <a href="#"><i id="language" class="fas fa-language"></i></a>
-                <a href="/Login/login.html"><i class="fas fa-user"></i></a>
-                <a href="/Header/add_to_cart.html"><i class="fas fa-shopping-cart"></i></a>
+                <!-- <a href="#"><i id="language" class="fas fa-language"></i></a> -->
+                <a href="?lang=en"><i id="language" class="fas fa-language"></i></a>
+                <a href="../Login/login.php"><i class="fas fa-user"></i></a>
+                <a href="../Header/add_to_cart.php"><i class="fas fa-shopping-cart"></i></a>
             </div>
         </div>
 
         <!-- Navigation bar -->
         <nav class="navbar">
             <div class="logo">
-                <a href="/Header/home_page.html">
+                <a href="/Header/home_page.php">
                     <img src="Layer_1.png" alt="Tea and Accessory Logo">
                 </a>
                 <span id="title">NEPALI SWADH</span>
             </div>
 
             <ul class="nav-links">
-                <li><a id="home" href="/Header/home_page.html">HOME</a></li>
-                <li><a id="products" href="/Header/products.html">TEAS</a></li>
-                <li><a id="accessories" href="/tea_set/accessory.html">TEAPOT SET & ACCESSORIES</a></li>
-                <li><a id="about_us_title" href="/About_Us/about-us.html">ABOUT US</a></li>
+                <li><a id="home" href="../Header/home_page.php">HOME</a></li>
+                <li><a id="products" href="../Header/products.php">TEAS</a></li>
+                <li><a id="accessories" href="../tea_set/accessory.php">TEAPOT SET & ACCESSORIES</a></li>
+                <li><a id="about_us_title" href="../About_Us/about-us.php">ABOUT US</a></li>
 
             </ul>
         </nav>

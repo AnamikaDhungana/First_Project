@@ -255,7 +255,8 @@ include('database_connection.php');
             echo '<td>' . $row['full_name'] . '</td>';
             echo '<td>' . $row['email'] . '</td>';
             echo '<td class="actions">';
-            // echo '<a href="edit_user.php?id=' . $row['id'] . '" class="edit">Edit</a>';
+
+            echo '<a href="update_users.php?id=' . $row['id'] . '" class="edit">Update</a>';
             echo '<a href="delete_user.php?id=' . $row['id'] . '" class="delete" onclick="return confirm(\'Are you sure you want to delete this user?\')">Delete</a>';
             echo '</td>';
             echo '</tr>';

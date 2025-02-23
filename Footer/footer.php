@@ -20,7 +20,7 @@
       <div class="links">
           <h3 id="footer_links_title">Nepali Swad</h3>
           <ul>
-              <li><a id="footer_link_about_us" href="/About_Us/about-us.html">About Us</a></li>
+              <li><a id="footer_link_about_us" href="../About_Us/about-us.php">About Us</a></li>
               <!-- <li><a href="#">Contact Us</a></li> -->
           </ul>
       </div>
@@ -50,7 +50,7 @@
   </div>
 </div>
 
-<script src="./../language/script.js" />
+<script src="./../language/script.js"></script>
 
 </body>
 </html>

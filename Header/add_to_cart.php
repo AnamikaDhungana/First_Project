@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart</title>
   <link rel="stylesheet" href="cart.css">
 </head>
@@ -10,7 +8,7 @@
   <!-- Header -->
   <div id="header-placeholder"></div>
   <script>
-    fetch('/Header/header.html')
+    fetch('../Header/header.php')
       .then(response => response.text())
       .then(data => {
         document.getElementById('header-placeholder').innerHTML = data;
@@ -24,8 +22,8 @@
     <div id="cart-items"></div>
     <div class="cart-summary">
       <p>Total: Rs.<span id="total-price"></span></p>
-      <a href="/Login/login.html"></a>
-      <a href="/Login/register.html">
+      <a href="../Login/login.php"></a>
+      <a href="../Login/register.php">
         <button class="checkout-btn" id="checkout-btn">Proceed to Checkout</button>
       </a>
   
@@ -101,14 +99,14 @@
   <!-- Footer -->
   <div id="footer-container"></div>
   <script>
-    fetch("/Footer/footer.html")
+    fetch("../Footer/footer.php")
       .then(response => response.text())
       .then(data => {
         document.getElementById('footer-container').innerHTML = data;
       });
   </script>
   
-  <script src="./../language/script.js" />
+  <script src="./../language/script.js"></script>
 
 </body>
 </html>

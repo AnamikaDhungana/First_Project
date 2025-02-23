@@ -10,7 +10,7 @@ if (isset($_GET['delete_id'])) {
     $delete_query = "DELETE FROM products WHERE product_id = $delete_id";
     
     if (mysqli_query($conn, $delete_query)) {
-        echo "<p>Product deleted successfully!</p>";
+        // echo "<p>Product deleted successfully!</p>";
     } else {
         echo "<p>Error deleting product: " . mysqli_error($conn) . "</p>";
     }
@@ -41,49 +41,55 @@ if (isset($_POST['edit_product'])) {
     <title>Manage Products</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            font-family:'Times New Roman', Times, serif;
+            background-color: #F8F4E3;
             margin: 0;
             padding: 0;
         }
 
         header {
-            background-color: #333;
+            background-color: #2C5F2D;
             color: white;
-            padding: 10px 0;
+            padding: 15px 0;
         }
 
         header nav ul {
-            list-style-type: none;
-            text-align: center;
-            margin: 0;
-            padding: 0;
+           list-style-type: none;
+           margin: 0;
+           padding: 0;
+           display: flex; /* Use flex for proper alignment */
+           justify-content: left; /* Center align all links */
+         /* Ensure vertical alignment */
+           gap: 130px; /* Add space between links */
         }
 
         header nav ul li {
-            display: inline;
-            margin: 0 15px;
+           margin: 0; /* Ensure no extra margin */
+           padding: 0;
+           margin-left:12px; /* Ensure no extra padding */
         }
 
         header nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2em;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+           color: white;
+           text-decoration: none;
+           font-size: 1.2em;
+           padding: 5px; /* Uniform top, bottom, left, right padding */
+           border-radius: 5px;
+           transition: background-color 0.3s;
+           display: inline-block; /* Ensure consistent box model for links */
         }
 
-        header nav ul li a:hover {
+        /* header nav ul li a:hover {
             background-color: #007bff;
-        }
+        } */
 
         .container {
-            max-width: 1200px;
+            max-width: 700px;
             margin: 2rem auto;
             padding: 1rem;
             background: white;
             border-radius: 5px;
+            background-color: #F8F4E3;
         }
 
         .container h1 {
@@ -96,7 +102,7 @@ if (isset($_POST['edit_product'])) {
             border-radius: 5px;
             padding: 1rem;
             margin-bottom: 1rem;
-            background-color: #f4f4f4;
+            background-color: #F8F4E3;
         }
 
         .product p {
@@ -106,33 +112,37 @@ if (isset($_POST['edit_product'])) {
         .product form {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 1rem;
         }
 
         .product form input[type="text"],
         .product form input[type="number"] {
             padding: 0.5rem;
+            padding-right:5rem;
             border: 1px solid #ddd;
             border-radius: 3px;
-            width: 100%;
+            max-width:970;
+            font-family:'Times New Roman', Times, serif;
+            font-size:1rem;
         }
 
         .product form button {
-            padding: 0.5rem;
-            background-color: #007bff;
+            padding: 0.6rem;
+            background-color:  #2C5F2D;
             color: white;
             border: none;
             border-radius: 3px;
             cursor: pointer;
             transition: background-color 0.3s;
+            /* max-width:970px; */
         }
 
         .product form button:hover {
-            background-color: #0056b3;
+            background-color:  #C5B358;
         }
 
         .actions {
-            margin-top: 0.5rem;
+            margin-top: 1rem;
         }
 
         .actions a {
@@ -142,20 +152,31 @@ if (isset($_POST['edit_product'])) {
             border-radius: 3px;
             margin-right: 5px;
         }
+        .actions a.update {
+    background-color: #007bff;
+}
+
+.actions a.update:hover {
+    background-color: #0056b3;
+}
+
 
         .actions a.delete {
-            background-color: #dc3545;
+            background-color:  #dc3545;
         }
 
         .actions a.delete:hover {
-            opacity: 0.8;
+            /* opacity: 0.8; */
+            background-color: #C5B358;
         }
+
+        
 
         .add-product-link {
             display: inline-block;
             margin-bottom: 1rem;
             padding: 10px 15px;
-            background-color: #28a745;
+            background-color:  #2C5F2D;
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -163,7 +184,7 @@ if (isset($_POST['edit_product'])) {
         }
 
         .add-product-link:hover {
-            background-color: #218838;
+            background-color:  #C5B358;
         }
 
     </style>
@@ -199,19 +220,23 @@ if (isset($_POST['edit_product'])) {
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<div class='product'>";
             echo "<p><strong>" . htmlspecialchars($row['product_name']) . "</strong></p>";
-            echo "<p>Price: $" . htmlspecialchars($row['product_price']) . "</p>";
+            echo "<p>Price: Rs." . htmlspecialchars($row['product_price']) . "</p>";
             
             // Edit Product Form
             echo "<form action='' method='POST'>";
             echo "<input type='hidden' name='product_id' value='" . $row['product_id'] . "'>";
             echo "<input type='text' name='product_name' value='" . htmlspecialchars($row['product_name']) . "' required placeholder='Product Name'>";
             echo "<input type='number' name='product_price' value='" . htmlspecialchars($row['product_price']) . "' required placeholder='Product Price'>";
-            echo "<button type='submit' name='edit_product'>Save Changes</button>";
+          
             echo "</form>";
 
             // Delete Product
             echo "<div class='actions'>";
+            echo "<a href='update_products.php?update_id=" . $row['product_id'] . "' class='update'>Update</a>";
+
             echo "<a href='?delete_id=" . $row['product_id'] . "' class='delete' onclick='return confirm(\"Are you sure you want to delete this product?\")'>Delete</a>";
+
+           
             echo "</div>";
             echo "</div>";
         }

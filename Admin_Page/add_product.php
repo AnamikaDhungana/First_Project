@@ -2,12 +2,21 @@
 include('database_connection.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Step 2: Reset AUTO_INCREMENT to 1 (resetting after deletion or new insertion)
+    $resetQuery = "ALTER TABLE products AUTO_INCREMENT = 1"; // Reset the AUTO_INCREMENT value
+    if ($conn->query($resetQuery) === TRUE) {
+        // echo "Product table cleared and AUTO_INCREMENT reset.";
+    } else {
+        echo "Error resetting AUTO_INCREMENT: " . $conn->error;
+    }
     // Retrieve form data
     $product_name = $_POST['name'];
     $price = $_POST['price'];
     $description = $_POST['description'];
     $image = $_FILES['image']['name'];
     $target = "uploads/" . basename($image);
+    $category = $_POST['category'];
+    $stock = $_POST['stock'];
 
     // Check if the uploads directory exists and is writable
     if (!is_dir('uploads')) {
@@ -19,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Use a prepared statement to insert into the database
-    $stmt = $conn->prepare("INSERT INTO products (product_name, product_price, product_description, image_url) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("siss", $product_name, $price, $description, $image);
+    $stmt = $conn->prepare("INSERT INTO products (product_name, product_price, product_description, image_url,category,stock) VALUES (?, ?, ?, ?,?,?)");
+    $stmt->bind_param("sissss", $product_name, $price, $description, $image, $category, $stock);
 
     if ($stmt->execute()) {
         // Move the uploaded file
@@ -169,13 +178,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="number" name="price" id="price" required>
 
         <label for="description">Description:</label>
-        <textarea name="description" id="description" required></textarea>
+        <textarea name="description" id="description"></textarea> 
 
         <label for="stock">Stock:</label>
         <input type="number" name="stock" id="stock" required>
 
         <label for="image">Product Image:</label>
         <input type="file" name="image" id="image" required>
+
+        <label for="category">Category:</label>
+        <input type="text" name="category" id="category" required>
 
         <button type="submit">Add Product</button>
     </form>

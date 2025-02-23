@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
     <title>About Us - Nepali Swad</title>
-    <link rel="stylesheet" href="about-us.css">
+    <link rel="stylesheet" href="aboutUs.css">
 
 </head>
 
 <body>
     <div id="header-placeholder"></div>
     <script>
-        fetch('/Header/header.html')
+        fetch('../Header/header.php')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
@@ -74,7 +74,7 @@
 
     <div id="footer-container"></div>
     <script>
-        fetch("/Footer/footer.html")
+        fetch("../Footer/footer.php")
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer-container').innerHTML = data;

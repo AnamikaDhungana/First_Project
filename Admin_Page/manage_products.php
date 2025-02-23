@@ -47,38 +47,7 @@ if (isset($_POST['edit_product'])) {
             padding: 0;
         }
 
-        header {
-            background-color: #2C5F2D;
-            color: white;
-            padding: 15px 0;
-        }
-
-        header nav ul {
-           list-style-type: none;
-           margin: 0;
-           padding: 0;
-           display: flex; /* Use flex for proper alignment */
-           justify-content: left; /* Center align all links */
-         /* Ensure vertical alignment */
-           gap: 130px; /* Add space between links */
-        }
-
-        header nav ul li {
-           margin: 0; /* Ensure no extra margin */
-           padding: 0;
-           margin-left:12px; /* Ensure no extra padding */
-        }
-
-        header nav ul li a {
-           color: white;
-           text-decoration: none;
-           font-size: 1.2em;
-           padding: 5px; /* Uniform top, bottom, left, right padding */
-           border-radius: 5px;
-           transition: background-color 0.3s;
-           display: inline-block; /* Ensure consistent box model for links */
-        }
-
+        
         /* header nav ul li a:hover {
             background-color: #007bff;
         } */
@@ -190,17 +159,17 @@ if (isset($_POST['edit_product'])) {
     </style>
 </head>
 <body>
-<header>
-    <nav>
-        <ul>
-            <li><a href="auth_admin.php">Dashboard</a></li>
-            <li><a href="manage_products.php">Manage Products</a></li>
-            <li><a href="add_product.php">Add Products</a></li>               
-            <li><a href="manage_users.php">Manage Users</a></li>
-            <li><a href="logout.php">Logout</a></li>
-        </ul>
-    </nav>
-</header>
+<!--JS for the Header-->
+
+<div id="header-placeholder"></div>
+    <script>
+        fetch('../Admin_Page/admin_header.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
 
 <section class="container">
     <h1>Manage Products</h1>

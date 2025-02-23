@@ -2,7 +2,7 @@
 include('database_connection.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Step 2: Reset AUTO_INCREMENT to 1 (resetting after deletion or new insertion)
+       // Step 2: Reset AUTO_INCREMENT to 1 (resetting after deletion or new insertion)
     $resetQuery = "ALTER TABLE products AUTO_INCREMENT = 1"; // Reset the AUTO_INCREMENT value
     if ($conn->query($resetQuery) === TRUE) {
         // echo "Product table cleared and AUTO_INCREMENT reset.";
@@ -13,10 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $product_name = $_POST['name'];
     $price = $_POST['price'];
     $description = $_POST['description'];
+    $stock = $_POST['stock'];
     $image = $_FILES['image']['name'];
     $target = "uploads/" . basename($image);
     $category = $_POST['category'];
-    $stock = $_POST['stock'];
 
     // Check if the uploads directory exists and is writable
     if (!is_dir('uploads')) {
@@ -28,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Use a prepared statement to insert into the database
-    $stmt = $conn->prepare("INSERT INTO products (product_name, product_price, product_description, image_url,category,stock) VALUES (?, ?, ?, ?,?,?)");
-    $stmt->bind_param("sissss", $product_name, $price, $description, $image, $category, $stock);
+    $stmt = $conn->prepare("INSERT INTO products (product_name, product_price, product_description, stock, image_url, category) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sissss", $product_name, $price, $description, $stock, $image, $category);
 
     if ($stmt->execute()) {
         // Move the uploaded file
@@ -52,121 +52,96 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Add Product</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
+    font-family: 'Times New Roman', Times, serif;
+    background-color:#F8F4E3;
+    margin: 0;
+    padding: 0;
+}
 
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-        }
 
-        header nav ul {
-            list-style-type: none;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
 
-        header nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
 
-        header nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2em;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+.form-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #F8F4E3;
+}
 
-        header nav ul li a:hover {
-            background-color: #007bff;
-        }
+.form-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+   
+    
+}
 
-        .form-container {
-            max-width: 500px;
-            margin: 2rem auto;
-            padding: 1rem;
-            background: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+/* .form-container input,
+.form-container textarea,
+.form-container button {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
 
-        .form-container label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
+.form-container button {
+    background-color:#333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
 
-        /* .form-container input,
-        .form-container textarea,
-        .form-container button {
-            width: 100%;
-            margin-bottom: 1rem;
-            padding: 0.5rem;
-        }
+.form-container button:hover {
+    background-color: #0056b3;
+} */
+.form-container input,
+.form-container textarea {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.50rem; /* Increased padding for better spacing */
+    font-size: 1rem; /* Increased font size for readability */
+    border: 1px solid #ccc; /* Added border for better definition */
+    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
 
-        .form-container button {
-            background-color:#333;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+.form-container textarea {
+    height: 100px; /* Adjust height for text area */
+    resize: vertical; /* Allow resizing vertically only */
+}
 
-        .form-container button:hover {
-            background-color: #0056b3;
-        } */
-        .form-container input,
-        .form-container textarea {
-            width: 100%;
-            margin-bottom: 1rem;
-            padding: 0.75rem; /* Increased padding for better spacing */
-            font-size: 1rem; /* Increased font size for readability */
-            border: 1px solid #ccc; /* Added border for better definition */
-            border-radius: 5px; /* Rounded corners */
-            box-sizing: border-box; /* Ensures padding doesn't affect width */
-        }
+.form-container button {
+    background-color:  #2C5F2D;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0.75rem; /* Consistent padding */
+    font-size: 1rem; /* Consistent font size */
+    border-radius: 5px; /* Rounded corners */
+}
 
-        .form-container textarea {
-            height: 120px; /* Adjust height for text area */
-            resize: vertical; /* Allow resizing vertically only */
-        }
+.form-container button:hover {
+    background-color: #C5B358;
+}
 
-        .form-container button {
-            background-color: #333;
-            color: white;
-            border: none;
-            cursor: pointer;
-            padding: 0.75rem; /* Consistent padding */
-            font-size: 1rem; /* Consistent font size */
-            border-radius: 5px; /* Rounded corners */
-        }
-
-        .form-container button:hover {
-            background-color: #0056b3;
-        }
 
     </style>
 </head>
 <body>
+<!--JS for the Header-->
 
-<!-- Admin Navigation Bar -->
-<header>
-    <nav>
-           <ul>
-                <li><a href="auth_admin.php">Dashboard</a></li>
-                <li><a href="manage_products.php">Manage Products</a></li>
-                <li><a href="add_product.php">Add Products</a></li>
-                <li><a href="manage_users.php">Manage Users</a></li>
-                <li><a href="logout.php">Logout</a></li>
-            </ul>
-    </nav>
-</header>
+<div id="header-placeholder"></div>
+    <script>
+        fetch('../Admin_Page/admin_header.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
+
 
 <div class="form-container">
     <h2>Add a New Product</h2>
@@ -178,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="number" name="price" id="price" required>
 
         <label for="description">Description:</label>
-        <textarea name="description" id="description"></textarea> 
+        <textarea name="description" id="description"></textarea>
 
         <label for="stock">Stock:</label>
         <input type="number" name="stock" id="stock" required>
@@ -195,4 +170,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
-

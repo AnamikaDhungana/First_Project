@@ -45,20 +45,20 @@ if ($result->num_rows == 1) {
         $_SESSION['isLoggedIn'] = true;
 
         // Redirect to user home page
-        header("Location: ../Header/proceed_checkout.html");
+        header("Location: ../Header/proceed_checkout.php");
         exit();
     } else {
         // Incorrect password
         echo "<script>
                 alert('Incorrect password. Please try again.');
-                window.location.href = '../Login/login.html';
+                window.location.href = '../Login/login.php';
               </script>";
     }
 } else {
     // No user found
     echo "<script>
             alert('No user found with this email. Please register.');
-            window.location.href = '../Login/register.html';
+            window.location.href = '../Login/register.php';
           </script>";
 }
 

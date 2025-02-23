@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($password !== $confirm_password) {
         echo "<script>
                 alert('Passwords do not match!');
-                window.location.href = 'register.html';
+                window.location.href = 'register.php';
               </script>";
         exit;
     }
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "<script>
                 alert('Invalid email format!');
-                window.location.href = 'register.html';
+                window.location.href = 'register.php';
               </script>";
         exit;
     }
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!preg_match("/^(9[6-8][0-9])\d{7}$/", $phone)) {
       echo "<script>
               alert('Phone number must be a valid Nepali number (e.g., 9801234567)');
-              window.location.href = 'register.html';
+              window.location.href = 'register.php';
             </script>";
       exit;
     }
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!$result) {
       echo "<script>
                 alert('Database error: Failed to validate email.');
-                window.location.href = 'register.html';
+                window.location.href = 'register.php';
               </script>";
       exit;
     }
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (mysqli_num_rows($result) > 0) {
         echo "<script>
                 alert('This email is already registered!');
-                window.location.href = 'register.html';
+                window.location.href = 'register.php';
               </script>";
         exit;
     }
@@ -68,12 +68,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (mysqli_query($conn, $sql)) {
         echo "<script>
                 alert('Registration successful! Please login.');
-                window.location.href = 'login.html';
+                window.location.href = 'login.php';
               </script>";
     } else {
         echo "<script>
                 alert('Error: Could not complete the registration.');
-                window.location.href = 'register.html';
+                window.location.href = 'register.php';
               </script>";
     }
 }

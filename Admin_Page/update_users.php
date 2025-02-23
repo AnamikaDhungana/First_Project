@@ -63,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f9f9f9;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #F8F4E3;
             margin: 0;
             padding: 0;
             
@@ -116,6 +116,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+    <!--JS for the Header-->
+
+<div id="header-placeholder"></div>
+    <script>
+        fetch('../Admin_Page/admin_header.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
 <div class="container">
     <h2>Update User</h2>
 

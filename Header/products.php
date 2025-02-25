@@ -24,7 +24,7 @@
     <!-- Main Content -->
     <main>
         <?php
-        require_once "../Login/database_connection.php";
+        require_once "../database_connection.php";
 
         // Check connection
         if ($conn->connect_error) {
@@ -97,7 +97,7 @@
             localStorage.setItem('cart', JSON.stringify(cart));
 
             // Redirect to the cart page
-            window.location.href = "/Header/add_to_cart.html";
+            window.location.href = "../Header/add_to_cart.php";
         }
     </script>
 </body>

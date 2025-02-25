@@ -6,7 +6,7 @@ if (!isset($_SESSION['isLoggedIn']) || $_SESSION['userRole'] !== 'Admin') {
 }
 
 // Include the database connection
-include('database_connection.php');
+include('../database_connection.php');
 
 // Query to count total products
 $product_count_query = "SELECT COUNT(*) AS total_products FROM products";

@@ -1,5 +1,5 @@
 <?php
-include('database_connection.php');
+include('../database_connection.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
        // Step 2: Reset AUTO_INCREMENT to 1 (resetting after deletion or new insertion)

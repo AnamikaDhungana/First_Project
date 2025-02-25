@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("database_connection.php");
+include("../database_connection.php");
 
 // Admin credentials
 $adminemail = "MasterAdmin111@gmail.com";

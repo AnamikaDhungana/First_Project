@@ -134,7 +134,8 @@ html{
 /*Featured Products*/
 body {
   font-family:'Times New Roman', Times, serif; 
-  background-color: #F8F4E3;
+  /* background-color: #F8F4E3; */
+  background-color: #4a8e36;
 }
 
 .featured-products {

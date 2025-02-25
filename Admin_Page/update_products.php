@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('database_connection.php');
+include('../database_connection.php');
 
 if (isset($_GET['update_id'])) {
     $product_id = $_GET['update_id'];

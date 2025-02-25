@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('database_connection.php');
+include('../database_connection.php');
 
 // Check if user ID is provided
 if (isset($_GET['id'])) {

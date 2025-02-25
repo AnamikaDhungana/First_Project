@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('database_connection.php');
+include('../database_connection.php');
 
 // Check if delete request is received
 if (isset($_GET['delete_id'])) {

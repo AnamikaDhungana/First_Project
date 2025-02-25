@@ -1,5 +1,5 @@
 <?php
-require_once "../Login/database_connection.php";
+require_once "../database_connection.php";
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -47,6 +47,8 @@ if ($conn->connect_error) {
         } else {
             echo "<p>No accessories available.</p>";
         }
+
+        
         ?>
     </section>
 
@@ -59,7 +61,28 @@ if ($conn->connect_error) {
             });
     </script>
 
-    <script src="./../language/script.js"></script>
+<script>
+        function addToCart(productName, productPrice, productImage) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Check if the product is already in the cart
+            const productIndex = cart.findIndex(item => item.name === productName);
+            if (productIndex === -1) {
+                cart.push({ name: productName, price: productPrice, image: productImage, quantity: 1 });
+            } else {
+                cart[productIndex].quantity += 1;
+            }
+
+            // Save the updated cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Redirect to the cart page
+            window.location.href = "../Header/add_to_cart.php";
+        }
+    </script>
+   
+
+    <!-- <script src="./../language/script.js"></script> -->
     <?php $conn->close(); ?>
 </body>
 

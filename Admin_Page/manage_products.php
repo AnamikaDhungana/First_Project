@@ -2,6 +2,13 @@
 session_start();
 include('../database_connection.php');
 
+// Function to convert English numbers to Nepali
+function convertToNepali($english_price) {
+    $english_numbers = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+    $nepali_numbers = array('०', '१', '२', '३', '४', '५', '६', '७', '८', '९');
+    return str_replace($english_numbers, $nepali_numbers, $english_price);
+}
+
 // Check if delete request is received
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
@@ -46,11 +53,6 @@ if (isset($_POST['edit_product'])) {
             margin: 0;
             padding: 0;
         }
-
-        
-        /* header nav ul li a:hover {
-            background-color: #007bff;
-        } */
 
         .container {
             max-width: 700px;
@@ -103,7 +105,6 @@ if (isset($_POST['edit_product'])) {
             border-radius: 3px;
             cursor: pointer;
             transition: background-color 0.3s;
-            /* max-width:970px; */
         }
 
         .product form button:hover {
@@ -122,24 +123,20 @@ if (isset($_POST['edit_product'])) {
             margin-right: 5px;
         }
         .actions a.update {
-    background-color: #007bff;
-}
+            background-color: #007bff;
+        }
 
-.actions a.update:hover {
-    background-color: #0056b3;
-}
-
+        .actions a.update:hover {
+            background-color: #0056b3;
+        }
 
         .actions a.delete {
             background-color:  #dc3545;
         }
 
         .actions a.delete:hover {
-            /* opacity: 0.8; */
             background-color: #C5B358;
         }
-
-        
 
         .add-product-link {
             display: inline-block;
@@ -159,8 +156,8 @@ if (isset($_POST['edit_product'])) {
     </style>
 </head>
 <body>
-<!--JS for the Header-->
 
+<!--JS for the Header-->
 <div id="header-placeholder"></div>
     <script>
         fetch('../Admin_Page/admin_header.php')
@@ -189,7 +186,7 @@ if (isset($_POST['edit_product'])) {
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<div class='product'>";
             echo "<p><strong>" . htmlspecialchars($row['product_name']) . "</strong></p>";
-            echo "<p>Price: Rs." . htmlspecialchars($row['product_price']) . "</p>";
+            echo "<p>Price: Rs." . htmlspecialchars($row['product_price']) . " / Price (Nepali): Rs." . convertToNepali($row['product_price']) . "</p>";
             
             // Edit Product Form
             echo "<form action='' method='POST'>";
@@ -202,10 +199,7 @@ if (isset($_POST['edit_product'])) {
             // Delete Product
             echo "<div class='actions'>";
             echo "<a href='update_products.php?update_id=" . $row['product_id'] . "' class='update'>Update</a>";
-
             echo "<a href='?delete_id=" . $row['product_id'] . "' class='delete' onclick='return confirm(\"Are you sure you want to delete this product?\")'>Delete</a>";
-
-           
             echo "</div>";
             echo "</div>";
         }

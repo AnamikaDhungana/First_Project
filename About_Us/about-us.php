@@ -10,7 +10,7 @@
 
 </head>
 
-<body>
+<body class="body_class">
     <div id="header-placeholder"></div>
     <script>
         fetch('../Header/header.php')
@@ -25,7 +25,7 @@
     <section class="about-us">
         <div class="content">
             <h1 id="about_us_title_1">About Us</h1>
-            <p id="about_us_description">
+            <p class="p_class" id="about_us_description">
                 Welcome to <strong>Nepali Swad</strong>, we are on a journey to bring the rich heritage and unique
                 flavors of Nepali teas to the world. Our teas reflect the essence of Nepal’s natural beauty, cultural
                 richness, and sustainable agricultural practices.
@@ -37,7 +37,7 @@
     <section id="mission">
         <div class="section-content">
             <div class="image">
-                <img src="tea-farm.png" alt="Our Mission">
+                <img src="../web_image/tea-farm.png" alt="Our Mission">
             </div>
             <div class="text">
                 <h2 id="mission_title">Our Mission</h2>
@@ -56,7 +56,7 @@
 
             <div class="text">
                 <h2 id="our_story_title">Our Story</h2>
-                <p id="our_story_description">
+                <p class="p_class" id="our_story_description">
                     Nepali Swad was founded as part of a college project by a group of passionate students at Tribhuvan
                     University:<br><br>
                 <ul>
@@ -67,7 +67,7 @@
                 </p>
             </div>
             <div class="image">
-                <img src="story-image.png" alt="Our Story">
+                <img src="../web_image/story-image.png" alt="Our Story">
             </div>
         </div>
     </section>

@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include 'database_connection.php';  // Make sure this file is in the same folder or provide the correct path
+include '../database_connection.php';  // Make sure this file is in the same folder or provide the correct path
 
 // Create the `users` table
 $sql_users = " CREATE TABLE IF NOT EXISTS users (
@@ -46,6 +46,40 @@ if (mysqli_num_rows($result) == 0) {
     }
 } else {
     echo "Column 'category' already exists in 'products' table.<br>";
+}
+
+// Check if 'product_name_np' column exists in `products`
+$check_product_name_np_column = "SHOW COLUMNS FROM products LIKE 'product_name_np'";
+$result_product_name_np = mysqli_query($conn, $check_product_name_np_column);
+
+if (mysqli_num_rows($result_product_name_np) == 0) {
+    $alter_table = "ALTER TABLE products ADD COLUMN product_name_np VARCHAR(100) NOT NULL AFTER product_name";
+    
+    if (mysqli_query($conn, $alter_table)) {
+        echo "Column 'product_name_np' added successfully!<br>";
+    } else {
+        echo "Error adding 'product_name_np' column: " . mysqli_error($conn) . "<br>";
+    }
+} else {
+    echo "Column 'product_name_np' already exists in 'products' table.<br>";
+}
+
+// Check if 'product_description_np' column exists
+$check_description_np = "SHOW COLUMNS FROM products LIKE 'product_description_np'";
+$result_description_np = mysqli_query($conn, $check_description_np);
+
+if (mysqli_num_rows($result_description_np) == 0) {
+    $alter_description_np = "ALTER TABLE products ADD COLUMN product_description_np TEXT AFTER product_description";
+    mysqli_query($conn, $alter_description_np);
+}
+
+// Check if 'product_price_np' column exists
+$check_price_np = "SHOW COLUMNS FROM products LIKE 'product_price_np'";
+$result_price_np = mysqli_query($conn, $check_price_np);
+
+if (mysqli_num_rows($result_price_np) == 0) {
+    $alter_price_np = "ALTER TABLE products ADD COLUMN product_price_np DECIMAL(10,2) NOT NULL AFTER product_price";
+    mysqli_query($conn, $alter_price_np);
 }
 
 // Create the `orders` table

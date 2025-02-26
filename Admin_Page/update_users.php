@@ -2,54 +2,59 @@
 session_start();
 include('../database_connection.php');
 
-// Check if user ID is provided
-if (isset($_GET['id'])) {
-    $id = intval($_GET['id']);
-
-    // Fetch the user's details
-    $sql = "SELECT * FROM users WHERE id = $id";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        $user = mysqli_fetch_assoc($result);
-    } else {
-        echo "User not found.";
-        exit;
-    }
-} else {
-    echo "No user ID provided.";
-    exit;
+// Function to convert Nepali numbers to English
+function convertToEnglish($nepali_price) {
+    $nepali_numbers = array('०', '१', '२', '३', '४', '५', '६', '७', '८', '९');
+    $english_numbers = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+    return str_replace($nepali_numbers, $english_numbers, $nepali_price);
 }
 
-// Handle the form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
-    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-    $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm-password']);
+if (isset($_GET['update_id'])) {
+    $product_id = $_GET['update_id'];
+    
+    // Fetch product details
+    $query = "SELECT * FROM products WHERE product_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $product = $result->fetch_assoc();
+    
+    if (!$product) {
+        die("Product not found!");
+    }
+}
 
-    // Check if passwords match
-    if (!empty($password) && $password !== $confirm_password) {
-        $_SESSION['error'] = "Passwords do not match!";
+// Handle update form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $product_id = $_POST['product_id'];
+    $product_name = $_POST['name'];
+    $price_en = $_POST['price_en'];
+    $price_np = $_POST['price_np']; // Store Nepali price (optional)
+    $description = $_POST['description'];
+    $stock = $_POST['stock'];
+    $category = $_POST['category'];
+    $image = $_FILES['image']['name'];
+    
+    // Convert Nepali price back to English before storing
+    $price_en = convertToEnglish($price_en);
+
+    if ($image) {
+        $target = "uploads/" . basename($image);
+        move_uploaded_file($_FILES['image']['tmp_name'], $target);
+        $update_query = "UPDATE products SET product_name=?, product_price=?, product_description=?, stock=?, image_url=?, category=? WHERE product_id=?";
+        $stmt = $conn->prepare($update_query);
+        $stmt->bind_param("sissssi", $product_name, $price_en, $description, $stock, $image, $category, $product_id);
     } else {
-        // Update the user details in the database
-        $hashed_password = !empty($password) ? password_hash($password, PASSWORD_DEFAULT) : $user['password'];
+        $update_query = "UPDATE products SET product_name=?, product_price=?, product_description=?, stock=?, category=? WHERE product_id=?";
+        $stmt = $conn->prepare($update_query);
+        $stmt->bind_param("sisssi", $product_name, $price_en, $description, $stock, $category, $product_id);
+    }
 
-        $updateQuery = "UPDATE users SET 
-                            full_name = '$name',
-                            phone = '$phone',
-                            email = '$email',
-                            password = '$hashed_password'
-                        WHERE id = $id";
-
-        if (mysqli_query($conn, $updateQuery)) {
-            $_SESSION['success'] = "User updated successfully!";
-            header('Location: manage_users.php');
-            exit;
-        } else {
-            $_SESSION['error'] = "Error updating user: " . mysqli_error($conn);
-        }
+    if ($stmt->execute()) {
+        echo "<script>alert('Product updated successfully!'); window.location.href='manage_products.php';</script>";
+    } else {
+        echo "Error updating product: " . $stmt->error;
     }
 }
 ?>
@@ -59,64 +64,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update User</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Update Product</title>
     <style>
         body {
             font-family: 'Times New Roman', Times, serif;
             background-color: #F8F4E3;
             margin: 0;
             padding: 0;
-            
         }
-        .container {
-            max-width: 500px;
+        .form-container {
+            max-width: 400px;
             margin: 2rem auto;
             padding: 1rem;
             background: white;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #F8F4E3;
         }
-        .container h2 {
-            text-align: center;
+        .form-container label {
+            display: block;
+            margin-bottom: 0.5rem;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-top: 1rem;
-        }
-        input {
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
+        .form-container input,
+        .form-container textarea {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 0.50rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box;
         }
-        button {
-            padding: 10px;
-            background-color: #007bff;
+        .form-container textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .form-container button {
+            background-color: #2C5F2D;
             color: white;
             border: none;
-            border-radius: 5px;
-            margin-top: 1rem;
             cursor: pointer;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border-radius: 5px;
         }
-        button:hover {
-            background-color: #0056b3;
+        .form-container button:hover {
+            background-color: #C5B358;
         }
-        .error {
-            color: red;
-            text-align: center;
-        }
-        .success {
-            color: green;
-            text-align: center;
-        }
+        
     </style>
 </head>
 <body>
-    <!--JS for the Header-->
 
 <div id="header-placeholder"></div>
     <script>
@@ -127,42 +125,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             })
             .catch(error => console.error('Error loading header:', error));
     </script>
-<div class="container">
-    <h2>Update User</h2>
 
-    <!-- Display error or success messages -->
-    <?php
-    if (isset($_SESSION['error'])) {
-        echo '<p class="error">' . $_SESSION['error'] . '</p>';
-        unset($_SESSION['error']);
-    }
-    if (isset($_SESSION['success'])) {
-        echo '<p class="success">' . $_SESSION['success'] . '</p>';
-        unset($_SESSION['success']);
-    }
-    ?>
+<div class="form-container">
+    <h2>Update Product</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
 
-    <form method="POST">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['full_name']); ?>" required>
+        <label for="name">Product Name:</label>
+        <input type="text" name="name" id="name" value="<?php echo $product['product_name']; ?>" required>
 
-        <label for="phone">Phone:</label>
-        <input type="text" id="phone" name="phone" 
-               pattern="(9[6-8][0-9])\d{7}" 
-               title="Enter a valid Nepali phone number (e.g., 9801234567)"
-               value="<?php echo htmlspecialchars($user['phone']); ?>" required>
+        <label for="price_en">Price (English):</label>
+        <input type="text" name="price_en" id="price_en" value="<?php echo $product['product_price']; ?>" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+        <label for="price_np">Price (Nepali):</label>
+        <input type="text" name="price_np" id="price_np" value="<?php echo convertToNepali($product['product_price']); ?>" required>
 
-        <label for="password">Password (leave blank to keep current):</label>
-        <input type="password" id="password" name="password">
+        <label for="description">Description:</label>
+        <textarea name="description" id="description"><?php echo $product['product_description']; ?></textarea>
 
-        <label for="confirm-password">Confirm Password:</label>
-        <input type="password" id="confirm-password" name="confirm-password">
+        <label for="stock">Stock:</label>
+        <input type="number" name="stock" id="stock" value="<?php echo $product['stock']; ?>" required>
 
-        <button type="submit">Update User</button>
+        <label for="image">Product Image:</label>
+        <input type="file" name="image" id="image">
+        <p>Current Image: <?php echo $product['image_url']; ?></p>
+
+        <label for="category">Category:</label>
+        <input type="text" name="category" id="category" value="<?php echo $product['category']; ?>" required>
+
+        <button type="submit">Update Product</button>
     </form>
 </div>
+
 </body>
 </html>

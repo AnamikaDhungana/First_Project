@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Products</title>
-    <link rel="stylesheet" href="products.css">
+    <link rel="stylesheet" href="./products.css">
 </head>
 
-<body>
+<body class="body_class">
 
     <!-- Header -->
     <div id="header-placeholder"></div>
@@ -25,10 +25,10 @@
     <main>
         <?php
         require_once "../database_connection.php";
-
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+        session_start();
+        $language = "en";
+        if (isset($_GET['language'])) {
+            $language = $_GET['language'];
         }
 
         // Section arrays to define categories
@@ -41,11 +41,11 @@
 
         foreach ($categories as $categoryName => $sectionId) {
             echo "<section id='$sectionId' class='tea-section'>";
-            echo "<h2>$categoryName</h2>";
+            echo "<h2 id='" . $sectionId . "_1'>" . $categoryName . "</h2>";
             echo "<div class='tea-grid'>";
 
             // Fetch products for the current category
-            $sql = "SELECT product_name, product_price, product_description, image_url FROM products WHERE category = '$categoryName'";
+            $sql = "SELECT product_name, product_name_np, product_price, product_price_np, product_description, image_url FROM products WHERE category = '$categoryName'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -53,10 +53,19 @@
                 while ($row = $result->fetch_assoc()) {
                     echo '<div class="tea-item">';
                     echo '<img src="../Admin_Page/uploads/' . $row["image_url"] . '" alt="' . $row["product_name"] . '">';
-                    echo '<h2>' . $row["product_name"] . '</h2>';
-                    echo '<p>Price: Rs ' . $row["product_price"] . '</p>';
+                    if ($language != "np") {
+                        echo '<h2>' . $row["product_name_np"] . '</h2>';
+                    } else {
+                        echo '<h2>' . $row["product_name"] . '</h2>';
+                    }
+                    
+                    if ($language != "np") {
+                        echo '<p>Price: Rs ' . $row["product_price_np"] . '</p>';
+                    } else {
+                        echo '<p>Price: Rs ' . $row["product_price"] . '</p>';
+                    }
                     echo '<p>' . $row["product_description"] . '</p>';
-                    echo '<button class="add-to-cart-btn" onclick="addToCart(\'' . $row["product_name"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add To Cart</button>';
+                    echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . $row["product_name"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add To Cart</button>';
                     echo '</div>';
                 }
             } else {
@@ -100,6 +109,8 @@
             window.location.href = "../Header/add_to_cart.php";
         }
     </script>
+
+<script src="./../language/script.js"> </script>
 </body>
 
 </html>

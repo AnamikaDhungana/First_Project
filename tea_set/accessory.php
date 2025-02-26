@@ -31,17 +31,33 @@ if ($conn->connect_error) {
 
     <section class="product-section">
         <?php
-        $sql = "SELECT product_name, product_price, product_description, image_url FROM products WHERE category = 'Accessories'";
+        session_start();
+        $language = "en";
+        if (isset($_GET['language'])) {
+            $language = $_GET['language'];
+        }
+        
+        $sql = "SELECT product_name, product_name_np, product_price, product_description, product_description_np, image_url FROM products WHERE category = 'Accessories'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="product1">';
                 echo '<img src="../Admin_Page/uploads/' . $row["image_url"] . '" alt="' . $row["product_name"] . '" class="product-img">';
-                echo '<h1 class="product-title">' . $row["product_name"] . '</h1>';
+                // Check if the session variable is set before using it
+                if ($language != "np") {
+                    echo '<h1 class="product-title">' . $row["product_name_np"] . '</h1>';
+                } else {
+                    echo '<h1 class="product-title">' . $row["product_name"] . '</h1>';
+                }
                 echo '<p class="product-price">Rs. ' . $row["product_price"] . '</p>';
-                echo '<button class="add-to-cart-btn" onclick="addToCart(\'' . $row["product_name"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add to cart</button>';
-                echo '<p class="product-description">' . $row["product_description"] . '</p>';
+                echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . $row["product_name"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add to cart</button>';
+                
+                if ($language != "np") {
+                    echo '<p class="product-description">' . $row["product_description_np"] . '</p>';
+                } else {
+                    echo '<p class="product-description">' . $row["product_description"] . '</p>';
+                }
                 echo '</div>';
             }
         } else {
@@ -84,6 +100,7 @@ if ($conn->connect_error) {
 
     <!-- <script src="./../language/script.js"></script> -->
     <?php $conn->close(); ?>
+    <script src="./../language/script.js"> </script>
 </body>
 
 </html>

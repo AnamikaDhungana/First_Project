@@ -10,13 +10,11 @@
     <link rel="preload" href="../language/language.en.js" as="script">
     <link rel="preload" href="../language/language.np.js" as="script"> 
 
-    <!--- <link rel="icon" type="image/png" href="Layer_1.png">-->
 </head>
 
 <body>
 
     <!--JS for the Header-->
-
     <div id="header-placeholder"></div>
     <script>
         fetch('../Header/header.php')
@@ -39,26 +37,22 @@
         </div>
     </section>
 
-    <!-- Why Choose Nepali Swadh Section -->
     <section class="why-choose">
         <h2 id="why_choose">Why Choose Nepali Swadh?</h2>
         <div class="benefits-container">
 
-            <!-- Healthy Benefit -->
             <div class="benefit">
                 <i class="fas fa-heartbeat icon"></i>
                 <h3 id="healthy">Healthy</h3>
                 <p id="healthy_desc">Nourishing, antioxidant-rich, invigorating, natural</p>
             </div>
 
-            <!-- Sustainable Benefit -->
             <div class="benefit">
                 <i class="fas fa-seedling icon"></i>
                 <h3 id="sustainable">Sustainable</h3>
                 <p id="sustainable_desc">Eco-friendly, Sustainable sips</p>
             </div>
 
-            <!-- Sourced from the Himalayas -->
             <div class="benefit">
                 <i class="fas fa-mountain icon"></i>
                 <h3 id="sourced">Sourced from the Himalayas</h3>
@@ -74,7 +68,6 @@
             <img src="../Tea_name/ctc-tea.png" alt="Black Tea"> <br>
             <h3 id="black_tea">Black Tea</h3>
             <p id="black_tea_price">Rs 300 - Rs 1,200</p> <br>
-            <!-- <div class="rating">⭐⭐⭐⭐⭐</div> -->
             <a href="../Header/products.php#black-tea">
                 <button id="select_option">Select options</button>
             </a>
@@ -107,7 +100,7 @@
         </span>
     </section>
 
-    <!--Javascript for footer-->
+    <!--Js for footer-->
     <div id="footer-container"></div>
     <script>
         fetch("../Footer/footer.php")

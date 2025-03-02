@@ -1,4 +1,4 @@
-/* Reset Default Styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -26,8 +26,8 @@
 /* Full Page Layout */
 .product-section {
   width: 100%;
-  margin: 0; /* Remove extra margin */
-  padding: 0; /* Remove top padding */
+  margin: 0; 
+  padding: 0; 
   background-color: #F8F4E3;
   text-align: center;
 }
@@ -35,14 +35,13 @@
 /* Product Container Styling */
 .product1{
   max-width: 1000px;
-  margin: 0 auto; /* Center-align the product container */
+  margin: 0 auto; 
   padding: 20px;
 }
 
-/* Image Styling */
+
 .product-img {
   width: 400px;
-  /* max-width: 600px; */
   height: auto;
   margin: 0 auto;
   display: block;
@@ -68,7 +67,7 @@
   font-family: 'Times New Roman', Times, serif;
 }
 
-/* Add to Cart Button Styling */
+
 .add-to-cart-btn {
   background-color:  #8cc635;
   color: white;

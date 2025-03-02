@@ -13,7 +13,7 @@ html{
   overflow: hidden;
 }
 
-/* Background video styling */
+
 .background-video {
   position: absolute;
   top: 0;
@@ -24,7 +24,6 @@ html{
   z-index: -1;
 }
 
-/* Hero content styling */
 .hero-content {
   position: relative;
   z-index: 1;
@@ -63,23 +62,10 @@ html{
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+  background: rgba(0, 0, 0, 0.5); 
   z-index: -1;
 }
 
-/* Media query for smaller screens */
-@media (max-width: 768px) {
-  .nav-links {
-      display: none;
-  }
-
-  .navbar {
-      flex-direction: column;
-      padding: 15px;
-  }
-}
-
-/* Why Choose Nepali Swadh Section */
 .why-choose {
   padding: 40px;
   background-color:white;
@@ -134,8 +120,7 @@ html{
 /*Featured Products*/
 body {
   font-family:'Times New Roman', Times, serif; 
-  /* background-color: #F8F4E3; */
-  background-color: #4a8e36;
+  background-color: #F8F4E3; 
 }
 
 .featured-products {
@@ -158,7 +143,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /*width:   calc(100% / 2 - 2%);  Two cards per row */
   max-width: 200px;
   height: 50%;
   padding: 1em;
@@ -172,13 +156,6 @@ body {
 .product-card h3{
   margin-top: 50px;
 }
-@media (max-width: 768px) {
-  .product-card {
-    width: 90%; /* Single column layout for smaller screens */
-    margin: 0 auto;
-  }
-}
-
 
 .product-card img {
   width: 100%;
@@ -193,7 +170,7 @@ body {
 .product-card h3 {
   font-size: 1.1em;
   margin: 0.5em 0;
-  min-height: 3em; /* Ensures consistent space for the title */
+  min-height: 3em; 
 }
 
 .product-card p {

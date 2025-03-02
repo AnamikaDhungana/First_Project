@@ -4,22 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="login_style.css"> <!-- External CSS file -->
+    <link rel="stylesheet" href="login_style.css"> 
     <script>
         function validateForm() {
             var email = document.getElementById('email').value;
             var password = document.getElementById('password').value;
             var errorMessage = "";
 
-            // Validate email (proper email format)
-            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (/[A-Z]/.test(email)) {
+                errorMessage += "Email cannot contain uppercase letters.\n";
+            }
+
+            var emailPattern = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,6}$/;
             if (!email.match(emailPattern)) {
                 errorMessage += "Please enter a valid email address.\n";
             }
-
-            // Validate password
-            if (password === "") {
-                errorMessage += "Password is required.\n";
+            
+            if (password.length < 5) {
+                errorMessage += "Password must be at least 5 characters long.\n";
             }
 
             if (errorMessage !== "") {
@@ -35,7 +37,7 @@
     <div class="login-container">
         <div class="login-form">
             <h2>User Login</h2>
-            <form action="validate_login.php" method="POST">
+            <form action="validate_login.php" method="POST" onsubmit="return validateForm()">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
 
@@ -50,4 +52,3 @@
 
 </body>
 </html>
-

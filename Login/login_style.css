@@ -1,23 +1,24 @@
-/* Resetting default styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body styling */
 body {
   font-family: 'Times New Roman', Times, serif;
   background-color: #F8F4E3;;
-  /* background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%); */
   display: flex;
+  background-image: url('../web_image/login_bg_image.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   justify-content: center;
   align-items: center;
+  
   height: 100vh;
   font-weight: bolder;
 }
 
-/* Container for the login form */
+
 .login-container {
   background-size: cover;
   background-position: center;
@@ -55,7 +56,7 @@ body {
   font-size: 14px;
 }
 
-/* Submit button */
+
 .login-btn {
   width: 100%;
   padding: 10px;
@@ -69,7 +70,6 @@ body {
   margin-top: 10px;
 }
 
-/* Button hover effect */
 .login-btn:hover {
   background-color:  #adc63f;
   transform: scale(1.05);
@@ -89,10 +89,9 @@ body {
   text-decoration: underline;
 }
 
-/* Error message styling */
+
 .error {
   color: red;
   font-size: 14px;
   margin-bottom: 20px;
 }
-

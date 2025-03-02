@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +29,7 @@
       <p>Total: Rs.<span id="total-price"></span></p>
       <a href="../Login/login.php"></a>
       <a href="../Login/register.php">
-        <button class="checkout-btn" id="checkout-btn">Proceed to Checkout</button>
+        <button class="checkout-btn" id="checkout-btn">Cash On Delivery</button>
       </a>
   
     </div>

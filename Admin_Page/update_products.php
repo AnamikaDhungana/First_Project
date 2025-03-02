@@ -2,11 +2,6 @@
 session_start();
 include('../database_connection.php');
 
-// Check database connection
-if (!$conn) {
-    die("Database connection failed: " . $conn->connect_error);
-}
-
 // Function to convert Nepali numbers to English
 function convertToEnglish($nepali_price) {
     $nepali_numbers = array('०', '१', '२', '३', '४', '५', '६', '७', '८', '९');
@@ -34,19 +29,18 @@ if (isset($_GET['update_id'])) {
 // Handle update form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $product_id = $_POST['product_id'];
-    $product_name_en = $_POST['name_en'];
+    $product_name = $_POST['name_en'];
     $product_name_np = $_POST['name_np'];
-    $price_en = $_POST['price_en'];
-    $price_np = $_POST['price_np'];
-    $description_en = $_POST['description_en'];
-    $description_np = $_POST['description_np'];
+    $product_price = $_POST['price_en'];
+    $product_price_np = $_POST['price_np'];
+    $product_description = $_POST['description_en'];
+    $product_description_np = $_POST['description_np'];
     $stock = $_POST['stock'];
     $category = $_POST['category'];
 
     // Convert Nepali price to English before storing
-    $price_en = convertToEnglish($price_en);
+    $product_price = convertToEnglish($product_price);
 
-    // Handle image upload
     $image = $_FILES['image']['name'];
     $image_target = "uploads/" . basename($image);
 
@@ -60,7 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Update query
     $update_query = "UPDATE products SET product_name=?, product_name_np=?, product_price=?, product_price_np=?, product_description=?, product_description_np=?, stock=?, image_url=?, category=? WHERE product_id=?";
     $stmt = $conn->prepare($update_query);
-    $stmt->bind_param("sssssisssi", $product_name_en, $product_name_np, $price_en, $price_np, $description_en, $description_np, $stock, $image, $category, $product_id);
+    
+    $stmt->bind_param("ssssssissi", $product_name, $product_name_np, $product_price, $product_price_np, $product_description, $product_description_np, $stock, $image, $category, $product_id);
 
     if ($stmt->execute()) {
         echo "<script>alert('Product updated successfully!'); window.location.href='manage_products.php';</script>";

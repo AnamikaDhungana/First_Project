@@ -15,15 +15,15 @@ header nav ul {
    list-style-type: none;
    margin: 0;
    padding: 0;
-   display: flex; /* Use flex for proper alignment */
-   justify-content: left; /* Center align all links */
-   align-items: center; /* Ensure vertical alignment */
-   gap: 130px; /* Add space between links */
+   display: flex; 
+   justify-content: left; 
+   align-items: center; 
+   gap: 130px; 
 }
 
 header nav ul li {
-   margin: 0; /* Ensure no extra margin */
-   padding: 0; /* Ensure no extra padding */
+   margin: 0; 
+   padding: 0; 
    margin-left:7px;
 }
 
@@ -31,17 +31,16 @@ header nav ul li a {
    color: white;
    text-decoration: none;
    font-size: 1.2em;
-   padding: 5px; /* Uniform top, bottom, left, right padding */
+   padding: 5px; 
    border-radius: 5px;
    transition: background-color 0.3s;
-   display: inline-block; /* Ensure consistent box model for links */
+   display: inline-block; 
 }
   </style>
   
 </head>
 <body>
   
-
 <header>
     <nav>
            <ul>

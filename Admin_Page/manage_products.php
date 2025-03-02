@@ -17,7 +17,7 @@ if (isset($_GET['delete_id'])) {
     $delete_query = "DELETE FROM products WHERE product_id = $delete_id";
     
     if (mysqli_query($conn, $delete_query)) {
-        // echo "<p>Product deleted successfully!</p>";
+        echo "<p>Product deleted successfully!</p>";
     } else {
         echo "<p>Error deleting product: " . mysqli_error($conn) . "</p>";
     }
@@ -173,11 +173,6 @@ if (isset($_POST['edit_product'])) {
     <a href="add_product.php" class="add-product-link">Add New Product</a>
 
     <?php
-    // Check database connection
-    if (!$conn) {
-        die('<p>Error: Unable to connect to the database.</p>');
-    }
-
     // Query to retrieve products
     $sql = "SELECT * FROM products";
     $result = mysqli_query($conn, $sql);

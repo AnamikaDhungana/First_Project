@@ -5,7 +5,6 @@ if (!isset($_SESSION['isLoggedIn']) || $_SESSION['userRole'] !== 'Admin') {
     exit();
 }
 
-// Include the database connection
 include('../database_connection.php');
 
 // Query to count total products
@@ -33,14 +32,11 @@ if ($user_count_result && mysqli_num_rows($user_count_result) > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="admin_style.css?v=<?php echo time(); ?>">
-    <!-- <link rel="icon" type="image/png" href="Layer_1.png"> -->
-    <!-- External CSS file for styling -->
 </head>
 
 <body>
  
     <!--JS for the Header-->
-
 <div id="header-placeholder"></div>
     <script>
         fetch('../Admin_Page/admin_header.php')
@@ -50,7 +46,7 @@ if ($user_count_result && mysqli_num_rows($user_count_result) > 0) {
             })
             .catch(error => console.error('Error loading header:', error));
     </script>
-    <!-- Main Content Section -->
+
     <section class="admin-dashboard">
         <h1>Welcome, Admin!</h1>
         <!-- Quick Stats or Information -->

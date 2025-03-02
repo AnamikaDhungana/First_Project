@@ -15,6 +15,7 @@ if ($conn->connect_error) {
 </head>
 
 <body>
+    <!--Js Header-->
     <div id="header-placeholder"></div>
     <script>
         fetch('../Header/header.php')
@@ -37,7 +38,7 @@ if ($conn->connect_error) {
             $language = $_GET['language'];
         }
         
-        $sql = "SELECT product_name, product_name_np, product_price, product_description, product_description_np, image_url FROM products WHERE category = 'Accessories'";
+        $sql = "SELECT product_name, product_name_np, product_price, product_price_np, product_description, product_description_np, image_url FROM products WHERE category = 'Accessories'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -50,7 +51,12 @@ if ($conn->connect_error) {
                 } else {
                     echo '<h1 class="product-title">' . $row["product_name"] . '</h1>';
                 }
-                echo '<p class="product-price">Rs. ' . $row["product_price"] . '</p>';
+                
+                if ($language != "np") {
+                    echo '<p>मूल्य: रु.' . $row["product_price_np"] . '</p>';
+                } else {
+                    echo '<p>Price: Rs ' . $row["product_price"] . '</p>';
+                }
                 echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . $row["product_name"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add to cart</button>';
                 
                 if ($language != "np") {
@@ -92,15 +98,13 @@ if ($conn->connect_error) {
             // Save the updated cart to localStorage
             localStorage.setItem('cart', JSON.stringify(cart));
 
-            // Redirect to the cart page
             window.location.href = "../Header/add_to_cart.php";
         }
     </script>
    
-
-    <!-- <script src="./../language/script.js"></script> -->
     <?php $conn->close(); ?>
     <script src="./../language/script.js"> </script>
+    
 </body>
 
 </html>

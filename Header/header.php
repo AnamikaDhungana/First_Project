@@ -13,10 +13,7 @@
 
 <body>
 
-    <!-- Header with Social Media Icons and Navigation Bar -->
     <header>
-        <!--<a href="home_page.html>"link rel="icon" type="image/png" href="Layer_1.png"></a>-->
-        <!-- Top banner with social media icons, tagline, and navigation icons -->
         <div class="top-banner">
             <div class="social-media-icons">
                 <a href="https://www.facebook.com/profile.php?id=61573363090867" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -44,7 +41,7 @@
 
             <ul class="nav-links">
                 <li><a id="home" href="../Header/home_page.php">HOME</a></li>
-                <li><a id="products" href="../Header/products.php">PRODUCTS</a></li>
+                <li><a id="products" href="../Header/products.php">TEAS</a></li>
                 <li><a id="accessories" href="../tea_set/accessory.php">TEAPOT SET & ACCESSORIES</a></li>
                 <li><a id="about_us_title" href="../About_Us/about-us.php">ABOUT US</a></li>
                

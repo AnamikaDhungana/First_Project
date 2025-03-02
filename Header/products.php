@@ -10,7 +10,7 @@
 
 <body class="body_class">
 
-    <!-- Header -->
+    <!--Js Header -->
     <div id="header-placeholder"></div>
     <script>
         fetch('../Header/header.php') 
@@ -21,7 +21,6 @@
             .catch(error => console.error('Error loading header:', error));
     </script>
 
-    <!-- Main Content -->
     <main>
         <?php
         require_once "../database_connection.php";
@@ -49,10 +48,10 @@
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
-                // Output each product
+    
                 while ($row = $result->fetch_assoc()) {
                     echo '<div class="tea-item">';
-                    echo '<img src="../Admin_Page/uploads/' . $row["image_url"] . '" alt="' . $row["product_name"] . '">';
+                    echo '<img src="../Admin_Page/uploads/' . $row["image_url"] . '" alt="' . $row["product_name"] . ' <br>">';
                     if ($language != "np") {
                         echo '<h2>' . $row["product_name_np"] . '</h2>';
                     } else {
@@ -60,7 +59,7 @@
                     }
                     
                     if ($language != "np") {
-                        echo '<p>Price: Rs ' . $row["product_price_np"] . '</p>';
+                        echo '<p>मूल्य: रु.' . $row["product_price_np"] . '</p>';
                     } else {
                         echo '<p>Price: Rs ' . $row["product_price"] . '</p>';
                     }
@@ -80,7 +79,7 @@
         ?>
     </main>
 
-    <!-- Footer -->
+    <!-- Js Footer -->
     <div id="footer-container"></div>
     <script>
         fetch("../Footer/footer.php")
@@ -105,7 +104,6 @@
             // Save the updated cart to localStorage
             localStorage.setItem('cart', JSON.stringify(cart));
 
-            // Redirect to the cart page
             window.location.href = "../Header/add_to_cart.php";
         }
     </script>

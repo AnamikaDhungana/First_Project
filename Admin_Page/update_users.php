@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $product_id = $_POST['product_id'];
     $product_name = $_POST['name'];
     $price_en = $_POST['price_en'];
-    $price_np = $_POST['price_np']; // Store Nepali price (optional)
+    $price_np = $_POST['price_np']; 
     $description = $_POST['description'];
     $stock = $_POST['stock'];
     $category = $_POST['category'];

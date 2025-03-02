@@ -29,16 +29,16 @@
                     title="Enter a valid Nepali phone number (e.g., 9801234567)" 
                     required>
 
-
-                <label for="email">Email:</label>
+                    <label for="email">Email:</label>
                 <input type="email" id="email" name="email" 
-                    title="Enter a valid email address" required>
+                    pattern="^[a-z0-9._%+-]+@gmail\.com$" 
+                    title="Only Gmail addresses allowed (example@gmail.com)" required>
 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" minlength="5" required>
 
                 <label for="confirm-password">Confirm Password:</label>
-                <input type="password" id="confirm-password" name="confirm-password" required>
+                <input type="password" id="confirm-password" name="confirm-password" minlength="5" required>
 
                 <button type="submit" class="login-btn">Register</button>
             </form>

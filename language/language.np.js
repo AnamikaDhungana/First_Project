@@ -144,5 +144,4 @@ window.LANG_NP = {
     "footer_payment_desc": "हामी मार्फत सुरक्षित भुक्तानी विकल्पहरू स्वीकार गर्छौं:",
     // "footer_payment_icon_alt": "भुक्तानी विधिहरू",
     "footer_bottom_copyright": "प्रतिलिपि अधिकार © २०२४ नेपाली स्वाध। सबै अधिकार सुरक्षित"
-
 }

@@ -17,8 +17,6 @@ include('../database_connection.php');
             padding: 0;
         }
 
-        
-
         .container {
             max-width: 1200px;
             margin: 2rem auto;

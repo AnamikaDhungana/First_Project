@@ -1,5 +1,4 @@
 
-/* Reset default styling */
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +8,7 @@
 body {
   font-family: 'Times New Roman', Times, serif;
   background-color: #F8F4E3;
+
 }
 
 /* Top banner styling */
@@ -97,15 +97,9 @@ body {
   gap: 1rem;
   
 }
-@media (max-width: 768px) {
-  .nav-links {
-    flex-direction: column; /* Stack links vertically */
-    gap: 0.5rem;
-  }
-}
 
 .nav-links li {
-  margin-right: 20px;/* 0 */
+  margin-right: 20px;
   
 }
 
@@ -116,6 +110,7 @@ body {
   font-weight: 500;
   margin-right:5px;
 }
+
 .nav-links a :hover{
   text-decoration: underline;
 }

@@ -67,7 +67,7 @@
         <span class="product-card">
             <img src="../Tea_name/ctc-tea.png" alt="Black Tea"> <br>
             <h3 id="black_tea">Black Tea</h3>
-            <p id="black_tea_price">Rs 300 - Rs 1,200</p> <br>
+            <p id="black_tea_price">Rs 250 - Rs 550</p> <br>
             <a href="../Header/products.php#black-tea">
                 <button id="select_option">Select options</button>
             </a>
@@ -76,7 +76,7 @@
         <span class="product-card">
             <img src="../Tea_name/chamomile-tea.png" alt="Chamomile Tea"> <br>
             <h3 id="flower_tea"> Flower Tea</h3>
-            <p id="flower_tea_price">Rs 300 - Rs 600</p> <br>
+            <p id="flower_tea_price">Rs 350 - Rs 450</p> <br>
             <a href="../Header/products.php#flower-tea">
                 <button id="select_option1">Select options</button>
             </a>
@@ -85,7 +85,7 @@
         <span class="product-card">
             <img src="../Tea_name/lemongrass-tea.png" alt="Herbal Tea"><br>
             <h3 id="herbal_tea">Herbal Tea</h3>
-            <p id="herbal_tea_price">Rs 800 - Rs 4,500</p> <br>
+            <p id="herbal_tea_price">Rs 250 - Rs 400</p> <br>
             <a href="../Header/products.php#herbal-tea">
                 <button id="select_option2">Select options</button>
             </a>
@@ -93,7 +93,7 @@
         <span class="product-card">
             <img src="../Tea_name/silver_needle_tea.png" alt="Everest Gold Pure Tea"><br>
             <h3 id="green_tea">Green Tea</h3>
-            <p id="green_tea_price">Rs 250 - Rs 1,900</p> <br>
+            <p id="green_tea_price">Rs 500 - Rs 650</p> <br>
             <a href="../Header/products.php#green-tea">
                 <button id="select_option3">Select options</button>
             </a>

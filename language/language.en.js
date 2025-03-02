@@ -76,12 +76,7 @@ window.LANG_EN = {
     "footer_phone": "Phone: +9779800569900",
     "footer_links_title": "Nepali Swadh",
     "footer_link_about_us": "About Us",
-    // "footer_link_contact_us": "Contact Us",
-    // "footer_quick_links_title": "Quick Links",
-    // "footer_privacy_policy": "Privacy Policy",
-    // "footer_refund_policy": "Refund Policy",
     "footer_payment_title": "Payment Methods",
     "footer_payment_desc": "We accept secured payment options via:",
-    // "footer_payment_icon_alt": "Payment Methods",
     "footer_bottom_copyright": "Copyright © 2024 Nepali Swadh. All Rights Reserved"
 }

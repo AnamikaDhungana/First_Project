@@ -81,67 +81,38 @@ if (mysqli_num_rows($result_price_np) == 0) {
     mysqli_query($conn, $alter_price_np);
 }
 
-// Create the `orders` table (with improvements)
-$sql_orders = " CREATE TABLE IF NOT EXISTS orders (
-    order_id INT AUTO_INCREMENT PRIMARY KEY,
+// Create the `cart` table
+$sql_cart = "CREATE TABLE IF NOT EXISTS cart (
+    cart_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    total_price DECIMAL(10, 2) NOT NULL,
-    order_status ENUM('Pending', 'Confirmed', 'Shipped', 'Delivered', 'Cancelled') DEFAULT 'Pending',
-    admin_notified BOOLEAN DEFAULT FALSE,
-    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    status ENUM('active', 'completed', 'abandoned') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )";
-if (mysqli_query($conn, $sql_orders)) {
-    echo "Table 'orders' created successfully.<br>";
+if (mysqli_query($conn, $sql_cart)) {
+    echo "Table 'cart' created successfully.<br>";
 } else {
-    echo "Error updating 'orders' table: " . mysqli_error($conn) . "<br>";
+    echo "Error creating 'cart' table: " . mysqli_error($conn) . "<br>";
 }
 
-// Create the `admin_notifications` table
-$sql_admin_notifications = "CREATE TABLE IF NOT EXISTS admin_notifications (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    message TEXT NOT NULL,
-    is_read BOOLEAN DEFAULT 0,  -- 0 = Unread, 1 = Read
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)";
-if (mysqli_query($conn, $sql_admin_notifications)) {
-    echo "Table 'admin_notifications' created successfully.<br>";
-} else {
-    echo "Error creating 'admin_notifications' table: " . mysqli_error($conn) . "<br>";
-}
-
-// Check if 'order_id' column exists in admin_notifications
-$check_order_id_column = "SHOW COLUMNS FROM admin_notifications LIKE 'order_id'";
-$result = mysqli_query($conn, $check_order_id_column);
-
-if (mysqli_num_rows($result) == 0) {
-    $alter_admin_notifications = "ALTER TABLE admin_notifications ADD COLUMN order_id INT DEFAULT NULL AFTER message";
-    
-    if (mysqli_query($conn, $alter_admin_notifications)) {
-        echo "Column 'order_id' added successfully to 'admin_notifications' table.<br>";
-    } else {
-        echo "Error adding 'order_id' column: " . mysqli_error($conn) . "<br>";
-    }
-} else {
-    echo "Column 'order_id' already exists in 'admin_notifications' table.<br>";
-}
-
-// Create the `order_items` table
-$sql_order_items = "CREATE TABLE IF NOT EXISTS order_items (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
+// Create the `cart_items` table
+$sql_cart_items = "CREATE TABLE IF NOT EXISTS cart_items (
+    cart_item_id INT AUTO_INCREMENT PRIMARY KEY,
+    cart_id INT NOT NULL,
     product_id INT NOT NULL,
-    product_name VARCHAR(255) NOT NULL,
-    product_price VARCHAR (50) NOT NULL,
-    quantity INT NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+    quantity INT NOT NULL DEFAULT 1,
+    price DECIMAL(10, 2) NOT NULL,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (cart_id) REFERENCES cart(cart_id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
 )";
-if (mysqli_query($conn, $sql_order_items)) {
-    echo "Table 'order_items' created successfully.<br>";
+if (mysqli_query($conn, $sql_cart_items)) {
+    echo "Table 'cart_items' created successfully.<br>";
 } else {
-    echo "Error creating 'order_items' table: " . mysqli_error($conn) . "<br>";
+    echo "Error creating 'cart_items' table: " . mysqli_error($conn) . "<br>";
 }
+
+
 
 mysqli_close($conn);
 ?>

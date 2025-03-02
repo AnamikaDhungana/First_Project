@@ -27,6 +27,7 @@
       <div class="payment">
           <h3 id="footer_payment_title">Payment Methods</h3>
           <p id="footer_payment_desc">We accept secured payment options via:</p>
+          <img src="../web_image/cash_to_delivery.png" alt="delivery">
       </div>
   </div>
   
@@ -34,8 +35,8 @@
 <div class="footer-bottom">
   <p id="footer_bottom_copyright">Copyright © 2024 Nepali Swad. All Rights Reserved</p>
   <div class="social-icons">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>    
+      <a href="https://www.facebook.com/profile.php?id=61573363090867" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/_swadhnepali_/" target="_blank"><i class="fab fa-instagram"></i></a>    
   </div>
 </div>
 

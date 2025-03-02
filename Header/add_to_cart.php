@@ -109,7 +109,7 @@ session_start();
       });
   </script>
   
-  <!-- <script src="./../language/script.js"></script> -->
+      <script src="./../language/script.js"></script>
 
 </body>
 </html>

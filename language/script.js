@@ -101,66 +101,7 @@ function setLanguageInProducts(language) {
         document.getElementById("flower-tea_1").textContent = language.category_name2;
         document.getElementById("herbal-tea_1").textContent = language.category_name3;
         document.getElementById("green-tea_1").textContent = language.category_name4;
-        
-        // // document.getElementById("products").textContent = products;
-        // document.getElementById("black_tea_heading").textContent = language.black_tea_heading;
-        // document.getElementById("orthodox_tea").textContent = language.orthodox_tea;
-        // document.getElementById("orthodox_tea_price").textContent = language.orthodox_tea_price;
-        // document.getElementById("add_to_cart4").textContent = language.add_to_cart4;
-        // document.getElementById("ctc_tea").textContent = language.ctc_tea;
-        // document.getElementById("ctc_tea_price").textContent = language.ctc_tea_price;
-        // document.getElementById("add_to_cart5").textContent = language.add_to_cart5;
-        // document.getElementById("everest_tea").textContent = language.everest_tea;
-        // document.getElementById("everest_tea_price").textContent = language.everest_tea_price;
-        // document.getElementById("add_to_cart6").textContent = language.add_to_cart6;
-        // document.getElementById("golden_black_tea").textContent = language.golden_black_tea;
-        // document.getElementById("golden_black_tea_price").textContent = language.golden_black_tea_price;
-        // document.getElementById("add_to_cart7").textContent = language.add_to_cart7;
 
-        // // Flower Tea Section
-        // document.getElementById("flower_tea_heading").textContent = language.flower_tea_heading;
-        // document.getElementById("butterfly_pea_tea").textContent = language.butterfly_pea_tea;
-        // document.getElementById("butterfly_pea_tea_price").textContent = language.butterfly_pea_tea_price;
-        // document.getElementById("add_to_cart8").textContent = language.add_to_cart8;
-        // document.getElementById("chamomile_tea").textContent = language.chamomile_tea;
-        // document.getElementById("chamomile_tea_price").textContent = language.chamomile_tea_price;
-        // document.getElementById("add_to_cart9").textContent = language.add_to_cart9;
-        // document.getElementById("rose_tea").textContent = language.rose_tea;
-        // document.getElementById("rose_tea_price").textContent = language.rose_tea_price;
-        // document.getElementById("add_to_cart10").textContent = language.add_to_cart10;
-        // document.getElementById("hibiscus_tea").textContent = language.hibiscus_tea;
-        // document.getElementById("hibiscus_tea_price").textContent = language.hibiscus_tea_price;
-        // document.getElementById("add_to_cart11").textContent = language.add_to_cart11;
-
-        // // Herbal Tea Section
-        // document.getElementById("herbal_tea_heading").textContent = language.herbal_tea_heading;
-        // document.getElementById("tulsi_tea").textContent = language.tulsi_tea;
-        // document.getElementById("tulsi_tea_price").textContent = language.tulsi_tea_price;
-        // document.getElementById("add_to_cart12").textContent = language.add_to_cart12;
-        // document.getElementById("lemongrass_tea").textContent = language.lemongrass_tea;
-        // document.getElementById("lemongrass_tea_price").textContent = language.lemongrass_tea_price;
-        // document.getElementById("add_to_cart13").textContent = language.add_to_cart13;
-        // document.getElementById("oregano_tea").textContent = language.oregano_tea;
-        // document.getElementById("oregano_tea_price").textContent = language.oregano_tea_price;
-        // document.getElementById("add_to_cart14").textContent = language.add_to_cart14;
-        // document.getElementById("thyme_tea").textContent = language.thyme_tea;
-        // document.getElementById("thyme_tea_price").textContent = language.thyme_tea_price;
-        // document.getElementById("add_to_cart15").textContent = language.add_to_cart15;
-
-        // // Green Tea Section
-        // document.getElementById("green_tea_heading").textContent = language.green_tea_heading;
-        // document.getElementById("sencha_tea").textContent = language.sencha_tea;
-        // document.getElementById("sencha_tea_price").textContent = language.sencha_tea_price;
-        // document.getElementById("add_to_cart16").textContent = language.add_to_cart16;
-        // document.getElementById("hand_rolled_tea").textContent = language.hand_rolled_tea;
-        // document.getElementById("hand_rolled_tea_price").textContent = language.hand_rolled_tea_price;
-        // document.getElementById("add_to_cart17").textContent = language.add_to_cart17;
-        // document.getElementById("silver_needle_tea").textContent = language.silver_needle_tea;
-        // document.getElementById("silver_needle_tea_price").textContent = language.silver_needle_tea_price;
-        // document.getElementById("add_to_cart18").textContent = language.add_to_cart18;
-        // document.getElementById("himalayan_tea").textContent = language.himalayan_tea;
-        // document.getElementById("himalayan_tea_price").textContent = language.himalayan_tea_price;
-        // document.getElementById("add_to_cart19").textContent = language.add_to_cart19;
     } catch (e) {
     }
 }

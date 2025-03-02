@@ -1,5 +1,4 @@
 <?php
-
 include '../database_connection.php';
 
 // Check if the form is submitted
@@ -8,11 +7,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $full_name = mysqli_real_escape_string($conn, trim($_POST['name']));
     $phone = mysqli_real_escape_string($conn, trim($_POST['phone']));
     $email = strtolower(mysqli_real_escape_string($conn, trim($_POST['email']))); 
-    $address = mysqli_real_escape_string($conn, trim($_POST['address']));
     $password = mysqli_real_escape_string($conn, trim($_POST['password']));
     $confirm_password = mysqli_real_escape_string($conn, trim($_POST['confirm-password']));
 
-    // Check if passwords match
+    // Validate Full Name (Only Alphabets & Minimum 6 Characters)
+    if (!preg_match("/^[A-Za-z\s]{6,}$/", $full_name)) {
+        echo "<script>
+                alert('Full name must contain only alphabets and be at least 6 characters long.');
+                window.location.href = 'register.php';
+              </script>";
+        exit;
+    }
+
+    // Validate Password Matching
     if ($password !== $confirm_password) {
         echo "<script>
                 alert('Passwords do not match!');
@@ -21,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Validate password length (at least 5 characters)
+    // Validate Password Length (Minimum 5 Characters)
     if (strlen($password) < 5) {
         echo "<script>
                 alert('Password must be at least 5 characters long!');
@@ -30,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Validate email format and enforce lowercase Gmail
+    // Validate Email Format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "<script>
                 alert('Invalid email format!');
@@ -39,16 +46,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Check if email belongs to Gmail
-    if (!preg_match('/^[a-z0-9._%+-]+@gmail\.com$/', $email)) {
-        echo "<script>
-                alert('Only Gmail addresses are allowed! Example: example@gmail.com');
-                window.location.href = 'register.php';
-              </script>";
-        exit;
-    }
-
-    // Validate Nepali phone number
+    // Ensure Email Starts with a Letter & Is a Gmail Address
+    if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*[a-zA-Z]+@gmail\.com$/', $email)) {
+      echo "<script>
+              alert('Invalid email! It must start with a letter, contain at least one letter, and be a Gmail address.');
+              window.location.href = 'register.php';
+            </script>";
+      exit;
+  }
+  
+    // Validate Nepali Phone Number
     if (!preg_match("/^(9[6-8][0-9])\d{7}$/", $phone)) {
         echo "<script>
                 alert('Phone number must be a valid Nepali number (e.g., 9801234567)');
@@ -57,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Check if email already exists
+    // Check if Email Already Exists
     $check_email = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $check_email);
     if (!$result) {
@@ -76,14 +83,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // Hash the password before storing it
+    // Hash the Password Before Storing It
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
+    // Insert Data into Database
+    $sql = "INSERT INTO users (full_name, phone, email, password) 
+            VALUES ('$full_name', '$phone', '$email', '$hashed_password')";
 
-    $sql = "INSERT INTO users (full_name, phone, email, address, password) 
-            VALUES ('$full_name', '$phone', '$email', '$address', '$hashed_password')";
-
-    // Execute the query
+    // Execute the Query
     if (mysqli_query($conn, $sql)) {
         echo "<script>
                 alert('Registration successful! Please login.');

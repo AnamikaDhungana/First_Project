@@ -44,7 +44,7 @@
             echo "<div class='tea-grid'>";
 
             // Fetch products for the current category
-            $sql = "SELECT product_name, product_name_np, product_price, product_price_np, product_description, image_url FROM products WHERE category = '$categoryName'";
+            $sql = "SELECT * FROM products WHERE category = '$categoryName'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -64,7 +64,10 @@
                         echo '<p>Price: Rs ' . $row["product_price"] . '</p>';
                     }
                     echo '<p>' . $row["product_description"] . '</p>';
-                    echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . $row["product_name"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add To Cart</button>';
+                    echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . addslashes($row["product_name"]) . '\', ' 
+                    . $row["product_price"] . ', \'../Admin_Page/uploads/' . addslashes($row["image_url"]) . '\', \'' 
+                    . addslashes($row["product_id"]) . '\')">Add To Cart</button>';
+               
                     echo '</div>';
                 }
             } else {
@@ -90,21 +93,43 @@
     </script>
 
     <script>
-        function addToCart(productName, productPrice, productImage) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        function addToCart(productName, productPrice, productImage, productId) {
+            // let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            // Check if the product is already in the cart
-            const productIndex = cart.findIndex(item => item.name === productName);
-            if (productIndex === -1) {
-                cart.push({ name: productName, price: productPrice, image: productImage, quantity: 1 });
-            } else {
-                cart[productIndex].quantity += 1;
-            }
+            // // Check if the product is already in the cart
+            // const productIndex = cart.findIndex(item => item.name === productName);
+            // if (productIndex === -1) {
+            //     cart.push({ name: productName, price: productPrice, image: productImage, quantity: 1 });
+            // } else {
+            //     cart[productIndex].quantity += 1;
+            // }
 
-            // Save the updated cart to localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
 
-            window.location.href = "../Header/add_to_cart.php";
+            // // Save the updated cart to localStorage
+            // localStorage.setItem('cart', JSON.stringify(cart));
+
+            // window.location.href = "../Header/add_to_cart.php";
+            const url = `add_to_cart.php?action=add_to_cart&product_id=${encodeURIComponent(productId)}&quantity=1&price=${encodeURIComponent(productPrice)}`;
+
+fetch(url, {
+    method: "GET",
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error("Failed to add product to cart");
+    }
+    return response.text(); // or response.json() if the server returns JSON
+})
+.then(data => {
+    console.log("Product added to cart:", data);
+    window.location.href = "../Header/add_to_cart.php"; // Redirect after success
+})
+.catch(error => {
+    console.error("Error:", error);
+    alert("Failed to add product to cart.");
+});
+        
+
         }
     </script>
 

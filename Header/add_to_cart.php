@@ -1,19 +1,7 @@
 <?php
 session_start();
 date_default_timezone_set('UTC');
-
-// Database configuration
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'nepaliswadh_db');
-
-try {
-    $pdo = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    die("ERROR: Could not connect. " . $e->getMessage());
-}
+require_once "./../database_connection.php";
 
 // Check if user is logged in
 $isLoggedIn = isset($_SESSION['isLoggedIn']);
@@ -21,7 +9,7 @@ $isLoggedIn = isset($_SESSION['isLoggedIn']);
 // Handle AJAX requests
 if (isset($_GET['action'])) {
     $response = ['success' => false, 'message' => ''];
-    
+
     switch ($_GET['action']) {
         case 'add_to_cart':
             if (!$isLoggedIn) {
@@ -29,118 +17,126 @@ if (isset($_GET['action'])) {
                 echo json_encode($response);
                 exit;
             }
-            
+
             $product_id = $_GET['product_id'];
             $quantity = $_GET['quantity'];
             $price = $_GET['price'];
-            
+
             try {
                 // Check if user has an active cart
-                $stmt = $pdo->prepare("SELECT cart_id FROM cart WHERE user_id = ? AND status = 'active'");
-                $stmt->execute([$_SESSION['userID']]);
-                $cart = $stmt->fetch();
-                
+                $stmt = mysqli_prepare($conn, "SELECT order_id FROM orders WHERE id = ? AND status = 'active'");
+                mysqli_stmt_bind_param($stmt, "i", $_SESSION['userID']);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                $cart = mysqli_fetch_assoc($result);
+
                 if (!$cart) {
                     // Create new cart
-                    $stmt = $pdo->prepare("INSERT INTO cart (user_id, status, created_at) VALUES (?, 'active', ?)");
-                    $stmt->execute([$_SESSION['userID'], date('Y-m-d H:i:s')]);
-                    $cart_id = $pdo->lastInsertId();
+                    $stmt = mysqli_prepare($conn, "INSERT INTO orders (id, status, created_at) VALUES (?, 'active', ?)");
+                    $date = date('Y-m-d H:i:s');
+                    mysqli_stmt_bind_param($stmt, "is", $_SESSION['userID'], $date);
+                    mysqli_stmt_execute($stmt);
+                    $order_id = mysqli_insert_id($conn);
                 } else {
-                    $cart_id = $cart['cart_id'];
+                    $order_id = $cart['order_id'];
                 }
-                
+
                 // Check if product already exists in cart
-                $stmt = $pdo->prepare("SELECT * FROM cart_items WHERE cart_id = ? AND product_id = ?");
-                $stmt->execute([$cart_id, $product_id]);
-                $existing_item = $stmt->fetch();
-                
+                $stmt = mysqli_prepare($conn, "SELECT * FROM cart_items WHERE order_id = ? AND product_id = ?");
+                mysqli_stmt_bind_param($stmt, "ii", $order_id, $product_id);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                $existing_item = mysqli_fetch_assoc($result);
+
                 if ($existing_item) {
                     // Update quantity
-                    $stmt = $pdo->prepare("UPDATE cart_items SET quantity = quantity + ? WHERE cart_id = ? AND product_id = ?");
-                    $stmt->execute([$quantity, $cart_id, $product_id]);
+                    $stmt = mysqli_prepare($conn, "UPDATE cart_items SET quantity = quantity + ? WHERE order_id = ? AND product_id = ?");
+                    mysqli_stmt_bind_param($stmt, "iii", $quantity, $order_id, $product_id);
+                    mysqli_stmt_execute($stmt);
                 } else {
                     // Add new item
-                    $stmt = $pdo->prepare("INSERT INTO cart_items (cart_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
-                    $stmt->execute([$cart_id, $product_id, $quantity, $price]);
+                    $stmt = mysqli_prepare($conn, "INSERT INTO cart_items (order_id, product_id, quantity, price, added_at) VALUES (?, ?, ?, ?, ?)");
+                    $date = date('Y-m-d H:i:s');
+                    mysqli_stmt_bind_param($stmt, "iiiss", $order_id, $product_id, $quantity, $price, $date);
+                    mysqli_stmt_execute($stmt);
                 }
-                
+
                 $response['success'] = true;
                 $response['message'] = 'Item added to cart';
-            } catch(PDOException $e) {
-                $response['message'] = 'Error adding item to cart';
+            } catch (Exception $e) {
+                $response['message'] = 'Error adding item to cart: ' . $e->getMessage();
             }
 
-            
-            // header("Refresh:0");
-    exit();
-
+            echo json_encode($response);
+            exit();
             break;
-            
+
         case 'update_quantity':
             if (!$isLoggedIn) {
                 $response['message'] = 'Please login first';
                 echo json_encode($response);
                 exit;
             }
-            
+
             $cart_item_id = $_GET['cart_item_id'];
             $quantity = $_GET['quantity'];
-            
+
             try {
-                $stmt = $pdo->prepare("UPDATE cart_items SET quantity = ? WHERE cart_item_id = ?");
-                $stmt->execute([$quantity, $cart_item_id]);
+                $stmt = mysqli_prepare($conn, "UPDATE cart_items SET quantity = ? WHERE cart_item_id = ?");
+                mysqli_stmt_bind_param($stmt, "ii", $quantity, $cart_item_id);
+                mysqli_stmt_execute($stmt);
                 $response['success'] = true;
                 $response['message'] = 'Quantity updated';
-            } catch(PDOException $e) {
-                $response['message'] = 'Error updating quantity';
+            } catch (Exception $e) {
+                $response['message'] = 'Error updating quantity: ' . $e->getMessage();
             }
-    echo json_encode($response);
-    exit();
-
+            echo json_encode($response);
+            exit();
             break;
-            case 'checkout':
-              if (!$isLoggedIn) {
-                  $response['message'] = 'Please login first';
-                  echo json_encode($response);
-                  exit;
-              }
-              
-              $cart_item_id = $_GET['cart_item_id'];
-              try {
-                $stmt = $pdo->prepare("UPDATE cart SET status = 'completed' WHERE cart_id = ?");
-                $stmt->execute([$cart_item_id]);
-                  $response['success'] = true;
-                  $response['message'] = 'Purchased';
-              } catch(PDOException $e) {
-                  $response['message'] = 'Error buying '.$e;
-              }
-    echo json_encode($response);
-    return;
-    // exit();
-              break;
-              
+
+        case 'checkout':
+            if (!$isLoggedIn) {
+                $response['message'] = 'Please login first';
+                echo json_encode($response);
+                exit;
+            }
+
+            $cart_id = $_GET['cart_id']; // Changed from cart_item_id to cart_id
+            try {
+                $stmt = mysqli_prepare($conn, "UPDATE orders SET status = 'completed' WHERE order_id = ?");
+                mysqli_stmt_bind_param($stmt, "i", $cart_id);
+                mysqli_stmt_execute($stmt);
+                $response['success'] = true;
+                $response['message'] = 'Purchase completed';
+            } catch (Exception $e) {
+                $response['message'] = 'Error during checkout: ' . $e->getMessage();
+            }
+            echo json_encode($response);
+            exit();
+            break;
+
         case 'remove_item':
             if (!$isLoggedIn) {
                 $response['message'] = 'Please login first';
                 echo json_encode($response);
                 exit;
             }
-            
+
             $cart_item_id = $_GET['cart_item_id'];
-            
+
             try {
-                $stmt = $pdo->prepare("DELETE FROM cart_items WHERE cart_item_id = ?");
-                $stmt->execute([$cart_item_id]);
+                $stmt = mysqli_prepare($conn, "DELETE FROM cart_items WHERE cart_item_id = ?");
+                mysqli_stmt_bind_param($stmt, "i", $cart_item_id);
+                mysqli_stmt_execute($stmt);
                 $response['success'] = true;
                 $response['message'] = 'Item removed from cart';
-            } catch(PDOException $e) {
-                $response['message'] = 'Error removing item';
+            } catch (Exception $e) {
+                $response['message'] = 'Error removing item: ' . $e->getMessage();
             }
-    echo json_encode($response);
-
+            echo json_encode($response);
+            exit(); // Added exit() for consistency
             break;
     }
-    
 }
 ?>
 
@@ -195,8 +191,16 @@ if (isset($_GET['action'])) {
     </style>
 </head>
 <body>
+    <!--JS Header -->
     <div id="header-placeholder"></div>
-    
+    <script>
+        fetch('../Header/header.php') 
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+    </script>
     <main class="cart-container">
         <h1>Your Cart</h1>
         <?php if (!$isLoggedIn): ?>
@@ -206,17 +210,27 @@ if (isset($_GET['action'])) {
         <?php else: ?>
             <div id="cart-items">
                 <?php
+                // Initialize total variable
+                $total = 0;
+                $cart_id = 0; // Initialize cart_id variable
+                
                 try {
-                    $stmt = $pdo->prepare("
-                        SELECT ci.*, p.product_name, p.image_url, p.product_price 
+                    $stmt = mysqli_prepare($conn, "
+                        SELECT ci.*, p.product_name, p.image_url, p.product_price, o.order_id
                         FROM cart_items ci
-                        JOIN cart c ON ci.cart_id = c.cart_id
+                        JOIN orders o ON ci.order_id = o.order_id
                         JOIN products p ON ci.product_id = p.product_id
-                        WHERE c.user_id = ? AND c.status = 'active'
+                        WHERE o.id = ? AND o.status = 'active'
                     ");
-                    $stmt->execute([$_SESSION['userID']]);
-                    $cart_items = $stmt->fetchAll();
-                    $total = 0;
+                    mysqli_stmt_bind_param($stmt, "i", $_SESSION['userID']);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+                    $cart_items = [];
+                    while($row = mysqli_fetch_assoc($result)) {
+                        $cart_items[] = $row;
+                        // Store the cart_id for checkout
+                        $cart_id = $row['order_id'];
+                    }
                     
                     if (empty($cart_items)) {
                         echo '<p>Your cart is empty!</p>';
@@ -242,102 +256,83 @@ if (isset($_GET['action'])) {
                             <?php
                         }
                     }
-                } catch(PDOException $e) {
-                    echo '<p>Error loading cart items</p>';
+                } catch(Exception $e) {
+                    echo '<p>Error loading cart items: ' . htmlspecialchars($e->getMessage()) . '</p>';
                 }
                 ?>
             </div>
             
             <div class="cart-summary">
                 <h2>Total: Rs.<?php echo number_format($total, 2); ?></h2>
-                <button class="checkout-btn" onclick="checkout(<?php echo $item['cart_id']; ?>)" <?php echo empty($cart_items) ? 'disabled' : ''; ?>>
-                    Proceed to Checkout
-                </button>
+                <button class="checkout-btn" id="checkout-btn" <?php echo $total == 0 ? 'disabled' : ''; ?> 
+                        onclick="checkoutCart(<?php echo $cart_id; ?>)">Proceed to Checkout</button>
             </div>
         <?php endif; ?>
     </main>
-
-    <div id="footer-placeholder"></div>
-
+</body>
+<!--Js Footer -->
+<div id="footer-container"></div>
     <script>
-        // Load header and footer
-        fetch('../Header/header.php')
+        fetch("../Footer/footer.php")
             .then(response => response.text())
             .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
+                document.getElementById('footer-container').innerHTML = data;
             });
-
-        fetch('../Footer/footer.php')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            });
-
-        // Cart functions
-        function updateQuantity(cartItemId, quantity) {
-            fetch('add_to_cart.php', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `action=update_quantity&cart_item_id=${cartItemId}&quantity=${quantity}`
-            })
+    </script>
+<script>
+      
+    // Update item quantity
+    function updateQuantity(cart_item_id, quantity) {
+        if (quantity <= 0) return;
+        const url = add_to_cart.php?action=update_quantity&cart_item_id=${cart_item_id}&quantity=${quantity};
+        
+        fetch(url)
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    location.reload();
+                    alert(data.message);
+                    location.reload(); // Refresh the page after update
                 } else {
                     alert(data.message);
                 }
             });
-        }
+    }
 
-        function removeItem(cartItemId) {
-            if (confirm('Are you sure you want to remove this item?')) {
-                fetch('add_to_cart.php', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: `action=remove_item&cart_item_id=${cartItemId}`
-                })
+    // Remove item from cart
+    function removeItem(cart_item_id) {
+        if (confirm('Are you sure you want to remove this item?')) {
+            const url = add_to_cart.php?action=remove_item&cart_item_id=${cart_item_id};
+            
+            fetch(url)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        location.reload();
+                        alert(data.message);
+                        location.reload(); // Refresh the page after removal
                     } else {
                         alert(data.message);
                     }
                 });
-            }
         }
+    }
 
-        function checkout(cartItemId) {
-          if (confirm('Are you sure you want to buy?')) {
-
-            console.log("id :: " + cartItemId);
-
-                fetch(`add_to_cart.php?action=checkout&cart_item_id=${cartItemId}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    }})
-                .then(response => response.json())
-                .then(data => {
-
-                  console.log(data);
-
-                    if (data.success) {
-                        location.reload();
-                    } else {
-                        alert(data.message);
-                    }
-                });
+ // Proceed to checkout
+function checkoutCart(cart_id) {
+    const url = add_to_cart.php?action=checkout&cart_id=${cart_id};
+    
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                // Optionally, you can display a success message instead of redirecting to another page
+                document.querySelector('.cart-summary').innerHTML = '<h2>Thank you for your order!</h2>';
+            } else {
+                alert(data.message);
             }
+        });
+}
 
+</script>
 
-
-        }
-    </script>
-</body>
 </html>

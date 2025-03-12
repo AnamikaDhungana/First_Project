@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 </head>
 
 <body>
-    <!--Js Header-->
+    <!-- Js Header -->
     <div id="header-placeholder"></div>
     <script>
         fetch('../Header/header.php')
@@ -38,26 +38,27 @@ if ($conn->connect_error) {
             $language = $_GET['language'];
         }
         
-        $sql = "SELECT product_name, product_name_np, product_price, product_price_np, product_description, product_description_np, image_url FROM products WHERE category = 'Accessories'";
+        $sql = "SELECT product_id, product_name, product_name_np, product_price, product_price_np, product_description, product_description_np, image_url FROM products WHERE category = 'Accessories'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="product1">';
                 echo '<img src="../Admin_Page/uploads/' . $row["image_url"] . '" alt="' . $row["product_name"] . '" class="product-img">';
+                
                 // Check if the session variable is set before using it
                 if ($language != "np") {
                     echo '<h1 class="product-title">' . $row["product_name_np"] . '</h1>';
                 } else {
                     echo '<h1 class="product-title">' . $row["product_name"] . '</h1>';
                 }
-                
+            
                 if ($language != "np") {
                     echo '<p>मूल्य: रु.' . $row["product_price_np"] . '</p>';
                 } else {
                     echo '<p>Price: Rs ' . $row["product_price"] . '</p>';
                 }
-                echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . $row["product_name"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add to cart</button>';
+                echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . $row["product_id"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add to cart</button>';
                 
                 if ($language != "np") {
                     echo '<p class="product-description">' . $row["product_description_np"] . '</p>';
@@ -70,10 +71,11 @@ if ($conn->connect_error) {
             echo "<p>No accessories available.</p>";
         }
 
-        
+        $conn->close();
         ?>
     </section>
 
+    <!-- Js Footer -->
     <div id="footer-container"></div>
     <script>
         fetch("../Footer/footer.php")
@@ -83,28 +85,32 @@ if ($conn->connect_error) {
             });
     </script>
 
-<script>
-        function addToCart(productName, productPrice, productImage) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    <script>
+        function addToCart(productId, price, imageUrl) {
+            console.log("Url ::: " + ../Header/add_to_cart.php?action=add_to_cart&product_id=${productId}&quantity=1&price=${price});
 
-            // Check if the product is already in the cart
-            const productIndex = cart.findIndex(item => item.name === productName);
-            if (productIndex === -1) {
-                cart.push({ name: productName, price: productPrice, image: productImage, quantity: 1 });
-            } else {
-                cart[productIndex].quantity += 1;
-            }
-
-            // Save the updated cart to localStorage
-            localStorage.setItem('cart', JSON.stringify(cart));
-
-            window.location.href = "../Header/add_to_cart.php";
+            fetch(../Header/add_to_cart.php?action=add_to_cart&product_id=${productId}&quantity=1&price=${price})
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Item added to cart!');
+                        // Instead of immediate redirect, consider showing a mini-cart or notification
+                        window.location.href = "../Header/add_to_cart.php";
+                    } else {
+                        alert(data.message);
+                        if (data.message === 'Please login first') {
+                            window.location.href = "../Login/login.php";
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while adding the item to cart' + error);
+                });
         }
     </script>
-   
-    <?php $conn->close(); ?>
+
     <script src="./../language/script.js"> </script>
-    
 </body>
 
 </html>

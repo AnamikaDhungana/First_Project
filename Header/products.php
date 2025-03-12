@@ -10,7 +10,7 @@
 
 <body class="body_class">
 
-    <!--Js Header -->
+    <!--JS Header -->
     <div id="header-placeholder"></div>
     <script>
         fetch('../Header/header.php') 
@@ -41,6 +41,10 @@
         foreach ($categories as $categoryName => $sectionId) {
             echo "<section id='$sectionId' class='tea-section'>";
             echo "<h2 id='" . $sectionId . "_1'>" . $categoryName . "</h2>";
+
+    //         // Add the search link for the current category
+    // echo "<a href='search.php?category=$categoryName'>Search in $categoryName</a>"; // <-- Add this line
+
             echo "<div class='tea-grid'>";
 
             // Fetch products for the current category
@@ -48,7 +52,7 @@
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
-    
+             
                 while ($row = $result->fetch_assoc()) {
                     echo '<div class="tea-item">';
                     echo '<img src="../Admin_Page/uploads/' . $row["image_url"] . '" alt="' . $row["product_name"] . ' <br>">';
@@ -64,10 +68,8 @@
                         echo '<p>Price: Rs ' . $row["product_price"] . '</p>';
                     }
                     echo '<p>' . $row["product_description"] . '</p>';
-                    echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . addslashes($row["product_name"]) . '\', ' 
-                    . $row["product_price"] . ', \'../Admin_Page/uploads/' . addslashes($row["image_url"]) . '\', \'' 
-                    . addslashes($row["product_id"]) . '\')">Add To Cart</button>';
-               
+                    // echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . $row["product_id"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add To Cart</button>';
+                    echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . $row["product_name"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add to cart</button>';
                     echo '</div>';
                 }
             } else {
@@ -82,7 +84,7 @@
         ?>
     </main>
 
-    <!-- Js Footer -->
+    <!--Js Footer -->
     <div id="footer-container"></div>
     <script>
         fetch("../Footer/footer.php")
@@ -93,44 +95,30 @@
     </script>
 
     <script>
-        function addToCart(productName, productPrice, productImage, productId) {
-            // let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        function addToCart(productId, price, imageUrl) {
 
-            // // Check if the product is already in the cart
-            // const productIndex = cart.findIndex(item => item.name === productName);
-            // if (productIndex === -1) {
-            //     cart.push({ name: productName, price: productPrice, image: productImage, quantity: 1 });
-            // } else {
-            //     cart[productIndex].quantity += 1;
-            // }
+            console.log("Url ::: " + ../Header/add_to_cart.php?action=add_to_cart&product_id=${productId}&quantity=1&price=${price});
 
 
-            // // Save the updated cart to localStorage
-            // localStorage.setItem('cart', JSON.stringify(cart));
-
-            // window.location.href = "../Header/add_to_cart.php";
-            const url = `add_to_cart.php?action=add_to_cart&product_id=${encodeURIComponent(productId)}&quantity=1&price=${encodeURIComponent(productPrice)}`;
-
-fetch(url, {
-    method: "GET",
-})
-.then(response => {
-    if (!response.ok) {
-        throw new Error("Failed to add product to cart");
-    }
-    return response.text(); // or response.json() if the server returns JSON
-})
-.then(data => {
-    console.log("Product added to cart:", data);
-    window.location.href = "../Header/add_to_cart.php"; // Redirect after success
-})
-.catch(error => {
-    console.error("Error:", error);
-    alert("Failed to add product to cart.");
-});
-        
-
+    fetch(../Header/add_to_cart.php?action=add_to_cart&product_id=${productId}&quantity=1&price=${price})
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Item added to cart!');
+            // Instead of immediate redirect, consider showing a mini-cart or notification
+            window.location.href = "../Header/add_to_cart.php";
+        } else {
+            alert(data.message);
+            if (data.message === 'Please login first') {
+                window.location.href = "../Login/login.php";
+            }
         }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while adding the item to cart' + error);
+    });
+}
     </script>
 
 <script src="./../language/script.js"> </script>

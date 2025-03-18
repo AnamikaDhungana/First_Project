@@ -94,26 +94,45 @@ if (isset($_GET['action'])) {
             exit();
             break;
 
-        case 'checkout':
-            if (!$isLoggedIn) {
-                $response['message'] = 'Please login first';
-                echo json_encode($response);
-                exit;
-            }
+            case 'checkout':
+                if (!$isLoggedIn) {
+                    $response['message'] = 'Please login first';
+                    echo json_encode($response);
+                    exit;
+                }
+            
+                $cart_id = $_GET['cart_id'];
+                try {
+                    // Mark the order as completed
+                    $stmt = mysqli_prepare($conn, "UPDATE orders SET status = 'completed' WHERE order_id = ?");
+                    mysqli_stmt_bind_param($stmt, "i", $cart_id);
+                    mysqli_stmt_execute($stmt);
+            
+                    // Clear cart items after successful checkout
+                    $stmt = mysqli_prepare($conn, "DELETE FROM cart_items WHERE order_id = ?");
+                    mysqli_stmt_bind_param($stmt, "i", $cart_id);
+                    mysqli_stmt_execute($stmt);
+            
+                    // Check if the cart is now empty
+                    $stmt = mysqli_prepare($conn, "SELECT COUNT(*) FROM cart_items WHERE order_id = ?");
+                    mysqli_stmt_bind_param($stmt, "i", $cart_id);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+                    $row = mysqli_fetch_array($result);
+                    $cartEmpty = ($row[0] == 0);
+            
+                    $response['success'] = true;
+                    $response['message'] = 'Your order has been successfully placed! We will contact you soon.';
 
-            $cart_id = $_GET['cart_id']; // Changed from cart_item_id to cart_id
-            try {
-                $stmt = mysqli_prepare($conn, "UPDATE orders SET status = 'completed' WHERE order_id = ?");
-                mysqli_stmt_bind_param($stmt, "i", $cart_id);
-                mysqli_stmt_execute($stmt);
-                $response['success'] = true;
-                $response['message'] = 'Purchase completed';
-            } catch (Exception $e) {
-                $response['message'] = 'Error during checkout: ' . $e->getMessage();
-            }
-            echo json_encode($response);
-            exit();
-            break;
+                    $response['cart_empty'] = $cartEmpty; // Add flag to check if cart is empty
+            
+                } catch (Exception $e) {
+                    $response['message'] = 'Error during checkout: ' . $e->getMessage();
+                }
+                echo json_encode($response);
+                exit();
+                break;
+              
 
         case 'remove_item':
             if (!$isLoggedIn) {
@@ -202,74 +221,76 @@ if (isset($_GET['action'])) {
             .catch(error => console.error('Error loading header:', error));
     </script>
     <main class="cart-container">
-        <h1>Your Cart</h1>
-        <?php if (!$isLoggedIn): ?>
-            <div class="login-message">
-                Please <a href="../Login/login.php">login</a> to view your cart
-            </div>
-        <?php else: ?>
-            <div id="cart-items">
-                <?php
-                // Initialize total variable
-                $total = 0;
-                $cart_id = 0; // Initialize cart_id variable
-                
-                try {
-                    $stmt = mysqli_prepare($conn, "
-                        SELECT ci.*, p.product_name, p.image_url, p.product_price, o.order_id
-                        FROM cart_items ci
-                        JOIN orders o ON ci.order_id = o.order_id
-                        JOIN products p ON ci.product_id = p.product_id
-                        WHERE o.id = ? AND o.status = 'active'
-                    ");
-                    mysqli_stmt_bind_param($stmt, "i", $_SESSION['userID']);
-                    mysqli_stmt_execute($stmt);
-                    $result = mysqli_stmt_get_result($stmt);
-                    $cart_items = [];
-                    while($row = mysqli_fetch_assoc($result)) {
-                        $cart_items[] = $row;
-                        // Store the cart_id for checkout
-                        $cart_id = $row['order_id'];
-                    }
-                    
-                    if (empty($cart_items)) {
-                        echo '<p>Your cart is empty!</p>';
-                    } else {
-                        foreach ($cart_items as $item) {
-                            $subtotal = $item['price'] * $item['quantity'];
-                            $total += $subtotal;
-                            ?>
-                            <div class="cart-item" data-id="<?php echo $item['cart_item_id']; ?>">
-                                <img src="../Admin_Page/uploads/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>">
-                                <div class="item-details">
-                                    <h3><?php echo htmlspecialchars($item['product_name']); ?></h3>
-                                    <p>Price: Rs.<?php echo number_format($item['product_price'], 2); ?></p>
-                                    <div class="item-quantity">
-                                        <label>Quantity:</label>
-                                        <input type="number" value="<?php echo $item['quantity']; ?>" min="1" 
-                                               onchange="updateQuantity(<?php echo $item['cart_item_id']; ?>, this.value)">
-                                    </div>
-                                    <p>Subtotal: Rs.<?php echo number_format($subtotal, 2); ?></p>
-                                </div>
-                                <button onclick="removeItem(<?php echo $item['cart_item_id']; ?>)">Remove</button>
-                            </div>
-                            <?php
-                        }
-                    }
-                } catch(Exception $e) {
-                    echo '<p>Error loading cart items: ' . htmlspecialchars($e->getMessage()) . '</p>';
-                }
-                ?>
-            </div>
+    <h1>Your Cart</h1>
+    <?php if (!$isLoggedIn): ?>
+        <div class="login-message">
+            Please <a href="../Login/login.php">login</a> to view your cart
+        </div>
+    <?php else: ?>
+        <div id="cart-items">
+            <?php
+            // Initialize total variable
+            $total = 0;
+            $cart_id = 0; // Initialize cart_id variable
             
-            <div class="cart-summary">
-                <h2>Total: Rs.<?php echo number_format($total, 2); ?></h2>
-                <button class="checkout-btn" id="checkout-btn" <?php echo $total == 0 ? 'disabled' : ''; ?> 
-                        onclick="checkoutCart(<?php echo $cart_id; ?>)">Proceed to Checkout</button>
-            </div>
-        <?php endif; ?>
-    </main>
+            try {
+                $stmt = mysqli_prepare($conn, "
+                    SELECT ci.*, p.product_name, p.image_url, p.product_price, o.order_id
+                    FROM cart_items ci
+                    JOIN orders o ON ci.order_id = o.order_id
+                    JOIN products p ON ci.product_id = p.product_id
+                    WHERE o.id = ? AND o.status = 'active'
+                ");
+                mysqli_stmt_bind_param($stmt, "i", $_SESSION['userID']);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                $cart_items = [];
+                while($row = mysqli_fetch_assoc($result)) {
+                    $cart_items[] = $row;
+                    // Store the cart_id for checkout
+                    $cart_id = $row['order_id'];
+                }
+                
+                if (empty($cart_items)) {
+                    // Move this message below the header
+                    echo '<p class="empty-cart-message">Your cart is empty!</p>';
+                } else {
+                    foreach ($cart_items as $item) {
+                        $subtotal = $item['price'] * $item['quantity'];
+                        $total += $subtotal;
+                        ?>
+                        <div class="cart-item" data-id="<?php echo $item['cart_item_id']; ?>">
+                            <img src="../Admin_Page/uploads/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>">
+                            <div class="item-details">
+                                <h3><?php echo htmlspecialchars($item['product_name']); ?></h3>
+                                <p>Price: Rs.<?php echo number_format($item['product_price'], 2); ?></p>
+                                <div class="item-quantity">
+                                    <label>Quantity:</label>
+                                    <input type="number" value="<?php echo $item['quantity']; ?>" min="1" 
+                                           onchange="updateQuantity(<?php echo $item['cart_item_id']; ?>, this.value)">
+                                </div>
+                                <p>Subtotal: Rs.<?php echo number_format($subtotal, 2); ?></p>
+                            </div>
+                            <button onclick="removeItem(<?php echo $item['cart_item_id']; ?>)">Remove</button>
+                        </div>
+                        <?php
+                    }
+                }
+            } catch(Exception $e) {
+                echo '<p>Error loading cart items: ' . htmlspecialchars($e->getMessage()) . '</p>';
+            }
+            ?>
+        </div>
+        
+        <div class="cart-summary">
+            <h2>Total: Rs.<?php echo number_format($total, 2); ?></h2>
+            <button class="checkout-btn" id="checkout-btn" <?php echo $total == 0 ? 'disabled' : ''; ?> 
+                    onclick="checkoutCart(<?php echo $cart_id; ?>)">Cash On Delivery</button>
+        </div>
+    <?php endif; ?>
+</main>
 </body>
+
 <!--Js Footer -->
 <div id="footer-container"></div>
     <script>
@@ -284,7 +305,7 @@ if (isset($_GET['action'])) {
     // Update item quantity
     function updateQuantity(cart_item_id, quantity) {
         if (quantity <= 0) return;
-        const url = add_to_cart.php?action=update_quantity&cart_item_id=${cart_item_id}&quantity=${quantity};
+        const url = `add_to_cart.php?action=update_quantity&cart_item_id=${cart_item_id}&quantity=${quantity}`;
         
         fetch(url)
             .then(response => response.json())
@@ -301,7 +322,7 @@ if (isset($_GET['action'])) {
     // Remove item from cart
     function removeItem(cart_item_id) {
         if (confirm('Are you sure you want to remove this item?')) {
-            const url = add_to_cart.php?action=remove_item&cart_item_id=${cart_item_id};
+            const url = `add_to_cart.php?action=remove_item&cart_item_id=${cart_item_id}`;
             
             fetch(url)
                 .then(response => response.json())
@@ -316,17 +337,23 @@ if (isset($_GET['action'])) {
         }
     }
 
- // Proceed to checkout
-function checkoutCart(cart_id) {
-    const url = add_to_cart.php?action=checkout&cart_id=${cart_id};
+    
+    function checkoutCart(cart_id) {
+    const url = `add_to_cart.php?action=checkout&cart_id=${cart_id}`;
     
     fetch(url)
         .then(response => response.json())
         .then(data => {
             if (data.success) {
                 alert(data.message);
-                // Optionally, you can display a success message instead of redirecting to another page
+                
+                // Display thank-you message
                 document.querySelector('.cart-summary').innerHTML = '<h2>Thank you for your order!</h2>';
+
+                // If the cart is empty, display "Your cart is empty"
+                if (data.cart_empty) {
+                    document.getElementById('cart-items').innerHTML = '<p>Your cart is empty!!</p>';
+                }
             } else {
                 alert(data.message);
             }

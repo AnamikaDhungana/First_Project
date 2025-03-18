@@ -1,8 +1,5 @@
 <?php
 require_once "../database_connection.php";
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,9 +84,9 @@ if ($conn->connect_error) {
 
     <script>
         function addToCart(productId, price, imageUrl) {
-            console.log("Url ::: " + ../Header/add_to_cart.php?action=add_to_cart&product_id=${productId}&quantity=1&price=${price});
+            console.log("Url ::: " + `../Header/add_to_cart.php?action=add_to_cart&product_id=${productId}&quantity=1&price=${price}`);
 
-            fetch(../Header/add_to_cart.php?action=add_to_cart&product_id=${productId}&quantity=1&price=${price})
+            fetch(`../Header/add_to_cart.php?action=add_to_cart&product_id=${productId}&quantity=1&price=${price}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {

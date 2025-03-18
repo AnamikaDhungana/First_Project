@@ -51,6 +51,7 @@ function setLanguageInHeader(language) {
         document.getElementById("products").textContent = language.products;
         document.getElementById("accessories").textContent = language.accessories;
         document.getElementById("about_us_title").textContent = language.about_us_title;
+        document.getElementById("log_out").textContent = language.log_out;
     } catch (e) { }
 }
 
@@ -101,7 +102,7 @@ function setLanguageInProducts(language) {
         document.getElementById("flower-tea_1").textContent = language.category_name2;
         document.getElementById("herbal-tea_1").textContent = language.category_name3;
         document.getElementById("green-tea_1").textContent = language.category_name4;
-
+        
     } catch (e) {
     }
 }
@@ -150,6 +151,13 @@ function setLanguageInFooter(language) {
     }
 }
 
+// Add this function to your script.js file
+function setLanguageInLogOut(language) {
+    try {
+        document.getElementById("log_out").textContent = language.log_out;
+    } catch (e) { }
+}
+
 function loadLanguageScript(language) {
     const scriptId = "languageScript";
     const existingScript = document.getElementById(scriptId);
@@ -173,6 +181,7 @@ function loadLanguageScript(language) {
         setLanguageInProducts(window.languageObj);
         setLanguageInTeapotSetAndAccessories(window.languageObj);
         setLanguageInAboutUs(window.languageObj);
+        // setLanguageInLogOut(window.languageObj);
         setLanguageInFooter(window.languageObj);
     };
     script.onerror = () => {

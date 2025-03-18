@@ -37,14 +37,18 @@
                 <!-- Email Validation -->
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" 
-                    pattern="/^[a-zA-Z][a-zA-Z0-9._%+-]*[a-zA-Z]+@gmail\.com$/" 
-                    title="Email must be a valid Gmail address (e.g., example@gmail.com)" 
+                    pattern="^[a-zA-Z0-9][a-zA-Z0-9._%+-]*@gmail\.com$" 
+                    title="Email must be a valid Gmail address and can start with a number." 
                     required>
 
-                <!-- Password and Confirm Password -->
+                <!-- Password Validation -->
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" minlength="5" required>
+                <input type="password" id="password" name="password" 
+                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}" 
+                    title="Must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character." 
+                    required>
 
+                <!-- Confirm Password Validation -->
                 <label for="confirm-password">Confirm Password:</label>
                 <input type="password" id="confirm-password" name="confirm-password" minlength="5" required>
 

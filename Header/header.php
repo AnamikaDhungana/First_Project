@@ -1,3 +1,6 @@
+<?php
+session_start(); // Start the session
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +15,6 @@
 </head>
 
 <body>
-
     <header>
         <div class="top-banner">
             <div class="social-media-icons">
@@ -45,6 +47,7 @@
                 <li><a id="accessories" href="../tea_set/accessory.php">TEAPOT SET & ACCESSORIES</a></li>
                 <li><a id="about_us_title" href="../About_Us/about-us.php">ABOUT US</a></li>
                
+                <li><a id="log_out" href="logout.php">LOGOUT</a></li>
             </ul>
         </nav>
     </header>

@@ -7,14 +7,12 @@
     <title>NEPALI SWADH</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="home_styles.css">
-    <link rel="preload" href="../language/language.en.js" as="script">
-    <link rel="preload" href="../language/language.np.js" as="script"> 
-
+    <link rel="preload" href="http://localhost/Our_Project/language/language.en.js" as="script">
+    <link rel="preload" href="http://localhost/Our_Project/language/language.np.js" as="script">
 </head>
 
 <body>
-
-    <!--JS for the Header-->
+    <!-- JS for the Header -->
     <div id="header-placeholder"></div>
     <script>
         fetch('../Header/header.php')
@@ -24,6 +22,16 @@
             })
             .catch(error => console.error('Error loading header:', error));
     </script>
+
+    <!-- Search bar -->
+    <div class="search-bar">
+     <form onsubmit="searchProduct(event)" method="GET">
+      <input type="text" id="search-input" name="q" placeholder="Search for tea or accessories...">
+      <button type="submit"><i class="fas fa-search"></i></button>
+    </form>
+   <div id="search-result"></div>
+   </div>
+   
 
     <!-- Hero Section with Background Video -->
     <section class="hero">
@@ -61,7 +69,7 @@
         </div>
     </section>
 
-    <!--Featured Products-->
+    <!-- Featured Products -->
     <section id="featured-products" class="featured-products">
         <h2 id="featured_products">Featured Products</h2>
         <span class="product-card">
@@ -76,7 +84,7 @@
         <span class="product-card">
             <img src="../Tea_name/chamomile-tea.png" alt="Chamomile Tea"> <br>
             <h3 id="flower_tea"> Flower Tea</h3>
-            <p id="flower_tea_price">Rs 350 - Rs 450</p> <br>
+            <p id="flower_tea_price">Rs 300 - Rs 450</p> <br>
             <a href="../Header/products.php#flower-tea">
                 <button id="select_option1">Select options</button>
             </a>
@@ -100,7 +108,7 @@
         </span>
     </section>
 
-    <!--Js for footer-->
+    <!-- JS for footer -->
     <div id="footer-container"></div>
     <script>
         fetch("../Footer/footer.php")
@@ -109,6 +117,42 @@
                 document.getElementById('footer-container').innerHTML = data;
             });
     </script>
+
+<script>
+ // Function to handle search functionality   
+ function searchProduct(event) {
+    event.preventDefault();
+
+    const searchQuery = document.getElementById('search-input').value.trim();
+    if (!searchQuery) {
+        document.getElementById('search-result').innerHTML = "<p>Please enter a search query.</p>";
+        return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "search.php?q=" + encodeURIComponent(searchQuery), true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const result = JSON.parse(xhr.responseText);
+            if (result.length > 0) {
+                document.getElementById('search-result').innerHTML = result.map(item => `
+                    <div style='border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;'>
+                        <h3>${item.product_name}</h3>
+                        <p>${item.product_description}</p>
+                        <p>Price: Rs. ${item.product_price}</p>
+                        <img src="../Admin_Page/uploads/${item.image_url}" width="100" height="100" alt="Product Image">
+                    </div>
+                `).join('');
+            } else {
+                document.getElementById('search-result').innerHTML = "No results found.";
+            }
+        }
+    };
+    xhr.send();
+}
+
+
+</script>
 
     <script src="./../language/script.js"> </script>
 </body>

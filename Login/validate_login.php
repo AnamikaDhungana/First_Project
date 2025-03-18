@@ -10,21 +10,15 @@ $adminPassword = "MasterAdmin1!";
 $email = isset($_POST['email']) ? strtolower(trim($_POST['email'])) : '';
 $password = isset($_POST['password']) ? trim($_POST['password']) : '';
 
-// Email Validation (No Uppercase Letters)
-if (preg_match('/[A-Z]/', $email)) {
-    echo "<script>alert('Email cannot contain uppercase letters.'); window.location.href = '../Login/login.php';</script>";
+// Email Validation
+if (!preg_match('/^[a-zA-Z0-9][a-zA-Z0-9._%+-]*@gmail\.com$/', $email)) {
+    echo "<script>alert('Invalid email! Please use a valid Gmail address.'); window.location.href = '../Login/login.php';</script>";
     exit();
 }
 
-// Email Format Validation
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo "<script>alert('Invalid email format. Please enter a valid email.'); window.location.href = '../Login/login.php';</script>";
-    exit();
-}
-
-// Password Length Validation
-if (strlen($password) < 5) {
-    echo "<script>alert('Password must be at least 5 characters long.'); window.location.href = '../Login/login.php';</script>";
+// Password Validation
+if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $password)) {
+    echo "<script>alert('Invalid password! Must be at least 8 characters, include an uppercase letter, a lowercase letter, a number, and a special character.'); window.location.href = '../Login/login.php';</script>";
     exit();
 }
 
@@ -53,8 +47,8 @@ if ($result->num_rows === 1) {
         $_SESSION['isLoggedIn'] = true;
         $_SESSION['userRole'] = 'User';
         echo "<script>
-                if (confirm('Are you sure you want to buy these products?')) {
-                    window.location.href = '../Header/home_page.php';
+                if (confirm('You have successfully logged into our website!')) {
+                    window.location.href = '../Header/products.php';
                 } else {
                     window.location.href = '../Header/add_to_cart.php';
                 }

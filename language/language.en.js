@@ -9,6 +9,7 @@ window.LANG_EN = {
     "products": "TEAS",
     "accessories": "TEAPOT SET AND ACCESSORY",
     "about_us_title": "ABOUT US",
+    "log_out": "LOG OUT",
 
     // Home page 
     "hero_title": "Premium Tea Collection",
@@ -39,26 +40,10 @@ window.LANG_EN = {
     "category_name2":"Flower Tea",
     "category_name3":"Herbal Tea",
     "category_name4":"Green Tea",
-
-    // TeapotSet and Accessories
-    // "accessories": "TEAPOT SET AND ACCESSORY",
-    "title_of_accessories": "Brew in Style: Elegant Teapots & Timeless Accessories",
-    "sub_title": "Enhance your tea experience with our carefully crafted teapot sets and unique accessories.",
-    "travel_mug": "Travel Friendly Mug",
-    "travel_mug_price": "Rs. 750",
-    "add_to_cart1": "Add to cart",
-    "travel_mug_desc": "Stay hydrated in style with this bright orange insulated mug. Designed to keep your drinks hot or cold for hours, perfect for tea lovers on the go!",
-    "porcelain_cup": "Porcelain Tea Cup",
-    "porcelain_cup_price": "Rs. 650",
+    
     "add_to_cart2": "Add to cart",
-    "porcelain_cup_desc": "This is an elegant porcelain tea cup with a smooth white finish, accented by a gold rim and a beautifully crafted gold handle. It comes with matching gold-edged saucers, adding a touch of luxury and sophistication. Perfect for formal tea settings or as a decorative piece.",
-    "ceramic_mug": "Vintage Ceramic Mug",
-    "ceramic_mug_price": "Rs. 1050",
-    "add_to_cart3": "Add to cart",
-    "ceramic_mug_desc": "This mug is part of an old-fashioned tea set that looks really pretty and classy. It has a blue color with white flower designs, which makes it stand out. The mug is made of ceramic, so it keeps your tea warm for a longer time. It also has a nice handle that is easy to hold. The set comes with matching small plates, which make it perfect for serving tea in a fancy way or even just for decoration.",
 
     // About Us
-    // "about_us_title": "About Us",
     "about_us_description": "Welcome to Nepali Swad, we are on a journey to bring the rich heritage and unique flavors of Nepali teas to the world. Our teas reflect the essence of Nepal's natural beauty, cultural richness, and sustainable agricultural practices.",
     "mission_title": "Our Mission",
     "mission_item_1": "Deliver premium-quality tea leaves and accessories",

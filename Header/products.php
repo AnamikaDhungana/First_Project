@@ -68,8 +68,7 @@
                         echo '<p>Price: Rs ' . $row["product_price"] . '</p>';
                     }
                     echo '<p>' . $row["product_description"] . '</p>';
-                    // echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . $row["product_id"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add To Cart</button>';
-                    echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . $row["product_name"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add to cart</button>';
+                    echo '<button class="add-to-cart-btn add_to_cart" onclick="addToCart(\'' . $row["product_id"] . '\', ' . $row["product_price"] . ', \'../Admin_Page/uploads/' . $row["image_url"] . '\')">Add To Cart</button>';
                     echo '</div>';
                 }
             } else {
@@ -97,10 +96,10 @@
     <script>
         function addToCart(productId, price, imageUrl) {
 
-            console.log("Url ::: " + ../Header/add_to_cart.php?action=add_to_cart&product_id=${productId}&quantity=1&price=${price});
+            console.log("Url ::: " + `../Header/add_to_cart.php?action=add_to_cart&product_id=${productId}&quantity=1&price=${price}`);
 
 
-    fetch(../Header/add_to_cart.php?action=add_to_cart&product_id=${productId}&quantity=1&price=${price})
+    fetch(`../Header/add_to_cart.php?action=add_to_cart&product_id=${productId}&quantity=1&price=${price}`)
     .then(response => response.json())
     .then(data => {
         if (data.success) {

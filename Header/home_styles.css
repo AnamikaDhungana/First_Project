@@ -1,7 +1,116 @@
 html{
   scroll-behavior: smooth;
 }
-/* Hero section styling */
+
+/* Search Bar Styling */
+/* Center the search bar and style it */
+.search-bar {
+  width: 50%;
+  margin: 50px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #f8f8f8;
+}
+
+.search-bar input {
+  width: 90%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  transition: 0.3s ease-in-out;
+}
+
+.search-bar input:focus {
+  border-color: #009688;
+  box-shadow: 0 0 10px rgba(0, 150, 136, 0.3);
+}
+
+.search-bar button {
+  background-color: #009688;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.search-bar button i {
+  font-size: 18px;
+}
+
+
+/* Search Results Container */
+#search-result {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Individual Product Card */
+#search-result div {
+  width: 250px;
+  background: #f9f9f9;
+  border: 2px solid #ff9800;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  padding: 50px;
+  border-radius: 15px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+#search-result div:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+  background: #ffe0b2;
+}
+
+/* Image Styling */
+#search-result img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+#search-result div:hover img {
+  transform: rotate(5deg) scale(1.1);
+}
+
+/* Text Styling */
+#search-result h3 {
+  color: #ff9800;
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#search-result p {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 10px;
+}
+
 .hero {
   position: relative;
   height: 100vh;
@@ -120,7 +229,7 @@ html{
 /*Featured Products*/
 body {
   font-family:'Times New Roman', Times, serif; 
-  background-color: #F8F4E3; 
+  background-color:  #F8F4E3;
 }
 
 .featured-products {
@@ -156,7 +265,6 @@ body {
 .product-card h3{
   margin-top: 50px;
 }
-
 .product-card img {
   width: 100%;
   height: 120%;

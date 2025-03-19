@@ -1,7 +1,7 @@
 <?php
 include '../database_connection.php';  
 
-// Create the `users` table with InnoDB engine
+// Create the `users` table
 $sql_users = "CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
@@ -9,14 +9,14 @@ $sql_users = "CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB";
+)";
 if (mysqli_query($conn, $sql_users)) {
     echo "Table 'users' created successfully.<br>";
 } else {
     echo "Error creating 'users' table: " . mysqli_error($conn) . "<br>";
 }
 
-// // Create the `products` table with InnoDB engine
+// Create the `products` table
 $sql_products = "CREATE TABLE IF NOT EXISTS products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(100) NOT NULL,
@@ -25,14 +25,14 @@ $sql_products = "CREATE TABLE IF NOT EXISTS products (
     stock INT DEFAULT 0,
     image_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB";
+)";
 if (mysqli_query($conn, $sql_products)) {
     echo "Table 'products' created successfully.<br>";
 } else {
     echo "Error creating 'products' table: " . mysqli_error($conn) . "<br>";
 }
 
-// // Add the `category` column before `created_at` if it doesn't exist
+// Add the `category` column before `created_at` if it doesn't exist
 $check_category_column = "SHOW COLUMNS FROM products LIKE 'category'";
 $result = mysqli_query($conn, $check_category_column);
 
@@ -47,7 +47,7 @@ if (mysqli_num_rows($result) == 0) {
     echo "Column 'category' already exists in 'products' table.<br>";
 }
 
-// // Check if 'product_name_np' column exists in `products`
+// Check if 'product_name_np' column exists in `products`
 $check_product_name_np_column = "SHOW COLUMNS FROM products LIKE 'product_name_np'";
 $result_product_name_np = mysqli_query($conn, $check_product_name_np_column);
 
@@ -63,7 +63,7 @@ if (mysqli_num_rows($result_product_name_np) == 0) {
     echo "Column 'product_name_np' already exists in 'products' table.<br>";
 }
 
-// // Check if 'product_description_np' column exists
+// Check if 'product_description_np' column exists
 $check_description_np = "SHOW COLUMNS FROM products LIKE 'product_description_np'";
 $result_description_np = mysqli_query($conn, $check_description_np);
 
@@ -81,21 +81,21 @@ if (mysqli_num_rows($result_price_np) == 0) {
     mysqli_query($conn, $alter_price_np);
 }
 
-// Create the `orders` table with InnoDB engine
+// Create the `orders` table
 $sql_orders = "CREATE TABLE IF NOT EXISTS orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     id INT NOT NULL,
     status ENUM('active', 'completed', 'abandoned') DEFAULT 'active',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE
-) ENGINE=InnoDB";
+)";
 if (mysqli_query($conn, $sql_orders)) { 
     echo "Table 'orders' created successfully.<br>";
 } else {
     echo "Error creating 'orders' table: " . mysqli_error($conn) . "<br>";
 }
 
-// Create the `cart_items` table with InnoDB engine
+// Create the `cart_items` table
 $sql_cart_items = "CREATE TABLE IF NOT EXISTS cart_items (
     cart_item_id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
@@ -105,7 +105,7 @@ $sql_cart_items = "CREATE TABLE IF NOT EXISTS cart_items (
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
-) ENGINE=InnoDB";
+)";
 if (mysqli_query($conn, $sql_cart_items)) {
     echo "Table 'cart_items' created successfully.<br>";
 } else {

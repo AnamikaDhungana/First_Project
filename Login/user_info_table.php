@@ -112,5 +112,29 @@ if (mysqli_query($conn, $sql_cart_items)) {
     echo "Error creating 'cart_items' table: " . mysqli_error($conn) . "<br>";
 }
 
+$result = mysqli_query($conn, "SHOW COLUMNS FROM cart_items LIKE 'status'");
+if (mysqli_num_rows($result) == 0) {
+    // Add the column if it doesn't exist
+    $alterQuery = "ALTER TABLE cart_items ADD COLUMN status VARCHAR(255) DEFAULT 'active'";
+    mysqli_query($conn, $alterQuery);
+}
+
+// Create the `order_items` table (new addition)
+$sql_order_items = "CREATE TABLE IF NOT EXISTS order_items (
+    order_item_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
+)";
+if (mysqli_query($conn, $sql_order_items)) {
+    echo "Table 'order_items' created successfully.<br>";
+} else {
+    echo "Error creating 'order_items' table: " . mysqli_error($conn) . "<br>";
+}
+
 mysqli_close($conn);
 ?>

@@ -46,12 +46,11 @@ if ($result->num_rows === 1) {
         $_SESSION['userEmail'] = $email;
         $_SESSION['isLoggedIn'] = true;
         $_SESSION['userRole'] = 'User';
+
+        // Show the success alert and then redirect to products.php
         echo "<script>
-                if (confirm('You have successfully logged into our website!')) {
-                    window.location.href = '../Header/products.php';
-                } else {
-                    window.location.href = '../Header/add_to_cart.php';
-                }
+                alert('You have successfully logged into our website!');
+                window.location.href = '../Header/products.php';
               </script>";
         exit();
     } else {

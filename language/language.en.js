@@ -43,6 +43,9 @@ window.LANG_EN = {
     
     "add_to_cart2": "Add to cart",
 
+    "title_of_accessories": "Brew in Style: Elegant Teapots & Timeless Accessories",
+    "sub_title": "Enhance your tea experience with our carefully crafted teapot sets and unique accessories.",
+
     // About Us
     "about_us_description": "Welcome to Nepali Swad, we are on a journey to bring the rich heritage and unique flavors of Nepali teas to the world. Our teas reflect the essence of Nepal's natural beauty, cultural richness, and sustainable agricultural practices.",
     "mission_title": "Our Mission",

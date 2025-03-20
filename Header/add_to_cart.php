@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 date_default_timezone_set('UTC');
 require_once "./../database_connection.php";
@@ -49,12 +49,12 @@ if (isset($_GET['action'])) {
                 $existing_item = mysqli_fetch_assoc($result);
 
                 if ($existing_item) {
-                    // Update quantity
+                    // Update quantity if the item already exists
                     $stmt = mysqli_prepare($conn, "UPDATE cart_items SET quantity = quantity + ? WHERE order_id = ? AND product_id = ?");
                     mysqli_stmt_bind_param($stmt, "iii", $quantity, $order_id, $product_id);
                     mysqli_stmt_execute($stmt);
                 } else {
-                    // Add new item
+                    // Add new item to the cart
                     $stmt = mysqli_prepare($conn, "INSERT INTO cart_items (order_id, product_id, quantity, price, added_at) VALUES (?, ?, ?, ?, ?)");
                     $date = date('Y-m-d H:i:s');
                     mysqli_stmt_bind_param($stmt, "iiiss", $order_id, $product_id, $quantity, $price, $date);
@@ -73,66 +73,114 @@ if (isset($_GET['action'])) {
 
         case 'update_quantity':
             if (!$isLoggedIn) {
+                $response['success'] = false;
                 $response['message'] = 'Please login first';
                 echo json_encode($response);
                 exit;
             }
-
+        
             $cart_item_id = $_GET['cart_item_id'];
             $quantity = $_GET['quantity'];
-
+        
             try {
+                // Update the quantity in cart_items table
                 $stmt = mysqli_prepare($conn, "UPDATE cart_items SET quantity = ? WHERE cart_item_id = ?");
                 mysqli_stmt_bind_param($stmt, "ii", $quantity, $cart_item_id);
                 mysqli_stmt_execute($stmt);
-                $response['success'] = true;
-                $response['message'] = 'Quantity updated';
+        
+                // Fetch the product ID and updated quantity from cart_items
+                $stmt = mysqli_prepare($conn, "SELECT product_id, quantity FROM cart_items WHERE cart_item_id = ?");
+                mysqli_stmt_bind_param($stmt, "i", $cart_item_id);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                $cartItem = mysqli_fetch_assoc($result);
+        
+                if ($cartItem) {
+                    $product_id = $cartItem['product_id'];
+                    $quantity = $cartItem['quantity'];
+        
+                    // Fetch product price from products table
+                    $stmt = mysqli_prepare($conn, "SELECT product_price FROM products WHERE product_id = ?");
+                    mysqli_stmt_bind_param($stmt, "i", $product_id);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+                    $product = mysqli_fetch_assoc($result);
+        
+                    if ($product) {
+                        $price_per_item = $product['product_price'];
+                        $total_price = $price_per_item * $quantity; // Calculate total price
+        
+                        $response['success'] = true;
+                        $response['message'] = 'Quantity updated';
+                        $response['total_price'] = $total_price;
+                        $response['quantity'] = $quantity;
+                        $response['cart_item_id'] = $cart_item_id;
+                    } else {
+                        $response['success'] = false;
+                        $response['message'] = 'Product not found';
+                    }
+                } else {
+                    $response['success'] = false;
+                    $response['message'] = 'Cart item not found';
+                }
             } catch (Exception $e) {
+                $response['success'] = false;
                 $response['message'] = 'Error updating quantity: ' . $e->getMessage();
             }
+        
             echo json_encode($response);
             exit();
-            break;
-
-            case 'checkout':
-                if (!$isLoggedIn) {
-                    $response['message'] = 'Please login first';
+            
+        case 'checkout':
+            if (!$isLoggedIn) {
+                $response['message'] = 'Please login first';
+                echo json_encode($response);
+                exit;
+            }
+        
+            $cart_id = $_GET['cart_id'];
+            try {
+                // Check if the order is already completed
+                $stmt = mysqli_prepare($conn, "SELECT status FROM orders WHERE order_id = ?");
+                mysqli_stmt_bind_param($stmt, "i", $cart_id);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                $order = mysqli_fetch_assoc($result);
+        
+                if ($order && $order['status'] == 'completed') {
+                    $response['message'] = 'This order has already been completed.';
                     echo json_encode($response);
                     exit;
                 }
-            
-                $cart_id = $_GET['cart_id'];
-                try {
-                    // Mark the order as completed
-                    $stmt = mysqli_prepare($conn, "UPDATE orders SET status = 'completed' WHERE order_id = ?");
-                    mysqli_stmt_bind_param($stmt, "i", $cart_id);
-                    mysqli_stmt_execute($stmt);
-            
-                    // Clear cart items after successful checkout
-                    $stmt = mysqli_prepare($conn, "DELETE FROM cart_items WHERE order_id = ?");
-                    mysqli_stmt_bind_param($stmt, "i", $cart_id);
-                    mysqli_stmt_execute($stmt);
-            
-                    // Check if the cart is now empty
-                    $stmt = mysqli_prepare($conn, "SELECT COUNT(*) FROM cart_items WHERE order_id = ?");
-                    mysqli_stmt_bind_param($stmt, "i", $cart_id);
-                    mysqli_stmt_execute($stmt);
-                    $result = mysqli_stmt_get_result($stmt);
-                    $row = mysqli_fetch_array($result);
-                    $cartEmpty = ($row[0] == 0);
-            
-                    $response['success'] = true;
-                    $response['message'] = 'Your order has been successfully placed! We will contact you soon.';
-
-                    $response['cart_empty'] = $cartEmpty; // Add flag to check if cart is empty
-            
-                } catch (Exception $e) {
-                    $response['message'] = 'Error during checkout: ' . $e->getMessage();
-                }
-                echo json_encode($response);
-                exit();
-                break;
-              
+        
+                // Mark the order as completed
+                $stmt = mysqli_prepare($conn, "UPDATE orders SET status = 'completed' WHERE order_id = ?");
+                mysqli_stmt_bind_param($stmt, "i", $cart_id);
+                mysqli_stmt_execute($stmt);
+        
+                // Move cart items to order_items table
+                $stmt = mysqli_prepare($conn, "INSERT INTO order_items (order_id, product_id, quantity, price) 
+                    SELECT order_id, product_id, quantity, price FROM cart_items WHERE order_id = ?");
+                mysqli_stmt_bind_param($stmt, "i", $cart_id);
+                mysqli_stmt_execute($stmt);
+        
+                // Empty the cart_items table
+                $stmt = mysqli_prepare($conn, "DELETE FROM cart_items WHERE order_id = ?");
+                mysqli_stmt_bind_param($stmt, "i", $cart_id);
+                mysqli_stmt_execute($stmt);
+        
+                // Check if the cart is now empty
+                $cart_empty = true; 
+        
+                $response['success'] = true;
+                $response['message'] = 'Your order has been successfully placed! We will contact you soon.';
+                $response['cart_empty'] = $cart_empty;
+            } catch (Exception $e) {
+                $response['message'] = 'Error during checkout: ' . $e->getMessage();
+            }
+            echo json_encode($response);
+            exit;
+        
 
         case 'remove_item':
             if (!$isLoggedIn) {
@@ -252,7 +300,6 @@ if (isset($_GET['action'])) {
                 }
                 
                 if (empty($cart_items)) {
-                    // Move this message below the header
                     echo '<p class="empty-cart-message">Your cart is empty!</p>';
                 } else {
                     foreach ($cart_items as $item) {
@@ -269,7 +316,7 @@ if (isset($_GET['action'])) {
                                     <input type="number" value="<?php echo $item['quantity']; ?>" min="1" 
                                            onchange="updateQuantity(<?php echo $item['cart_item_id']; ?>, this.value)">
                                 </div>
-                                <p>Subtotal: Rs.<?php echo number_format($subtotal, 2); ?></p>
+                                <p>Subtotal: Rs.<span id="subtotal-<?php echo $item['cart_item_id']; ?>"><?php echo number_format($subtotal, 2); ?></span></p>
                             </div>
                             <button onclick="removeItem(<?php echo $item['cart_item_id']; ?>)">Remove</button>
                         </div>
@@ -283,16 +330,15 @@ if (isset($_GET['action'])) {
         </div>
         
         <div class="cart-summary">
-            <h2>Total: Rs.<?php echo number_format($total, 2); ?></h2>
+            <h2>Total: Rs.<span id="cart-total"><?php echo number_format($total, 2); ?></span></h2>
             <button class="checkout-btn" id="checkout-btn" <?php echo $total == 0 ? 'disabled' : ''; ?> 
                     onclick="checkoutCart(<?php echo $cart_id; ?>)">Cash On Delivery</button>
         </div>
     <?php endif; ?>
-</main>
-</body>
+    </main>
 
-<!--Js Footer -->
-<div id="footer-container"></div>
+    <!-- JS for footer -->
+    <div id="footer-container"></div>
     <script>
         fetch("../Footer/footer.php")
             .then(response => response.text())
@@ -300,66 +346,109 @@ if (isset($_GET['action'])) {
                 document.getElementById('footer-container').innerHTML = data;
             });
     </script>
-<script>
-      
-    // Update item quantity
-    function updateQuantity(cart_item_id, quantity) {
-        if (quantity <= 0) return;
-        const url = `add_to_cart.php?action=update_quantity&cart_item_id=${cart_item_id}&quantity=${quantity}`;
-        
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert(data.message);
-                    location.reload(); // Refresh the page after update
-                } else {
-                    alert(data.message);
-                }
-            });
-    }
 
-    // Remove item from cart
-    function removeItem(cart_item_id) {
-        if (confirm('Are you sure you want to remove this item?')) {
-            const url = `add_to_cart.php?action=remove_item&cart_item_id=${cart_item_id}`;
-            
-            fetch(url)
+    <script>
+       function updateQuantity(cartItemId, quantity) {
+    fetch('add_to_cart.php?action=update_quantity&cart_item_id=' + cartItemId + '&quantity=' + quantity)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                // Update the subtotal for this item
+                const subtotalElement = document.getElementById('subtotal-' + cartItemId);
+                if (subtotalElement) {
+                    subtotalElement.textContent = data.total_price.toFixed(2);
+                }
+                
+                // Recalculate and update the cart total
+                updateCartTotal();
+                
+                alert('Quantity updated');
+            } else {
+                alert(data.message || 'Error updating quantity');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating quantity:', error);
+            alert('Error updating quantity. Please try again.');
+        });
+}
+
+function updateCartTotal() {
+    // Calculate the new cart total by summing all subtotals
+    let total = 0;
+    const subtotalElements = document.querySelectorAll('[id^="subtotal-"]');
+    
+    subtotalElements.forEach(element => {
+        total += parseFloat(element.textContent);
+    });
+    
+    // Update the total display
+    const cartTotalElement = document.getElementById('cart-total');
+    if (cartTotalElement) {
+        cartTotalElement.textContent = total.toFixed(2);
+    }
+    
+    // Enable/disable checkout button based on total
+    const checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.disabled = total <= 0;
+    }
+}
+
+        function removeItem(cartItemId) {
+            fetch('add_to_cart.php?action=remove_item&cart_item_id=' + cartItemId)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert(data.message);
-                        location.reload(); // Refresh the page after removal
+                        alert('Item removed');
+                        // Remove the item from the DOM
+                        const itemElement = document.querySelector(.cart-item[data-id="${cartItemId}"]);
+                        if (itemElement) {
+                            itemElement.remove();
+                            // Update the cart total
+                            updateCartTotal();
+                            
+                            // Check if cart is empty
+                            const cartItems = document.querySelectorAll('.cart-item');
+                            if (cartItems.length === 0) {
+                                document.getElementById('cart-items').innerHTML = '<p class="empty-cart-message">Your cart is empty!</p>';
+                            }
+                        }
                     } else {
                         alert(data.message);
                     }
-                });
+                })
+                .catch(error => console.error('Error removing item:', error));
         }
-    }
 
-    
-    function checkoutCart(cart_id) {
-    const url = `add_to_cart.php?action=checkout&cart_id=${cart_id}`;
+        function checkoutCart(cart_id) {
+    const url = add_to_cart.php?action=checkout&cart_id=${cart_id};
     
     fetch(url)
         .then(response => response.json())
         .then(data => {
             if (data.success) {
                 alert(data.message);
-                
+
                 // Display thank-you message
                 document.querySelector('.cart-summary').innerHTML = '<h2>Thank you for your order!</h2>';
 
-                // If the cart is empty, display "Your cart is empty"
+                // Clear cart items if empty
                 if (data.cart_empty) {
                     document.getElementById('cart-items').innerHTML = '<p>Your cart is empty!!</p>';
                 }
             } else {
                 alert(data.message);
             }
-        });
+        })
+        .catch(error => console.error("Error:", error));
 }
 
-</script>
-
+    </script>
+</body>
 </html>

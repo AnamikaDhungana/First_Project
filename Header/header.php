@@ -26,10 +26,9 @@ session_start(); // Start the session
 
             <div class="nav-icons">
                 <a href="#"><i id="language" class="fas fa-language"></i></a>
-                
                 <?php
                     if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn']) {
-                        echo '<a href="#" class="user-greeting">Hi, ' . $_SESSION['username'] . '!</a>';
+                        echo '<a href="#" class="user-greeting">Hi, ' . htmlspecialchars($_SESSION['username']) . '!</a>';
                     } else {
                         echo '<a href="../Login/login.php"><i class="fas fa-user"></i></a>';
                     }
@@ -53,29 +52,14 @@ session_start(); // Start the session
                 <li><a id="accessories" href="../tea_set/accessory.php">TEAPOT SET & ACCESSORIES</a></li>
                 <li><a id="about_us_title" href="../About_Us/about-us.php">ABOUT US</a></li>
                 <?php
-                    // Show LOGOUT link only if the user is logged in
                     if (isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn']) {
-                        echo '<li><a id="log_out" href="logout.php">LOGOUT</a></li>';
+                        echo '<li><a id="log_out" href="../Header/logout.php">LOGOUT</a></li>';
                     }
                 ?>
             </ul>
         </nav>
     </header>
-
-    <script>
-        // Add this script to dynamically change the content when hovering over the login icon
-        const loginIcon = document.querySelector('#login');
-
-        loginIcon.addEventListener('mouseenter', () => {
-            const username = localStorage.getItem('username') || 'Guest'; // Fetch username from localStorage, fallback to 'Guest'
-            loginIcon.setAttribute('data-hover', Hi, ${username});
-        });
-
-        loginIcon.addEventListener('mouseleave', () => {
-            loginIcon.removeAttribute('data-hover'); // Remove the message when not hovering
-        });
-    </script>
-
+    
     <script src="./../language/script.js"></script>
 
 </body>
